@@ -1,0 +1,59 @@
+<div class="login-cont">
+  <mat-card class="example-card mat-elevation-z10">
+    <mat-card-header>
+      <mat-card-title>Prijavi se</mat-card-title>
+      <mat-card-subtitle
+      >Nemaš nalog?
+        <span class="nav-text" (click)="navigate('register')"
+        >Registruj se</span
+        ></mat-card-subtitle
+      >
+    </mat-card-header>
+    <mat-card-content>
+      <form class="form-items">
+        <mat-form-field appearance="outline">
+          <mat-label>Email Adresa</mat-label>
+          <input
+            type="text"
+            name="email"
+            [formControl]="email"
+            required
+            matInput
+            placeholder="vašemail@gmail.com"
+          />
+          <mat-icon matSuffix color="primary">mail</mat-icon>
+          <mat-error *ngIf="email.invalid"
+          >Unesite validnu email adresu.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Lozinka</mat-label>
+          <mat-icon matSuffix color="primary">password</mat-icon>
+          <input
+            type="password"
+            name="password"
+            [formControl]="password"
+            required
+            matInput
+            placeholder="******"
+          />
+          <mat-error *ngIf="password.invalid"> Unesite lozinku. </mat-error>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          disabled="{{ loading }}"
+          (click)="handleSubmit()"
+        >
+          Prijavi se
+        </button>
+        <span class="nav-text-small" (click)="navigate('home')"
+        >Nastavi bez prijave</span
+        >
+      </form>
+    </mat-card-content>
+    <mat-card-footer>
+      <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+</div>

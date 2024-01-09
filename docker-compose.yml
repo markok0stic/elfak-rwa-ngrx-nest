@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  mysql:
+    container_name: elfak-mysql-db
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password --sort_buffer_size=256000000
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=db1
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=root
+      - MYSQL_HOST=localhost
+    ports:
+      - "1111:3306"
+    volumes:
+      - elfak-db:/var/lib/mysql
+
+volumes:
+  elfak-db:
+    driver: local
