@@ -9,7 +9,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=db1
-      - MYSQL_USER=user
+      - MYSQL_USER=users
       - MYSQL_PASSWORD=root
       - MYSQL_HOST=localhost
     ports:

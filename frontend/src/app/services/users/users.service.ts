@@ -6,18 +6,20 @@ import {LoginUser, RegisterUser, User} from "../../models/user/user";
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class UsersService {
+  private baseUrl = `${environment.api}/users`;
+
   constructor(private httpClient: HttpClient) {}
 
   login(email: string, password: string) {
-    return this.httpClient.post<LoginUser>(`${environment.api}/users/login`, {
+    return this.httpClient.post<LoginUser>(`${this.baseUrl}/login`, {
       email,
       password,
     });
   }
 
   register(data: RegisterUser) {
-    return this.httpClient.post<User>(`${environment.api}/users/register`, {
+    return this.httpClient.post<User>(`${this.baseUrl}/register`, {
       ...data,
     });
   }

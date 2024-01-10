@@ -1,63 +1,45 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {ActivatedRouteSnapshot, CanActivate, Router, UrlTree} from '@angular/router';
-import { Observable } from 'rxjs';
+import {Observable, take} from 'rxjs';
 import {Store} from "@ngrx/store";
 import {getToken} from "./user.context";
 import {AppState} from "../../app.state";
 import {User} from "../../models/user/user";
 import {Roles} from "../../models/user/role";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  private jwtHelper: JwtHelperService;
+  private jwtHelper: JwtHelperService = new JwtHelperService();
 
-  constructor(private router: Router, private store: Store<AppState>) {
-    this.jwtHelper = new JwtHelperService();
-  }
+  constructor(private router: Router, private store: Store<AppState>) {}
 
-  getUserFromStore(): User | null {
-    let user: User | null = null;
-
-    this.store.subscribe((state: AppState) => {
-      user = state.user.user;
-    });
-    return user;
-  }
-
-  canActivate(route: ActivatedRouteSnapshot):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  canActivate(
+    route: ActivatedRouteSnapshot
+  ): Observable<boolean> | Promise<boolean> | boolean {
     const token: string | null = getToken();
-    const user: User | null = this.getUserFromStore();
 
-    const authorizedRole = route.data['role'];
+    if (token && !this.jwtHelper.isTokenExpired(token)) {
+      return this.store.select(state => state.user).pipe(
+        take(1),
+        map(userState => {
+          const user: User | null = userState.user;
+          const authorizedRole = route.data['role'];
 
-    if (token) {
-      if (this.jwtHelper.isTokenExpired(token)) {
-        this.router.navigate(['login']);
-        return false;
-      }
-
-      if (!user) {
-        this.router.navigate(['login']);
-        return false;
-      }
-
-      if (authorizedRole !== user.role && user.role != Roles.Admin) {
-        this.router.navigate(['login']);
-        return false;
-      }
-
-      return true;
+          if (user && (authorizedRole ? user.role === authorizedRole || user.role === Roles.Admin : true)) {
+            return true;
+          } else {
+            this.router.navigate(['login']);
+            return false;
+          }
+        })
+      );
     } else {
       this.router.navigate(['login']);
       return false;
     }
   }
-
 }

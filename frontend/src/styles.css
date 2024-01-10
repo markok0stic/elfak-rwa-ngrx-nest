@@ -1,1 +1,49 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --background-color: #f0f2f5;
+  --text-color: #333;
+  --error-color: #f44336;
+  --default-box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+  --default-border-radius: 8px;
+  --default-flex-direction: column;
+  --default-justify-content: center;
+  --default-align-items: center;
+  --default-title-size: 24px;
+  --default-title-weight: bold;
+  --default-title-margin: 20px 0;
+  --default-form-field-margin: 16px 0;
+}
+
+html, body { height: 100%; }
+body {
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--background-color);
+}
+
+mat-card {
+  box-shadow: var(--default-box-shadow);
+  border-radius: var(--default-border-radius);
+  display: flex;
+  flex-direction: var(--default-flex-direction);
+  justify-content: var(--default-justify-content);
+  align-items: var(--default-align-items);
+}
+
+mat-card-title {
+  font-size: var(--default-title-size);
+  color: var(--text-color);
+  font-weight: var(--default-title-weight);
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin: var(--default-form-field-margin);
+}
+
+button[mat-raised-button] {
+  box-shadow: none;
+}
+
+.error-message {
+  color: var(--error-color);
+}

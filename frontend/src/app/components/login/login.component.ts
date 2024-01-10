@@ -18,23 +18,29 @@ export class LoginComponent implements OnInit {
   constructor(private store: Store<AppState>, private router: Router) {}
 
   ngOnInit(): void {
-    this.store.subscribe((state) => {
-      this.loading = state.user.isLoading;
+    this.store.select('user').subscribe((state) => {
+      this.loading = state.isLoading;
+      if (state.user) {
+        this.router.navigate(['/']);
+      }
     });
   }
 
   handleSubmit() {
-    if (!this.email.value || !this.password.value) return;
-
-    this.store.dispatch(
-      loginUser({
-        email: this.email.value,
-        password: this.password.value,
-      })
-    );
+    if (this.email.valid && this.password.valid) {
+      this.store.dispatch(
+        loginUser({
+          email: this.email.value ?? '',
+          password: this.password.value ?? '',
+        })
+      );
+    }
   }
 
-  navigate(path: string) {
-    this.router.navigate([path]);
+  getEmailErrorMessage() {
+    if (this.email.hasError('required')) {
+      return 'You must enter a value';
+    }
+    return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 }

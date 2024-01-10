@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions } from '@ngrx/effects';
-import {UserService} from "../../services/user/user.service";
+import {UsersService} from "../../services/users/users.service";
 
 @Injectable()
 export class UserEffects {
   constructor(
     private action$: Actions,
-    private userService: UserService,
+    private userService: UsersService,
     private router: Router
   ) {}
 
@@ -18,7 +18,7 @@ export class UserEffects {
         this.userService.login(email, password).pipe(
           map((data: LoginUser) => {
             setToken(data.access_token);
-            setUser(data.user);
+            setUser(data.users);
             this.router.navigate(['layout'], { replaceUrl: true });
             return UserActions.loginSuccess({ data });
           }),
@@ -65,9 +65,9 @@ export class UserEffects {
       ofType(UserActions.editProfile),
       mergeMap(({ userData }) =>
         this.userService.editProfile(userData).pipe(
-          map((user: User) => {
-            setUser(user);
-            return UserActions.editProfileSuccess({ user: user });
+          map((users: User) => {
+            setUser(users);
+            return UserActions.editProfileSuccess({ users: users });
           }),
           catchError(({ error }) => {
             return of({ type: error });

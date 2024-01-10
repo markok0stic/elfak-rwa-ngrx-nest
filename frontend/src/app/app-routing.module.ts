@@ -7,15 +7,17 @@ import {HomeComponent} from "./components/home/home.component";
 import {RegisterComponent} from "./components/register/register.component";
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login',
+    component: LoginComponent,
+    data: { title: 'Login' }
+  },
   { path: 'register',
     component: RegisterComponent,
     canActivate: [AuthGuard],
-    data: { role: Roles.Admin },
+    data: { role: Roles.Admin, title: 'Register' },
   },
-  { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: '**', component: HomeComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
