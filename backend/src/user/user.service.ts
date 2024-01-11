@@ -5,6 +5,7 @@ import { User } from './entities/user.entity';
 import { SALT_ROUNDS } from '../../helper-config';
 import { UserUpdateDto } from './dto/user-update.dto';
 import * as bcrypt from 'bcrypt';
+import { Role } from '../enums/role.enum';
 
 @Injectable()
 export class UserService {
@@ -25,15 +26,17 @@ export class UserService {
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
 
-    const user = new User();
-    user.firstName = userDto.firstName;
-    user.lastName = userDto.lastName;
-    user.phone = userDto.phone;
-    user.address = userDto.address;
-    user.city = userDto.city;
-    user.zip = userDto.zip;
-    user.email = email;
-    user.password = hashedPassword;
+    const user = {
+      firstName: userDto.firstName,
+      lastName: userDto.lastName,
+      phone: userDto.phone,
+      address: userDto.address,
+      city: userDto.city,
+      zip: userDto.zip,
+      email: email,
+      password: hashedPassword,
+      role: Role.User,
+    };
 
     return this.userRepository.save(user);
   }
@@ -66,11 +69,6 @@ export class UserService {
       return { success: false };
 
     return user;
-  }
-
-  public async toggleSave(adId: number, accessUser: User) {
-    if (!accessUser) throw new BadRequestException('InvalidUser');
-    return { success: true };
   }
 
   public async findOne(email: string): Promise<User | undefined> {

@@ -27,6 +27,8 @@ export class UserController {
     private authService: AuthService,
   ) {}
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Post('register')
   public addUser(@Body() dto: UserDto) {
     return this.userService.create(dto);
@@ -49,16 +51,6 @@ export class UserController {
   @Get('profile')
   public getProfile(@Request() req) {
     return req.user;
-  }
-
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Get('toggleSave/:id')
-  @Roles(Role.User, Role.Admin)
-  public async toggleSave(
-    @Request() req,
-    @Param('id', ParseIntPipe) adId: number,
-  ) {
-    return this.userService.toggleSave(adId, req.user);
   }
 
   @Get()

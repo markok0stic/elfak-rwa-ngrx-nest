@@ -6,30 +6,30 @@ export class User {
   @PrimaryGeneratedColumn()
   public id: number;
 
-  @Column({ type: 'text', nullable: false })
+  @Column({ type: 'varchar', nullable: false })
   public firstName: string;
 
-  @Column({ type: 'text', nullable: false })
+  @Column({ type: 'varchar', nullable: false })
   public lastName: string;
 
-  @Column({ type: 'text', nullable: false, unique: true })
+  @Column({ type: 'varchar', nullable: false, unique: true })
   public email: string;
 
-  @Column({ type: 'text', nullable: false })
+  @Column({ type: 'varchar', nullable: false })
   public password: string;
 
-  @Column({ type: 'text', nullable: false })
+  @Column({ type: 'varchar', nullable: false })
   public phone: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   public address: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   public city: string;
 
-  @Column({ type: 'number', nullable: true })
+  @Column({ type: 'int', nullable: true })
   public zip: string;
 
-  @Column({ type: 'text', nullable: false, default: Role.User })
+  @Column({ type: 'varchar', nullable: false, default: Role.User })
   public role: string;
 }
