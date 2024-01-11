@@ -22,4 +22,7 @@ export const editProfile = createAction('[User] Edit Profile',
 export const editProfileSuccess = createAction('[User] Edit Profile Success',
   props<{ user: User }>()
 );
-
+export const setInitialUserState = createAction(
+  '[User] Set Initial State',
+  props<{ user: User | null; token: string | null }>()
+);

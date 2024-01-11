@@ -9,8 +9,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=db1
-      - MYSQL_USER=users
-      - MYSQL_PASSWORD=root
+      - MYSQL_USER=user1
+      - MYSQL_PASSWORD=q2wortgy7e
       - MYSQL_HOST=localhost
     ports:
       - "1111:3306"

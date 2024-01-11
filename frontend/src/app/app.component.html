@@ -1,3 +1,4 @@
 <div class="bg-img"></div>
 <div class="bg-color"></div>
+<app-layout *ngIf="isLoggedIn$ | async"></app-layout>
 <router-outlet></router-outlet>

@@ -20,21 +20,22 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.store.select('user').subscribe((state) => {
       this.loading = state.isLoading;
+      console.log(!!state.user)
       if (state.user) {
-        this.router.navigate(['/']);
+        this.router.navigate(['/dashboard']);
       }
     });
   }
 
   handleSubmit() {
-    if (this.email.valid && this.password.valid) {
-      this.store.dispatch(
-        loginUser({
-          email: this.email.value ?? '',
-          password: this.password.value ?? '',
-        })
-      );
-    }
+    if(!this.email.value || !this.password.value || !this.email.valid || !this.password.valid) return;
+
+    this.store.dispatch(
+      loginUser({
+        email: this.email.value,
+        password: this.password.value,
+      })
+    );
   }
 
   getEmailErrorMessage() {

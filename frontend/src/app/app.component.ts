@@ -2,6 +2,12 @@ import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
+import { getToken, getUser } from './services/auth/user.context';
+import { AppState } from './app.state';
+import { Store } from '@ngrx/store';
+import * as UserActions from './store/user/user.actions'
+import { Observable } from 'rxjs';
+import { isUserLoggedIn } from './store/user/user.selectors';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +16,13 @@ import { filter, map, mergeMap } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'Inventory Manager';
+  isLoggedIn$: Observable<boolean>;
+
   constructor(
     private titleService: Title,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private store: Store<AppState>
   ) {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
@@ -27,5 +36,16 @@ export class AppComponent {
     ).subscribe(event => {
       this.titleService.setTitle(`${this.title} - ${event['title']}`);
     });
+
+    this.isLoggedIn$ = this.store.select(isUserLoggedIn);
+  }
+
+  ngOnInit(): void {
+    const user = getUser();
+    const token = getToken();
+
+    if (user && token) {
+      this.store.dispatch(UserActions.setInitialUserState({ user, token }));
+    }
   }
 }

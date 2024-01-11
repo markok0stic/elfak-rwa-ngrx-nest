@@ -6,7 +6,7 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {getToken} from "./services/auth/user.context";
+import { getToken } from './user.context';
 
 export class InterceptorService implements HttpInterceptor {
   constructor() {}
@@ -16,7 +16,6 @@ export class InterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const token: string | null = getToken();
-    console.log('dadadad',!!token)
     if (token) {
       let request = req.clone({
         headers: new HttpHeaders({

@@ -32,7 +32,6 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {DialogModule} from "@angular/cdk/dialog";
 import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {productReducers} from "./store/product/product.reducers";
@@ -41,13 +40,19 @@ import {orderReducers} from "./store/order/order.reducers";
 import {OrderEffects} from "./store/order/order.effects";
 import {customerReducers} from "./store/customer/customer.reducers";
 import {CustomerEffects} from "./store/customer/customer.effects";
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    DashboardComponent,
+    LayoutComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -61,13 +66,13 @@ import {CustomerEffects} from "./store/customer/customer.effects";
       user: userReducers,
       product: productReducers,
       order: orderReducers,
-      customer: customerReducers
+      customer: customerReducers,
     }),
     EffectsModule.forRoot([
       UserEffects,
       ProductEffects,
       OrderEffects,
-      CustomerEffects
+      CustomerEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -95,6 +100,7 @@ import {CustomerEffects} from "./store/customer/customer.effects";
     DialogModule,
     MatDialogModule,
     MatListModule,
+    MatSidenavModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent]

@@ -44,5 +44,10 @@ export const userReducers = createReducer(
   on(UserActions.registerFailure, (state) => ({
     ...state,
     isLoading: false,
+  })),
+  on(UserActions.setInitialUserState, (state, { user, token }) => ({
+    ...state,
+    user: user,
+    accessToken: token
   }))
 );
