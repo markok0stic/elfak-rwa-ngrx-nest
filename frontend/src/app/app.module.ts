@@ -41,9 +41,9 @@ import {OrderEffects} from "./store/order/order.effects";
 import {customerReducers} from "./store/customer/customer.reducers";
 import {CustomerEffects} from "./store/customer/customer.effects";
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { LayoutComponent } from './components/layout/layout.component';
-import { NavigationComponent } from './components/navigation/navigation.component';
+import { LayoutComponent } from './components/_layout/layout.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { NavigationComponent } from './components/_navigation/navigation.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     RegisterComponent,
     DashboardComponent,
     LayoutComponent,
-    NavigationComponent
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,17 @@
+<mat-toolbar color="primary" class="toolbar-height">
+  <button mat-stroked-button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="spacer"></span>
+  <button mat-button (click)="onLogout()">Logout</button>
+</mat-toolbar>
+<mat-drawer-container autosize>
+  <mat-drawer #drawer mode="side">
+    <div>
+      asdasdasdasd
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <ng-content></ng-content>
+  </mat-drawer-content>
+</mat-drawer-container>

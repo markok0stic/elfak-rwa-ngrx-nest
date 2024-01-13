@@ -1,8 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
-import { Store } from '@ngrx/store';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { logoutUser } from '../../store/user/user.actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-navigation',
@@ -10,8 +8,9 @@ import { logoutUser } from '../../store/user/user.actions';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent {
-  constructor(private store: Store, private router: Router) {}
 
+  constructor(private store: Store) {
+  }
   onLogout() {
     this.store.dispatch(logoutUser());
   }
