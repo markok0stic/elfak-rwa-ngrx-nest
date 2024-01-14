@@ -19,7 +19,7 @@ export const userReducers = createReducer(
     user: null,
     accessToken: null,
     isLoading: false,
-    error: null
+    error: null,
   })),
   on(UserActions.loginSuccess, (state, {data}) => ({
     user: data.user,
@@ -32,18 +32,6 @@ export const userReducers = createReducer(
     accessToken: null,
     isLoading: false,
     error: null
-  })),
-  on(UserActions.registerUser, (state) => ({
-    ...state,
-    isLoading: true,
-  })),
-  on(UserActions.registerSuccess, (state) => ({
-    ...state,
-    isLoading: false,
-  })),
-  on(UserActions.registerFailure, (state) => ({
-    ...state,
-    isLoading: false,
   })),
   on(UserActions.setInitialUserState, (state, { user, token }) => ({
     ...state,

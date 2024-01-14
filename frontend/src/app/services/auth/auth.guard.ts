@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AppState } from '../../app.state';
 import { getToken } from './user.context';
-import { Roles } from '../../models/user/role';
+import { Roles } from '../../models/user/roles';
 
 @Injectable({
   providedIn: 'root',

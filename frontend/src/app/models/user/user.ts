@@ -1,4 +1,4 @@
-import {Roles} from "./role";
+import {Roles} from "./roles";
 
 export interface User {
   id: string;
@@ -12,15 +12,4 @@ export interface User {
 export interface LoginUser {
   user: User,
   accessToken: string;
-}
-
-export interface RegisterUser {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  phone: string;
-  address?: string;
-  city?: string;
-  zip?: number;
 }

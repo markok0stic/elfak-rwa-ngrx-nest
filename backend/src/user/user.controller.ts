@@ -16,9 +16,9 @@ import { UserDto } from './dto/user.dto';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
-import { Roles } from '../auth/roles.decorator';
-import { Role } from '../enums/role.enum';
 import { UserUpdateDto } from './dto/user-update.dto';
+import { Roles } from '../auth/roles.decorator';
+import { RolesEnum } from '../enums/roles.enum';
 
 @Controller('users')
 export class UserController {
@@ -28,7 +28,7 @@ export class UserController {
   ) {}
 
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(Role.Admin)
+  @Roles(RolesEnum.Admin)
   @Post('register')
   public addUser(@Body() dto: UserDto) {
     return this.userService.create(dto);
@@ -42,7 +42,7 @@ export class UserController {
 
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Put('edit-profile')
-  @Roles(Role.User, Role.Admin)
+  @Roles(RolesEnum.User, RolesEnum.Admin)
   public edit(@Request() req, @Body() dto: UserUpdateDto) {
     return this.userService.editProfile(req.user, dto);
   }

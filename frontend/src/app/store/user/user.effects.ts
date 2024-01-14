@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
-
 import * as UserActions from './user.actions';
 import { LoginUser, User } from '../../models/user/user';
 import { UsersService } from '../../services/users/users.service';
@@ -57,33 +56,6 @@ export class UserEffects {
         })
       ),
     { dispatch: false }
-  );
-
-  registerUser$ = createEffect(() =>
-    this.action$.pipe(
-      ofType(UserActions.registerUser),
-      mergeMap(({ registerData }) =>
-        this.usersService.register(registerData).pipe(
-          map(() => {
-            this.snackBar.open(
-              this.notificationsService.getMessage('registrationSuccess'),
-              this.notificationsService.getMessage('ok'),
-              { duration: 5000 }
-            );
-            this.router.navigate(['register'], { replaceUrl: true });
-            return UserActions.registerSuccess();
-          }),
-          catchError(error => {
-            this.snackBar.open(
-              this.notificationsService.getMessage('serverError'),
-              this.notificationsService.getMessage('close'),
-              { duration: 5000 }
-            );
-            return of(UserActions.registerFailure());
-          })
-        )
-      )
-    )
   );
 
   editProfile$ = createEffect(() =>

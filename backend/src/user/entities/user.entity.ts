@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Role } from '../../enums/role.enum';
+import { RolesEnum } from '../../enums/roles.enum';
 
 @Entity()
 export class User {
@@ -30,6 +30,6 @@ export class User {
   @Column({ type: 'int', nullable: true })
   public zip: number;
 
-  @Column({ type: 'varchar', nullable: false, default: Role.User })
+  @Column({ type: 'varchar', nullable: false, default: RolesEnum.User })
   public role: string;
 }

@@ -1,3 +1,5 @@
+import { RolesEnum } from '../../enums/roles.enum';
+
 export class UserDto {
   firstName: string;
   lastName: string;
@@ -7,4 +9,5 @@ export class UserDto {
   address: string;
   city: string;
   zip: number;
+  role: RolesEnum;
 }

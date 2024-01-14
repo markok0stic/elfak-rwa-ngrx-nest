@@ -5,7 +5,7 @@ import { User } from './entities/user.entity';
 import { SALT_ROUNDS } from '../../helper-config';
 import { UserUpdateDto } from './dto/user-update.dto';
 import * as bcrypt from 'bcrypt';
-import { Role } from '../enums/role.enum';
+import { RolesEnum } from '../enums/roles.enum';
 
 @Injectable()
 export class UserService {
@@ -35,7 +35,7 @@ export class UserService {
       zip: userDto.zip,
       email: email,
       password: hashedPassword,
-      role: Role.User,
+      role: userDto.role,
     };
 
     return this.userRepository.save(user);
