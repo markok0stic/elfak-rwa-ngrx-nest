@@ -15,9 +15,12 @@ export interface LoginUser {
 }
 
 export interface RegisterUser {
-  email: string;
-  password: string;
   firstName: string;
   lastName: string;
+  email: string;
+  password: string;
   phone: string;
+  address?: string;
+  city?: string;
+  zip?: number;
 }

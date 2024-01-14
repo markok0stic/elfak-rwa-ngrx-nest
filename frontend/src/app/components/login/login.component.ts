@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { loginUser } from 'src/app/store/user/user.actions';
+import { Observable } from 'rxjs';
+import { isLoadingSelector, isUserLoggedIn } from '../../store/user/user.selectors';
+import { LoginUser } from '../../models/user/user';
 
 @Component({
   selector: 'app-login',
@@ -11,37 +14,33 @@ import { loginUser } from 'src/app/store/user/user.actions';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required]);
-  loading: boolean = false;
+  loginForm: FormGroup;
+  hide: boolean;
+  $loading: Observable<boolean>;
+  $loggedIn: Observable<boolean>
 
-  constructor(private store: Store<AppState>, private router: Router) {}
+  constructor(private store: Store<AppState>, private router: Router) {
+    this.hide = true;
+    this.$loading = this.store.select(isLoadingSelector);
+    this.$loggedIn = this.store.select(isUserLoggedIn);
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required])
+    })
+  }
 
   ngOnInit(): void {
-    this.store.select('user').subscribe((state) => {
-      this.loading = state.isLoading;
-      console.log(!!state.user)
-      if (state.user) {
-        this.router.navigate(['/dashboard']);
-      }
-    });
+    if(this.$loggedIn) {
+      this.router.navigate(['/dashboard']);
+    }
+    console.log(this.loginForm.controls['email'].invalid)
   }
 
   handleSubmit() {
-    if(!this.email.value || !this.password.value || !this.email.valid || !this.password.valid) return;
-
-    this.store.dispatch(
-      loginUser({
-        email: this.email.value,
-        password: this.password.value,
-      })
-    );
-  }
-
-  getEmailErrorMessage() {
-    if (this.email.hasError('required')) {
-      return 'You must enter a value';
+    if (this.loginForm.invalid) {
+      return;
     }
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+
+    this.store.dispatch(loginUser(this.loginForm.value));
   }
 }

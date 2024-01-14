@@ -70,7 +70,7 @@ export class UserEffects {
               this.notificationsService.getMessage('ok'),
               { duration: 5000 }
             );
-            this.router.navigate(['login'], { replaceUrl: true });
+            this.router.navigate(['register'], { replaceUrl: true });
             return UserActions.registerSuccess();
           }),
           catchError(error => {

@@ -33,7 +33,7 @@ export const userReducers = createReducer(
     isLoading: false,
     error: null
   })),
-  on(UserActions.registerSuccess, (state) => ({
+  on(UserActions.registerUser, (state) => ({
     ...state,
     isLoading: true,
   })),
