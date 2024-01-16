@@ -61,13 +61,15 @@
     <form [formGroup]="credentialsForm">
       <ng-template matStepLabel>Credentials</ng-template>
       <div class="form-row">
-      <mat-form-field class="half-width" appearance="fill">
+      <mat-form-field class="full-width" appearance="fill">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" placeholder="Enter your email">
         <mat-error *ngIf="credentialsForm.controls['email'].invalid">
           Valid email is required
         </mat-error>
       </mat-form-field>
+      </div>
+      <div class="form-row">
       <mat-form-field class="half-width" appearance="fill">
         <mat-label>Password</mat-label>
         <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" placeholder="Enter your password">
@@ -76,8 +78,7 @@
           Password is required
         </mat-error>
       </mat-form-field>
-      </div>
-      <mat-form-field>
+      <mat-form-field class="half-width">
         <mat-label>Role</mat-label>
         <mat-select formControlName="role">
           <mat-option *ngFor="let role of roleKeys" [value]="role.toLowerCase()">
@@ -88,6 +89,7 @@
           Role is required
         </mat-error>
       </mat-form-field>
+      </div>
       <div class="button-container">
         <button mat-raised-button matStepperPrevious color="primary" >Back</button>
         <span class="spacer"></span>
@@ -97,7 +99,8 @@
   </mat-step>
   <mat-step [aria-labelledby]="!(registrationSuccess) ? 'disabled_Resi' : ''" [editable]="false" [completed]="registrationSuccess">
     <ng-template matStepLabel>Done</ng-template>
-    <p>Successfully registered user.</p>
+    <p>Successfully registered new user.</p>
+    <p>You can now share credentials.</p>
     <div>
       <button mat-raised-button (click)="handleReset()" color="primary">Reset</button>
     </div>
