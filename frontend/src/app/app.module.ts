@@ -44,8 +44,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LayoutComponent } from './components/_layout/layout.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavigationComponent } from './components/_navigation/navigation.component';
-import { registrationReducers } from './store/registration/registration.reducers';
-import { RegistrationEffects } from './store/registration/registration.effects';
 
 @NgModule({
   declarations: [
@@ -66,7 +64,6 @@ import { RegistrationEffects } from './store/registration/registration.effects';
     FontAwesomeModule,
     StoreModule.forRoot<AppState>({
       user: userReducers,
-      registration: registrationReducers,
       product: productReducers,
       order: orderReducers,
       customer: customerReducers
@@ -75,8 +72,7 @@ import { RegistrationEffects } from './store/registration/registration.effects';
       UserEffects,
       ProductEffects,
       OrderEffects,
-      CustomerEffects,
-      RegistrationEffects,
+      CustomerEffects
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

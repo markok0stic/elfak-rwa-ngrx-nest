@@ -8,6 +8,6 @@ export class UserDto {
   phone: string;
   address: string;
   city: string;
-  zip: number;
+  zip: string;
   role: RolesEnum;
 }

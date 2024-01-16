@@ -84,4 +84,30 @@ export class UserEffects {
       )
     )
   );
+
+  registerUser$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(UserActions.registerUser),
+      mergeMap(({ registerData }) =>
+        this.usersService.register(registerData).pipe(
+          map(() => {
+            this.snackBar.open(
+              this.notificationsService.getMessage('registrationSuccess'),
+              this.notificationsService.getMessage('close'),
+              { duration: 5000 }
+            );
+            return UserActions.registerSuccess();
+          }),
+          catchError(error => {
+            this.snackBar.open(
+              this.notificationsService.getMessage('serverError'),
+              this.notificationsService.getMessage('close'),
+              { duration: 5000 }
+            );
+            return of(UserActions.registerFailure());
+          })
+        )
+      )
+    )
+  );
 }

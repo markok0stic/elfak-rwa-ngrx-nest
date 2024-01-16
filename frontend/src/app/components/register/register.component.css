@@ -12,3 +12,8 @@ mat-form-field {
   width: 100%;
   margin-bottom: 16px;
 }
+
+::ng-deep .mat-step-header[aria-labelledby="disabled_Resi"] {
+  pointer-events: none !important;
+  cursor: not-allowed;
+}

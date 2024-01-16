@@ -2,11 +2,15 @@ import {createSelector} from "@ngrx/store";
 import {AppState} from "../../app.state";
 
 export const selectFeature = (state: AppState) => state.user;
-export const isLoadingSelector = createSelector(selectFeature,
+export const isUserLoadingSelector = createSelector(selectFeature,
   (state) => state.isLoading);
 export const selectUser = createSelector(selectFeature,
   (state) => state.user);
 
 export const isUserLoggedIn = createSelector(selectFeature,
   (state) => !!state.accessToken
+);
+
+export const selectSuccessfulRegistration = createSelector(selectFeature,
+  (state) => state.registration?.successfulRegistration
 );

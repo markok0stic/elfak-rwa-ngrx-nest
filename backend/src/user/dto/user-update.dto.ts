@@ -4,5 +4,5 @@ export interface UserUpdateDto {
   phone: string;
   address: string;
   city: string;
-  zip: number;
+  zip: string;
 }

@@ -5,8 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { loginUser } from 'src/app/store/user/user.actions';
 import { Observable } from 'rxjs';
-import { isLoadingSelector, isUserLoggedIn } from '../../store/user/user.selectors';
-import { LoginUser } from '../../models/user/user';
+import { isUserLoadingSelector, isUserLoggedIn } from '../../store/user/user.selectors';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private store: Store<AppState>, private router: Router) {
     this.hide = true;
-    this.$loading = this.store.select(isLoadingSelector);
+    this.$loading = this.store.select(isUserLoadingSelector);
     this.$loggedIn = this.store.select(isUserLoggedIn);
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),

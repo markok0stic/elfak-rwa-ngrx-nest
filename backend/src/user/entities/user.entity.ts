@@ -27,7 +27,7 @@ export class User {
   @Column({ type: 'varchar', nullable: true })
   public city: string;
 
-  @Column({ type: 'int', nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   public zip: number;
 
   @Column({ type: 'varchar', nullable: false, default: RolesEnum.User })

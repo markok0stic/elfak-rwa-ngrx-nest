@@ -5,4 +5,9 @@ export interface UserState {
   user: User | null;
   accessToken: string | null;
   error: string | null;
+  registration: RegistrationState | null;
+}
+
+export interface RegistrationState {
+  successfulRegistration: boolean;
 }
