@@ -1,6 +1,6 @@
-import {Roles} from "./roles";
+import { RolesEnum as Roles } from '@shared/enums/roles.enum';
 
-export interface User {
+export interface UserModel {
   id: string;
   email: string;
   role: Roles;
@@ -10,14 +10,16 @@ export interface User {
 }
 
 export interface LoginUser {
-  user: User,
+  user: UserModel,
   accessToken: string;
 }
 
 export interface BasicInfo {
   firstName: string;
   lastName: string;
-  phone: string; address?: string;
+  phone: string;
+  country: string;
+  address?: string;
   city?: string;
   zip?: string;
 }

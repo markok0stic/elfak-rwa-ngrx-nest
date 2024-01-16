@@ -1,24 +1,24 @@
 import { createAction, props } from '@ngrx/store';
-import {Order} from "../../models/order/order";
+import {OrderModel} from "../../models/order/order.model";
 
-export const requestLoadOrders = createAction('[Order] Request Load Orders');
-export const loadOrdersSuccess = createAction('[Order] Load Orders Success',
-  props<{ orders: Order[] }>()
+export const requestLoadOrders = createAction('[OrderModel] Request Load Orders');
+export const loadOrdersSuccess = createAction('[OrderModel] Load Orders Success',
+  props<{ orders: OrderModel[] }>()
 );
 
-export const loadOrdersFailure = createAction('[Order] Load Orders Failure',
+export const loadOrdersFailure = createAction('[OrderModel] Load Orders Failure',
   props<{ error: any }>()
 );
 
-export const requestCreateOrder = createAction('[Order] Request Create Order',
-  props<{ order: Order }>()
+export const requestCreateOrder = createAction('[OrderModel] Request Create OrderModel',
+  props<{ order: OrderModel }>()
 );
 
-export const createOrderSuccess = createAction('[Order] Create Order Success',
-  props<{ order: Order }>()
+export const createOrderSuccess = createAction('[OrderModel] Create OrderModel Success',
+  props<{ order: OrderModel }>()
 );
 
-export const createOrderFailure = createAction('[Order] Create Order Failure',
+export const createOrderFailure = createAction('[OrderModel] Create OrderModel Failure',
   props<{ error: any }>());
 
 // Dodajte akcije za ažuriranje, brisanje i specifične operacije vezane za narudžbine...

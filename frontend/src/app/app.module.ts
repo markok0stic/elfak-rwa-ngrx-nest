@@ -44,6 +44,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LayoutComponent } from './components/_layout/layout.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavigationComponent } from './components/_navigation/navigation.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -66,13 +67,13 @@ import { NavigationComponent } from './components/_navigation/navigation.compone
       user: userReducers,
       product: productReducers,
       order: orderReducers,
-      customer: customerReducers
+      customer: customerReducers,
     }),
     EffectsModule.forRoot([
       UserEffects,
       ProductEffects,
       OrderEffects,
-      CustomerEffects
+      CustomerEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -101,6 +102,7 @@ import { NavigationComponent } from './components/_navigation/navigation.compone
     MatDialogModule,
     MatListModule,
     MatSidenavModule,
+    MatExpansionModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent]

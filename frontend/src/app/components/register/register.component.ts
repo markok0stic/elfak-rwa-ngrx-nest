@@ -7,10 +7,10 @@ import {
   selectSuccessfulRegistration,
 } from '../../store/user/user.selectors';
 import { Observable } from 'rxjs';
-import { Roles } from '../../models/user/roles';
+import { RolesEnum as Roles } from '@shared/enums/roles.enum';
 import { MatStepper } from '@angular/material/stepper';
 import { registerUser } from 'src/app/store/user/user.actions';
-import { RegisterUser } from '../../models/user/user';
+import { RegisterUser } from '../../models/user/user.model';
 
 @Component({
   selector: 'app-register',
@@ -30,23 +30,32 @@ export class RegisterComponent {
   constructor(private store: Store<AppState>,private _formBuilder: FormBuilder) {
     this.hide = true;
     this.$loading = this.store.select(isUserLoadingSelector);
-    this.basicInfoForm = this._formBuilder.group({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
-      phone: new FormControl('', Validators.required),
-      address: new FormControl(''),
-      city: new FormControl(''),
-      zip: new FormControl('')
+    this.basicInfoForm = this.basicInfoFormGroup();
+    this.credentialsForm = this.credentialsFormGroup();
+    this.roleKeys = Object.keys(Roles);
+    this.registered$ = this.store.select(selectSuccessfulRegistration);
+    this.registrationSuccess = false;
+  }
+
+  basicInfoFormGroup() {
+    return this._formBuilder.group({
+      firstName: new FormControl(null, Validators.required),
+      lastName: new FormControl(null, Validators.required),
+      phone: new FormControl(null, Validators.required),
+      country: new FormControl(null, Validators.required),
+      address: new FormControl(null),
+      city: new FormControl(null),
+      zip: new FormControl(null)
     });
-    this.credentialsForm = this._formBuilder.group({
+  }
+
+  credentialsFormGroup() {
+    return this._formBuilder.group({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, Validators.required),
       role: new FormControl(Roles.User, Validators.required),
       registered: new FormControl(false, Validators.required)
     });
-    this.roleKeys = Object.keys(Roles);
-    this.registered$ = this.store.select(selectSuccessfulRegistration);
-    this.registrationSuccess = false;
   }
 
   ngOnInit(): void {
@@ -71,4 +80,10 @@ export class RegisterComponent {
     this.credentialsForm.patchValue({registrationCompleted: true})
   }
 
+  handleReset(){
+    this.registrationSuccess = false;
+    this.basicInfoForm = this.basicInfoFormGroup();
+    this.credentialsForm = this.credentialsFormGroup();
+    this.stepper.reset();
+  }
 }

@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { RolesEnum } from '../../enums/roles.enum';
+import { RolesEnum } from '@shared/enums/roles.enum';
 
 @Entity()
 export class User {
@@ -20,6 +20,9 @@ export class User {
 
   @Column({ type: 'varchar', nullable: false })
   public phone: string;
+
+  @Column({ type: 'varchar', nullable: false })
+  public country: string;
 
   @Column({ type: 'varchar', nullable: true })
   public address: string;

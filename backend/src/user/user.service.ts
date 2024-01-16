@@ -5,7 +5,7 @@ import { User } from './entities/user.entity';
 import { SALT_ROUNDS } from '../../helper-config';
 import { UserUpdateDto } from './dto/user-update.dto';
 import * as bcrypt from 'bcrypt';
-import { RolesEnum } from '../enums/roles.enum';
+import { HttpResponseErrorsEnum } from '@shared/enums/http.response.errors.enum';
 
 @Injectable()
 export class UserService {
@@ -17,11 +17,11 @@ export class UserService {
     const { email, password } = userDto;
 
     if (!email || !password) {
-      throw new BadRequestException('MissingFields');
+      throw new BadRequestException(HttpResponseErrorsEnum.MissingFields);
     }
 
     if (await this.findOne(email)) {
-      throw new BadRequestException('EmailAlreadyRegistered');
+      throw new BadRequestException(HttpResponseErrorsEnum.AlreadyRegistered);
     }
 
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
@@ -30,6 +30,7 @@ export class UserService {
       firstName: userDto.firstName,
       lastName: userDto.lastName,
       phone: userDto.phone,
+      country: userDto.country,
       address: userDto.address,
       city: userDto.city,
       zip: userDto.zip,
@@ -50,6 +51,7 @@ export class UserService {
         id: true,
         firstName: true,
         lastName: true,
+        country: true,
         address: true,
         phone: true,
         role: true,

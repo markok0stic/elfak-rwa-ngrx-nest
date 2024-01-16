@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { LoginUser, RegisterUser, User } from '../../models/user/user';
+import { LoginUser, RegisterUser, UserModel } from '../../models/user/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,13 +19,13 @@ export class UsersService {
   }
 
   register(data: RegisterUser) {
-    return this.httpClient.post<User>(`${this.baseUrl}/register`, {
+    return this.httpClient.post<UserModel>(`${this.baseUrl}/register`, {
       ...data,
     });
   }
 
   editProfile(userData: FormData) {
-    return this.httpClient.put<User>(
+    return this.httpClient.put<UserModel>(
       `${environment.api}/users/edit-profile`,
       userData
     );

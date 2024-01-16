@@ -1,4 +1,4 @@
-import { RolesEnum } from '../../enums/roles.enum';
+import { RolesEnum } from '@shared/enums/roles.enum';
 
 export class UserDto {
   firstName: string;
@@ -6,6 +6,7 @@ export class UserDto {
   email: string;
   password: string;
   phone: string;
+  country: string;
   address: string;
   city: string;
   zip: string;

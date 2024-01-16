@@ -1,34 +1,36 @@
 import {createAction, props} from '@ngrx/store';
-import { LoginUser, RegisterUser, User } from '../../models/user/user';
+import { LoginUser, RegisterUser, UserModel } from '../../models/user/user.model';
 
-export const loginUser = createAction('[User] Login User',
+export const loginUser = createAction('[UserModel] Login UserModel',
   props<{ email: string; password: string }>()
 );
-export const loginSuccess = createAction('[User] Login Success',
+export const loginSuccess = createAction('[UserModel] Login Success',
   props<{ data: LoginUser }>()
 );
-export const loginFailure = createAction('[User] Login Failure',
+export const loginFailure = createAction('[UserModel] Login Failure',
   props<{ error: string }>()
 );
-export const logoutUser = createAction('[User] Logout User');
+export const logoutUser = createAction('[UserModel] Logout UserModel');
 
-export const editProfile = createAction('[User] Edit Profile',
+export const editProfile = createAction('[UserModel] Edit Profile',
   props<{ userData: FormData }>()
 );
-export const editProfileSuccess = createAction('[User] Edit Profile Success',
-  props<{ user: User }>()
+export const editProfileSuccess = createAction('[UserModel] Edit Profile Success',
+  props<{ user: UserModel }>()
 );
 export const setInitialUserState = createAction(
-  '[User] Set Initial State',
-  props<{ user: User | null; token: string | null }>()
+  '[UserModel] Set Initial State',
+  props<{ user: UserModel | null; token: string | null }>()
 );
 
-export const registerUser = createAction('[Registration] Register User',
+export const registerUser = createAction('[Registration] Register UserModel',
   props<{ registerData: RegisterUser}>()
 );
 
 export const registerSuccess = createAction('[Registration] Register Success');
 
-export const registerFailure = createAction('[Registration] Register Failure');
+export const registerFailure = createAction('[Registration] Register Failure',
+  props<{ error: string }>()
+);
 
 

@@ -1,7 +1,7 @@
-import {Customer} from "../../models/customer/customer";
+import {CustomerModel} from "../../models/customer/customer.model";
 
 export interface CustomerState {
-  customers: Customer[];
+  customers: CustomerModel[];
   loading: boolean;
   error: any;
 }

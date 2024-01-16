@@ -1,25 +1,25 @@
 import { createAction, props } from '@ngrx/store';
-import {Customer} from "../../models/customer/customer";
+import {CustomerModel} from "../../models/customer/customer.model";
 
-export const requestLoadCustomers = createAction('[Customer] Request Load Customers');
+export const requestLoadCustomers = createAction('[CustomerModel] Request Load Customers');
 
-export const loadCustomersSuccess = createAction('[Customer] Load Customers Success',
-  props<{ customers: Customer[] }>()
+export const loadCustomersSuccess = createAction('[CustomerModel] Load Customers Success',
+  props<{ customers: CustomerModel[] }>()
 );
 
-export const loadCustomersFailure = createAction('[Customer] Load Customers Failure',
+export const loadCustomersFailure = createAction('[CustomerModel] Load Customers Failure',
   props<{ error: any }>()
 );
 
-export const requestAddCustomer = createAction('[Customer] Request Add Customer',
-  props<{ customer: Customer }>()
+export const requestAddCustomer = createAction('[CustomerModel] Request Add CustomerModel',
+  props<{ customer: CustomerModel }>()
 );
 
-export const addCustomerSuccess = createAction('[Customer] Add Customer Success',
-  props<{ customer: Customer }>()
+export const addCustomerSuccess = createAction('[CustomerModel] Add CustomerModel Success',
+  props<{ customer: CustomerModel }>()
 );
 
-export const addCustomerFailure = createAction('[Customer] Add Customer Failure',
+export const addCustomerFailure = createAction('[CustomerModel] Add CustomerModel Failure',
   props<{ error: any }>()
 );
 

@@ -1,26 +1,26 @@
 import {createAction, props} from '@ngrx/store';
-import {Product} from "../../models/product/product";
+import {ProductModel} from "../../models/product/product.model";
 
-export const requestLoadProducts = createAction('[Product] Request Load Products'
+export const requestLoadProducts = createAction('[ProductModel] Request Load Products'
 );
 
-export const loadProductsSuccess = createAction('[Product] Load Products Success',
-  props<{ products: Product[] }>()
+export const loadProductsSuccess = createAction('[ProductModel] Load Products Success',
+  props<{ products: ProductModel[] }>()
 );
 
-export const loadProductsFailure = createAction('[Product] Load Products Failure',
+export const loadProductsFailure = createAction('[ProductModel] Load Products Failure',
   props<{ error: any }>()
 );
 
-export const requestAddProduct = createAction('[Product] Request Add Product',
-  props<{ product: Product }>()
+export const requestAddProduct = createAction('[ProductModel] Request Add ProductModel',
+  props<{ product: ProductModel }>()
 );
 
-export const addProductSuccess = createAction('[Product] Add Product Success',
-  props<{ product: Product }>()
+export const addProductSuccess = createAction('[ProductModel] Add ProductModel Success',
+  props<{ product: ProductModel }>()
 );
 
-export const addProductFailure = createAction('[Product] Add Product Failure',
+export const addProductFailure = createAction('[ProductModel] Add ProductModel Failure',
   props<{ error: any }>()
 );
 

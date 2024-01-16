@@ -1,4 +1,4 @@
-export interface Order {
+export interface OrderModel {
   id: string;
   customerId: string;
   items: OrderItem[];

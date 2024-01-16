@@ -1,8 +1,8 @@
-import {User} from "../../models/user/user";
+import {UserModel} from "../../models/user/user.model";
 
 export interface UserState {
   isLoading: boolean;
-  user: User | null;
+  user: UserModel | null;
   accessToken: string | null;
   error: string | null;
   registration: RegistrationState | null;

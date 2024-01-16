@@ -1,7 +1,7 @@
-import {Order} from "../../models/order/order";
+import {OrderModel} from "../../models/order/order.model";
 
 export interface OrderState {
-  orders: Order[];
+  orders: OrderModel[];
   loading: boolean;
   error: any;
 }

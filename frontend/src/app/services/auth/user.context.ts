@@ -1,6 +1,6 @@
-import {User} from "../../models/user/user";
+import {UserModel} from "../../models/user/user.model";
 
-export const setUser = (user: User | null) => {
+export const setUser = (user: UserModel | null) => {
   if (user) {
     localStorage.setItem('user', JSON.stringify(user));
   }
@@ -9,7 +9,7 @@ export const setUser = (user: User | null) => {
   }
 };
 
-export const getUser = (): User | null => {
+export const getUser = (): UserModel | null => {
   const user = localStorage.getItem('user');
 
   if (user) {

@@ -5,10 +5,11 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import * as UserActions from './user.actions';
-import { LoginUser, User } from '../../models/user/user';
+import { LoginUser, UserModel } from '../../models/user/user.model';
 import { UsersService } from '../../services/users/users.service';
 import { setToken, setUser } from '../../services/auth/user.context';
 import { NotificationsService } from '../../services/notifications/notifications.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class UserEffects {
@@ -32,14 +33,10 @@ export class UserEffects {
             return UserActions.loginSuccess({ data });
           }),
           catchError(error => {
-            this.snackBar.open(
-              this.notificationsService.getMessage('unauthorized'),
-              this.notificationsService.getMessage('close'),
-              { duration: 5000 }
-            );
+            this.notificationsService.showErrorSnackBar(this.snackBar,error.error)
             setToken(null);
             setUser(null);
-            return of(UserActions.loginFailure({ error: 'BadCredentials' }));
+            return of(UserActions.loginFailure({ error: error.error.message }));
           })
         )
       )
@@ -63,21 +60,13 @@ export class UserEffects {
       ofType(UserActions.editProfile),
       mergeMap(({ userData }) =>
         this.usersService.editProfile(userData).pipe(
-          map((user: User) => {
+          map((user: UserModel) => {
             setUser(user);
-            this.snackBar.open(
-              this.notificationsService.getMessage('profileUpdated'),
-              this.notificationsService.getMessage('ok'),
-              { duration: 3000 }
-            );
+            this.notificationsService.showSuccessSnackBar(this.snackBar,"Profile Updated")
             return UserActions.editProfileSuccess({ user });
           }),
           catchError(error => {
-            this.snackBar.open(
-              this.notificationsService.getMessage('serverError'),
-              this.notificationsService.getMessage('close'),
-              { duration: 3000 }
-            );
+            this.notificationsService.showErrorSnackBar(this.snackBar,error.error)
             return of({ type: error });
           })
         )
@@ -91,20 +80,12 @@ export class UserEffects {
       mergeMap(({ registerData }) =>
         this.usersService.register(registerData).pipe(
           map(() => {
-            this.snackBar.open(
-              this.notificationsService.getMessage('registrationSuccess'),
-              this.notificationsService.getMessage('close'),
-              { duration: 5000 }
-            );
+            this.notificationsService.showSuccessSnackBar(this.snackBar,"Registration successful")
             return UserActions.registerSuccess();
           }),
-          catchError(error => {
-            this.snackBar.open(
-              this.notificationsService.getMessage('serverError'),
-              this.notificationsService.getMessage('close'),
-              { duration: 5000 }
-            );
-            return of(UserActions.registerFailure());
+          catchError((error: HttpErrorResponse) => {
+            this.notificationsService.showErrorSnackBar(this.snackBar,error.error)
+            return of(UserActions.registerFailure({error: error.error.message}));
           })
         )
       )
