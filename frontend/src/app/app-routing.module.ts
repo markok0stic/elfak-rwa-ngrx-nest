@@ -6,7 +6,7 @@ import {RegisterComponent} from "./components/register/register.component";
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {RolesEnum as Roles} from "@shared/enums/roles.enum";
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: 'login',
     component: LoginComponent,
     data: { title: 'Login' }
@@ -14,14 +14,20 @@ const routes: Routes = [
   { path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Dashboard' },
-    children: []
+    data: { title: 'Dashboard', navInclude: true },
+    children: [
+      { path: 'register',
+        component: RegisterComponent,
+        canActivate: [AuthGuard],
+        data: { role: Roles.Admin, title: 'Register', navInclude: true }
+      },
+    ]
   },
   { path: 'register',
     component: RegisterComponent,
     canActivate: [AuthGuard],
-    data: { role: Roles.Admin, title: 'Register'
-  }},
+    data: { role: Roles.Admin, title: 'Register', navInclude: true }
+  },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 

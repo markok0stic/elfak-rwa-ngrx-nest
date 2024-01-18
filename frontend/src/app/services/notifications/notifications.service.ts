@@ -7,19 +7,20 @@ import { BackendResponseErrorModel } from '@shared/models/backend.response.error
   providedIn: 'root',
 })
 export class NotificationsService {
+
+  constructor(private _snackBar: MatSnackBar) {
+  }
   showErrorSnackBar(
-    snackBar: MatSnackBar,
     error: BackendResponseErrorModel | Error,
     duration: number = 7000,
   ) {
-    snackBar.open(error.message,SnackbarActions.Ok,{duration, panelClass: SnackBarType.Error});
+    this._snackBar.open(error.message,SnackbarActions.Ok,{duration, panelClass: SnackBarType.Error});
   }
 
   showSuccessSnackBar(
-    snackBar: MatSnackBar,
     snackBarMessage: string,
     duration: number = 3000,
   ) {
-    snackBar.open(snackBarMessage,SnackbarActions.Close,{duration, panelClass: SnackBarType.Default});
+    this._snackBar.open(snackBarMessage,SnackbarActions.Close,{duration, panelClass: SnackBarType.Default});
   }
 }

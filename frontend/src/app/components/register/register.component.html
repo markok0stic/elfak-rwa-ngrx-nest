@@ -93,16 +93,26 @@
       <div class="button-container">
         <button mat-raised-button matStepperPrevious color="primary" >Back</button>
         <span class="spacer"></span>
-        <button mat-raised-button (click)="handleRegister()" color="primary" >Register</button>
+        <button mat-raised-button (click)="handleRegister()" matTooltip="Register user" color="primary" >Register</button>
       </div>
     </form>
   </mat-step>
   <mat-step [aria-labelledby]="!(registrationSuccess) ? 'disabled_Resi' : ''" [editable]="false" [completed]="registrationSuccess">
     <ng-template matStepLabel>Done</ng-template>
-    <p>Successfully registered new user.</p>
-    <p>You can now share credentials.</p>
-    <div>
-      <button mat-raised-button (click)="handleReset()" color="primary">Reset</button>
+    <p class="success-message">Successfully registered a new user. You can now share credentials or reset the form:</p>
+    <div class="button-container">
+      <button mat-raised-button (click)="copyCredentials()" color="primary" matTooltip="Copy user credentials to clipboard" [disabled]="!registrationSuccess">
+        <mat-icon>content_copy</mat-icon>
+        Copy to Clipboard
+      </button>
+      <button mat-raised-button (click)="sendEmail()" color="accent" matTooltip="Send user credentials via email" [disabled]="!registrationSuccess">
+        <mat-icon>email</mat-icon>
+        Send via Email
+      </button>
+      <button mat-raised-button (click)="handleReset()" color="warn" matTooltip="Reset the registration form">
+        <mat-icon>restart_alt</mat-icon>
+        Reset
+      </button>
     </div>
   </mat-step>
 </mat-stepper>

@@ -10,4 +10,6 @@ export interface UserState {
 
 export interface RegistrationState {
   successfulRegistration: boolean;
+  email: string,
+  password: string
 }

@@ -23,7 +23,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatSelectModule} from "@angular/material/select";
-import {MatRippleModule} from "@angular/material/core";
+import { MatLineModule, MatRippleModule } from '@angular/material/core';
 import {MatChipsModule} from "@angular/material/chips";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatDialogModule} from "@angular/material/dialog";
@@ -45,6 +45,7 @@ import { LayoutComponent } from './components/_layout/layout.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NavigationComponent } from './components/_navigation/navigation.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatListModule,
     MatSidenavModule,
     MatExpansionModule,
+    MatTooltipModule,
+    MatLineModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent]

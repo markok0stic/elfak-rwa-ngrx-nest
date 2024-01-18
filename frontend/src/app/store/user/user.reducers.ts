@@ -16,13 +16,7 @@ export const userReducers = createReducer(
     ...state,
     isLoading: true,
   })),
-  on(UserActions.logoutUser, () => ({
-    user: null,
-    accessToken: null,
-    isLoading: false,
-    error: null,
-    registration: null
-  })),
+  on(UserActions.logoutUser, () => (initialState)),
   on(UserActions.loginSuccess, (state, {data}) => ({
     user: data.user,
     accessToken: data.accessToken,
@@ -30,13 +24,7 @@ export const userReducers = createReducer(
     error: null,
     registration: null
   })),
-  on(UserActions.loginFailure, () => ({
-    user: null,
-    accessToken: null,
-    isLoading: false,
-    error: null,
-    registration: null
-  })),
+  on(UserActions.loginFailure, () => (initialState)),
   on(UserActions.setInitialUserState, (state, { user, token }) => ({
     ...state,
     user: user,
@@ -47,10 +35,14 @@ export const userReducers = createReducer(
     isLoading: true,
     registration: null
   })),
-  on(UserActions.registerSuccess, (state) => ({
+  on(UserActions.registerSuccess, (state, {successfulRegistrationData}) => ({
     ...state,
     isLoading: false,
-    registration: { successfulRegistration: true }
+    registration: {
+      successfulRegistration: successfulRegistrationData.successfulRegistration,
+      password: successfulRegistrationData.password,
+      email: successfulRegistrationData.email
+    }
   })),
   on(UserActions.registerFailure, (state) => ({
     ...state,

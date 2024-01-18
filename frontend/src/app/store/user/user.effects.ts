@@ -14,26 +14,25 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Injectable()
 export class UserEffects {
   constructor(
-    private action$: Actions,
-    private router: Router,
-    private snackBar: MatSnackBar,
-    private usersService: UsersService,
-    private notificationsService: NotificationsService
+    private _action$: Actions,
+    private _router: Router,
+    private _usersService: UsersService,
+    private _notificationsService: NotificationsService
   ) {}
 
   loginUser$ = createEffect(() =>
-    this.action$.pipe(
+    this._action$.pipe(
       ofType(UserActions.loginUser),
       mergeMap(({ email, password }) =>
-        this.usersService.login(email, password).pipe(
+        this._usersService.login(email, password).pipe(
           map((data: LoginUser) => {
             setToken(data.accessToken);
             setUser(data.user);
-            this.router.navigate(['layout'], { replaceUrl: true });
+            this._router.navigate(['layout'], { replaceUrl: true });
             return UserActions.loginSuccess({ data });
           }),
           catchError(error => {
-            this.notificationsService.showErrorSnackBar(this.snackBar,error.error)
+            this._notificationsService.showErrorSnackBar(error.error)
             setToken(null);
             setUser(null);
             return of(UserActions.loginFailure({ error: error.error.message }));
@@ -44,29 +43,29 @@ export class UserEffects {
   );
 
   logoutUser$ = createEffect(() =>
-      this.action$.pipe(
+      this._action$.pipe(
         ofType(UserActions.logoutUser),
         tap(() => {
           setToken(null);
           setUser(null);
-          this.router.navigate(['login'], { replaceUrl: true });
+          this._router.navigate(['login'], { replaceUrl: true });
         })
       ),
     { dispatch: false }
   );
 
   editProfile$ = createEffect(() =>
-    this.action$.pipe(
+    this._action$.pipe(
       ofType(UserActions.editProfile),
       mergeMap(({ userData }) =>
-        this.usersService.editProfile(userData).pipe(
+        this._usersService.editProfile(userData).pipe(
           map((user: UserModel) => {
             setUser(user);
-            this.notificationsService.showSuccessSnackBar(this.snackBar,"Profile Updated")
+            this._notificationsService.showSuccessSnackBar("Profile Updated")
             return UserActions.editProfileSuccess({ user });
           }),
           catchError(error => {
-            this.notificationsService.showErrorSnackBar(this.snackBar,error.error)
+            this._notificationsService.showErrorSnackBar(error.error)
             return of({ type: error });
           })
         )
@@ -75,16 +74,21 @@ export class UserEffects {
   );
 
   registerUser$ = createEffect(() =>
-    this.action$.pipe(
+    this._action$.pipe(
       ofType(UserActions.registerUser),
       mergeMap(({ registerData }) =>
-        this.usersService.register(registerData).pipe(
+        this._usersService.register(registerData).pipe(
           map(() => {
-            this.notificationsService.showSuccessSnackBar(this.snackBar,"Registration successful")
-            return UserActions.registerSuccess();
+            this._notificationsService.showSuccessSnackBar("Registration successful")
+            return UserActions.registerSuccess({
+              successfulRegistrationData: {
+                successfulRegistration: true,
+                password: registerData.password,
+                email: registerData.email}
+            });
           }),
           catchError((error: HttpErrorResponse) => {
-            this.notificationsService.showErrorSnackBar(this.snackBar,error.error)
+            this._notificationsService.showErrorSnackBar(error.error)
             return of(UserActions.registerFailure({error: error.error.message}));
           })
         )
