@@ -5,7 +5,9 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "paths": {
-      "@shared/*": ["../_shared/*"]
+      "@shared/*": [
+        "../_shared/*"
+      ]
     },
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -28,8 +30,8 @@
     ]
   },
   "include": [
-  "src/**/*",
-  "../_shared/**/*"
+    "src/**/*",
+    "../_shared/**/*"
   ],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

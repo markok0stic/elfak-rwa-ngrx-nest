@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -14,7 +14,8 @@ import { RolesEnum as Roles } from '@shared/enums/roles.enum';
 export class AuthGuard implements CanActivate {
   private jwtHelper: JwtHelperService = new JwtHelperService();
 
-  constructor(private router: Router, private store: Store<AppState>) {}
+  constructor(private router: Router, private store: Store<AppState>) {
+  }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
     return this.store.select(state => state.user.user).pipe(
@@ -37,7 +38,7 @@ export class AuthGuard implements CanActivate {
         }
 
         return true;
-      })
+      }),
     );
   }
 }

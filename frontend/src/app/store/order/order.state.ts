@@ -1,4 +1,4 @@
-import {OrderModel} from "../../models/order/order.model";
+import { OrderModel } from '../../models/order/order.model';
 
 export interface OrderState {
   orders: OrderModel[];

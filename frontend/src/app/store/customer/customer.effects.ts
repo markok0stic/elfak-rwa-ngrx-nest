@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as CustomerActions from './customer.actions';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import {CustomersService} from "../../services/customers/customers.service";
+import { CustomersService } from '../../services/customers/customers.service';
 
 @Injectable()
 export class CustomerEffects {
@@ -14,16 +14,17 @@ export class CustomerEffects {
       mergeMap(() =>
         this.customerService.getCustomers().pipe(
           map(customers => CustomerActions.loadCustomersSuccess({ customers })),
-          catchError(error => of(CustomerActions.loadCustomersFailure({ error })))
-        )
-      )
-    )
+          catchError(error => of(CustomerActions.loadCustomersFailure({ error }))),
+        ),
+      ),
+    ),
   );
 
   // Efekti za dodavanje, ažuriranje i brisanje kupaca...
 
   constructor(
     private actions$: Actions,
-    private customerService: CustomersService
-  ) {}
+    private customerService: CustomersService,
+  ) {
+  }
 }

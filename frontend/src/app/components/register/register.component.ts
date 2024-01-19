@@ -10,7 +10,6 @@ import { registerUser } from 'src/app/store/user/user.actions';
 import { RegisterUser } from '../../models/user/user.model';
 import { NotificationsService } from '../../services/notifications/notifications.service';
 import { RegistrationState } from '../../store/user/user.state';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -88,7 +87,7 @@ export class RegisterComponent {
   }
 
   copyCredentials() {
-    if(this.copyCredentialsData) {
+    if (this.copyCredentialsData) {
       const credentialsText = `Email: ${this.copyCredentialsData.email}\nPassword: ${this.copyCredentialsData.password}`;
       navigator.clipboard.writeText(credentialsText).then(
         () => this._notificationService.showSuccessSnackBar('Credentials copied to clipboard!'),
@@ -98,7 +97,7 @@ export class RegisterComponent {
   }
 
   sendEmail() {
-    if(this.copyCredentialsData) {
+    if (this.copyCredentialsData) {
       const emailBody = `Email: ${this.copyCredentialsData.email}%0D%0APassword: ${this.copyCredentialsData.password}`;
       window.location.href = `mailto:?subject=New User Credentials&body=${emailBody}`;
     }

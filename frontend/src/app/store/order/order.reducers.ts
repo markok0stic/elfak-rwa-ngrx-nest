@@ -1,11 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import * as OrderActions from './order.actions';
-import {OrderState} from "./order.state";
+import { OrderState } from './order.state';
 
 export const initialOrderState: OrderState = {
   orders: [],
   loading: false,
-  error: null
+  error: null,
 };
 
 export const orderReducers = createReducer(
@@ -14,12 +14,12 @@ export const orderReducers = createReducer(
   on(OrderActions.loadOrdersSuccess, (state, { orders }) => ({
     ...state,
     orders: orders,
-    loading: false
+    loading: false,
   })),
   on(OrderActions.loadOrdersFailure, (state, { error }) => ({
     ...state,
     error: error,
-    loading: false
+    loading: false,
   })),
   // Handle actions for creating, updating, and deleting orders...
 );

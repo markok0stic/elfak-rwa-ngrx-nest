@@ -2,7 +2,7 @@
   --background-color: #f0f2f5;
   --text-color: #333;
   --error-color: #f44336;
-  --default-box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+  --default-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   --default-border-radius: 8px;
   --default-flex-direction: column;
   --default-justify-content: center;
@@ -13,9 +13,13 @@
   --default-form-field-margin: 16px 0;
 }
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+}
+
 body {
-  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: var(--background-color);
 }
 
@@ -64,5 +68,11 @@ button[mat-raised-button] {
   }
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

@@ -1,19 +1,14 @@
-import {
-  HttpEvent,
-  HttpHandler,
-  HttpHeaders,
-  HttpInterceptor,
-  HttpRequest,
-} from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {getToken} from "./services/auth/user.context";
+import { getToken } from './services/auth/user.context';
 
 export class InterceptorService implements HttpInterceptor {
-  constructor() {}
+  constructor() {
+  }
 
   intercept(
     req: HttpRequest<any>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     const token: string | null = getToken();
     if (token) {

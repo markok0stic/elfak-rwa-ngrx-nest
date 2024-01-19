@@ -1,10 +1,9 @@
-import {UserModel} from "../../models/user/user.model";
+import { UserModel } from '../../models/user/user.model';
 
 export const setUser = (user: UserModel | null) => {
   if (user) {
     localStorage.setItem('user', JSON.stringify(user));
-  }
-  else {
+  } else {
     localStorage.removeItem('user');
   }
 };

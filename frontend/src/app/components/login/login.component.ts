@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   hide: boolean;
   $loading: Observable<boolean>;
-  $loggedIn: Observable<boolean>
+  $loggedIn: Observable<boolean>;
 
   constructor(private store: Store<AppState>, private router: Router) {
     this.hide = true;
@@ -24,15 +24,15 @@ export class LoginComponent implements OnInit {
     this.$loggedIn = this.store.select(isUserLoggedIn);
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required])
-    })
+      password: new FormControl('', [Validators.required]),
+    });
   }
 
   ngOnInit(): void {
-    if(this.$loggedIn) {
+    if (this.$loggedIn) {
       this.router.navigate(['/dashboard']);
     }
-    console.log(this.loginForm.controls['email'].invalid)
+    console.log(this.loginForm.controls['email'].invalid);
   }
 
   handleSubmit() {

@@ -9,7 +9,8 @@ import { LoginUser, RegisterUser, UserModel } from '../../models/user/user.model
 export class UsersService {
   private baseUrl = `${environment.api}/users`;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+  }
 
   login(email: string, password: string) {
     return this.httpClient.post<LoginUser>(`${this.baseUrl}/login`, {
@@ -27,7 +28,7 @@ export class UsersService {
   editProfile(userData: FormData) {
     return this.httpClient.put<UserModel>(
       `${environment.api}/users/edit-profile`,
-      userData
+      userData,
     );
   }
 }

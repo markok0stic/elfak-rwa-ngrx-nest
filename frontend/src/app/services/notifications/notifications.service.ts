@@ -10,17 +10,18 @@ export class NotificationsService {
 
   constructor(private _snackBar: MatSnackBar) {
   }
+
   showErrorSnackBar(
     error: BackendResponseErrorModel | Error,
     duration: number = 7000,
   ) {
-    this._snackBar.open(error.message,SnackbarActions.Ok,{duration, panelClass: SnackBarType.Error});
+    this._snackBar.open(error.message, SnackbarActions.Ok, { duration, panelClass: SnackBarType.Error });
   }
 
   showSuccessSnackBar(
     snackBarMessage: string,
     duration: number = 3000,
   ) {
-    this._snackBar.open(snackBarMessage,SnackbarActions.Close,{duration, panelClass: SnackBarType.Default});
+    this._snackBar.open(snackBarMessage, SnackbarActions.Close, { duration, panelClass: SnackBarType.Default });
   }
 }

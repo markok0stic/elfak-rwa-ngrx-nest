@@ -1,13 +1,13 @@
-import {createReducer, on} from '@ngrx/store';
-import * as UserActions from './user.actions'
-import {UserState} from "./user.state";
+import { createReducer, on } from '@ngrx/store';
+import * as UserActions from './user.actions';
+import { UserState } from './user.state';
 
 export const initialState: UserState = {
   isLoading: false,
   user: null,
   accessToken: null,
   error: null,
-  registration: null
+  registration: null,
 };
 
 export const userReducers = createReducer(
@@ -17,36 +17,36 @@ export const userReducers = createReducer(
     isLoading: true,
   })),
   on(UserActions.logoutUser, () => (initialState)),
-  on(UserActions.loginSuccess, (state, {data}) => ({
+  on(UserActions.loginSuccess, (state, { data }) => ({
     user: data.user,
     accessToken: data.accessToken,
     isLoading: false,
     error: null,
-    registration: null
+    registration: null,
   })),
   on(UserActions.loginFailure, () => (initialState)),
   on(UserActions.setInitialUserState, (state, { user, token }) => ({
     ...state,
     user: user,
-    accessToken: token
+    accessToken: token,
   })),
   on(UserActions.registerUser, (state) => ({
     ...state,
     isLoading: true,
-    registration: null
+    registration: null,
   })),
-  on(UserActions.registerSuccess, (state, {successfulRegistrationData}) => ({
+  on(UserActions.registerSuccess, (state, { successfulRegistrationData }) => ({
     ...state,
     isLoading: false,
     registration: {
       successfulRegistration: successfulRegistrationData.successfulRegistration,
       password: successfulRegistrationData.password,
-      email: successfulRegistrationData.email
-    }
+      email: successfulRegistrationData.email,
+    },
   })),
   on(UserActions.registerFailure, (state) => ({
     ...state,
     isLoading: false,
-    registration: null
-  }))
+    registration: null,
+  })),
 );

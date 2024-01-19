@@ -1,11 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import * as ProductActions from './product.actions';
-import {ProductState} from "./product.state";
+import { ProductState } from './product.state';
 
 export const initialProductState: ProductState = {
   products: [],
   loading: false,
-  error: null
+  error: null,
 };
 
 export const productReducers = createReducer(
@@ -14,12 +14,12 @@ export const productReducers = createReducer(
   on(ProductActions.loadProductsSuccess, (state, { products }) => ({
     ...state,
     products: products,
-    loading: false
+    loading: false,
   })),
   on(ProductActions.loadProductsFailure, (state, { error }) => ({
     ...state,
     error: error,
-    loading: false
+    loading: false,
   })),
   // Handle addProduct actions...
 );

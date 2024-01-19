@@ -1,4 +1,4 @@
-import {UserModel} from "../../models/user/user.model";
+import { UserModel } from '../../models/user/user.model';
 
 export interface UserState {
   isLoading: boolean;

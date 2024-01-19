@@ -1,6 +1,6 @@
 export enum SnackbarActions {
-  Ok = "Ok",
-  Close = "Close"
+  Ok = 'Ok',
+  Close = 'Close'
 }
 
 export enum SnackBarType {

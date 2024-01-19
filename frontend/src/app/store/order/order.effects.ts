@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as OrderActions from './order.actions';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import {OrdersService} from "../../services/orders/orders.service";
+import { OrdersService } from '../../services/orders/orders.service';
 
 @Injectable()
 export class OrderEffects {
@@ -14,16 +14,17 @@ export class OrderEffects {
       mergeMap(() =>
         this.orderService.getOrders().pipe(
           map(orders => OrderActions.loadOrdersSuccess({ orders })),
-          catchError(error => of(OrderActions.loadOrdersFailure({ error })))
-        )
-      )
-    )
+          catchError(error => of(OrderActions.loadOrdersFailure({ error }))),
+        ),
+      ),
+    ),
   );
 
   // Define effects for creating, updating, and deleting orders...
 
   constructor(
     private actions$: Actions,
-    private orderService: OrdersService
-  ) {}
+    private orderService: OrdersService,
+  ) {
+  }
 }

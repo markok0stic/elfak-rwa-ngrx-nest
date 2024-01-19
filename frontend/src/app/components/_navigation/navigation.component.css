@@ -6,13 +6,18 @@ mat-toolbar {
   left: 0;
 }
 
+.app-logo {
+  height: 40px;
+  width: auto;
+  margin-left: 30px;
+}
+
 mat-toolbar .spacer {
   flex: 1 1 auto;
 }
 
 mat-toolbar button {
   margin: 0;
-  border: none;
 }
 
 .toolbar-height {
@@ -20,11 +25,7 @@ mat-toolbar button {
 }
 
 mat-drawer {
-  width: 270px;
-}
-
-.background {
- background: transparent;
+  width: 230px;
 }
 
 mat-drawer-container {
@@ -45,41 +46,22 @@ mat-drawer-content {
   display: flex;
   flex-direction: column;
   height: 100%;
+  justify-content: center;
 }
 
 .spacer {
   flex: 1;
 }
 
-.logout-container {
-  padding: 0 10px 10px;
+.drawer-content mat-list {
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
-.logout-btn {
-  width: 100%;
-  margin-top: auto;
-  color: var(--text-color);
-}
-
-.no-body {
-  max-height: 48px;
-}
-
-.center-flex {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.inside-body{
+.icon-center {
   display: inline-flex;
 }
 
-.example-headers-align .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
-}
-
-.example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
-  margin-left: 8px;
+::ng-deep mat-nav-list .activated {
+  background-color: #dfdfdf;
 }

@@ -1,11 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import * as CustomerActions from './customer.actions';
-import {CustomerState} from "./customer.state";
+import { CustomerState } from './customer.state';
 
 export const initialCustomerState: CustomerState = {
   customers: [],
   loading: false,
-  error: null
+  error: null,
 };
 
 export const customerReducers = createReducer(
@@ -14,12 +14,12 @@ export const customerReducers = createReducer(
   on(CustomerActions.loadCustomersSuccess, (state, { customers }) => ({
     ...state,
     customers: customers,
-    loading: false
+    loading: false,
   })),
   on(CustomerActions.loadCustomersFailure, (state, { error }) => ({
     ...state,
     error: error,
-    loading: false
+    loading: false,
   })),
   // Obrada dodatnih akcija...
 );
