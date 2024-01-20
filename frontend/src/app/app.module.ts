@@ -47,6 +47,8 @@ import { NavigationComponent } from './components/_navigation/navigation.compone
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgOptimizedImage } from '@angular/common';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { NgOptimizedImage } from '@angular/common';
     DashboardComponent,
     LayoutComponent,
     NavigationComponent,
+    EditProfileComponent,
+    ViewProfileComponent,
   ],
   imports: [
     BrowserModule,

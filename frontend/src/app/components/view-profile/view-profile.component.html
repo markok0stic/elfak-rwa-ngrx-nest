@@ -1,0 +1,56 @@
+<div class="edit-profile-container">
+  <div class="edit-profile-container">
+    <mat-card class="edit-profile-card">
+      <form *ngIf="profileForm" [formGroup]="profileForm">
+        <mat-card-header>
+          <mat-card-title>{{sectionTitle}}</mat-card-title>
+        </mat-card-header>
+      <mat-card-content>
+        <div class="form-row">
+          <mat-form-field class="form-field">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" placeholder="Enter your first name">
+          </mat-form-field>
+          <mat-form-field class="form-field">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" placeholder="Enter your last name">
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field class="form-field">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="Enter your email" [disabled]="true">
+          </mat-form-field>
+          <mat-form-field class="form-field">
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phone" placeholder="Enter your phone number">
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field class="form-field">
+            <mat-label>Address</mat-label>
+            <input matInput formControlName="address" placeholder="Enter your address">
+          </mat-form-field>
+          <mat-form-field class="form-field">
+            <mat-label>City</mat-label>
+            <input matInput formControlName="city" placeholder="Enter your city">
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field class="form-field">
+            <mat-label>Zip Code</mat-label>
+            <input matInput formControlName="zip" placeholder="Enter your zip code">
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+        <mat-card-actions>
+          <button mat-icon-button (click)="toggleEdit()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <span class="spacer"></span>
+          <button mat-raised-button color="primary" type="submit" [disabled]="profileForm?.disabled ?? false">Save Changes</button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </div>
+</div>

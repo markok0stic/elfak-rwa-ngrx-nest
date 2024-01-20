@@ -2,35 +2,53 @@
   <button (click)="handleDrawerToggle()" color="accent" mat-stroked-button>
     <mat-icon>menu</mat-icon>
   </button>
-    <a routerLink="dashboard">
+  <a routerLink="dashboard">
     <img alt="Application Logo" class="app-logo" ngSrc="assets/inventory-management.png" height="512" width="512">
   </a>
   <span class="spacer"></span>
-  <button (click)="onLogout()" color="accent" mat-stroked-button>
-    <mat-icon>logout</mat-icon>
-    Logout
-  </button>
+  <a mat-button [matMenuTriggerFor]="userMenu">
+    <mat-icon>account_circle</mat-icon>
+    Profile
+  </a>
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item routerLink="/profile">
+      <mat-icon>edit</mat-icon>
+      <span>Edit Profile</span>
+    </button>
+    <button mat-menu-item (click)="onLogout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>
 <mat-drawer-container autosize>
   <mat-drawer #drawer [class.mat-elevation-z4]="true" [opened]="drawerOpened" mode="side">
     <div class="drawer-content">
       <div *ngIf="hasAnyElement(navItems)"></div>
       <mat-nav-list role="navigation">
-        <a *ngFor="let navItem of navItems"
-           [disableRipple]="true"
-           [routerLinkActiveOptions]="{exact: true}"
-           [routerLink]="[navItem.path]"
-           mat-list-item
-           routerLinkActive="activated"
-           [activated]="isActive(navItem.path)"
-        >
-        <span class="icon-center">
-      <mat-icon>{{ navItem.icon }}</mat-icon>
-          {{ navItem.title }}
-    </span>
-        </a>
+        <div *ngFor="let navItem of navItems">
+          <a *ngIf="(currentRole | async) === RolesEnum.Admin || (currentRole | async) === navItem.role"
+             [disableRipple]="true"
+             [routerLinkActiveOptions]="{exact: true}"
+             [routerLink]="[navItem.path]"
+             mat-list-item
+             routerLinkActive="activated"
+             [activated]="isActive(navItem.path)"
+          >
+            <span class="icon-center">
+              <mat-icon>{{ navItem.icon }}</mat-icon>
+              {{ navItem.title }}
+            </span>
+          </a>
+        </div>
       </mat-nav-list>
       <div class="spacer"></div>
+      <div class="logout-section">
+      <button color="primary" (click)="onLogout()" mat-stroked-button class="logout-btn">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </div>
     </div>
   </mat-drawer>
   <mat-drawer-content>

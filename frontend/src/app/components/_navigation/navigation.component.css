@@ -9,7 +9,7 @@ mat-toolbar {
 .app-logo {
   height: 40px;
   width: auto;
-  margin-left: 30px;
+  margin-left: 20px;
 }
 
 mat-toolbar .spacer {
@@ -22,6 +22,38 @@ mat-toolbar button {
 
 .toolbar-height {
   height: 64px;
+}
+/* Add this to your existing styles */
+
+.app-logo-link {
+  display: flex;
+  align-items: center;
+}
+
+mat-toolbar a {
+  color: inherit; /* Or any color you prefer */
+  text-decoration: none;
+}
+
+/* Ensure the mat-icon in toolbar button is vertically aligned */
+mat-toolbar a mat-icon {
+  vertical-align: middle;
+  margin-right: 8px; /* Spacing between icon and text */
+}
+
+/* Styling for the user menu */
+mat-menu {
+  min-width: 150px;
+}
+
+/* Styling for menu items */
+button[mat-menu-item] {
+  display: flex;
+  align-items: center;
+}
+
+button[mat-menu-item] mat-icon {
+  margin-right: 8px;
 }
 
 mat-drawer {
@@ -64,4 +96,13 @@ mat-drawer-content {
 
 ::ng-deep mat-nav-list .activated {
   background-color: #dfdfdf;
+}
+
+.logout-section {
+  padding: 0 10px 10px;
+}
+
+.logout-btn {
+  width: 100%;
+  margin-top: auto;
 }

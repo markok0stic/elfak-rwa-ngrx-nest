@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
@@ -16,7 +16,7 @@ import { RegistrationState } from '../../store/user/user.state';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit{
   @ViewChild('stepper') stepper!: MatStepper;
   hide: boolean;
   $loading: Observable<boolean>;
