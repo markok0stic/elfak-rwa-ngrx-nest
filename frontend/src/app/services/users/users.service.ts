@@ -25,10 +25,22 @@ export class UsersService {
     });
   }
 
-  editProfile(userData: UserModel) {
+  editUser(userData: UserModel) {
     return this.httpClient.put<UserModel>(
       `${environment.api}/users/edit-profile`,
       userData,
     );
+  }
+
+  deleteUser(id: number) {
+    return this.httpClient.delete<UserModel>(
+      `${environment.api}/users/delete/1`,
+    );
+  }
+
+  getAll() {
+    return this.httpClient.get<UserModel[]>(
+      `${environment.api}/users`,
+    )
   }
 }

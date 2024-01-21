@@ -53,7 +53,9 @@ export class UserController {
     return req.user;
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Get()
+  @Roles(RolesEnum.Admin)
   public getUsers() {
     return this.userService.getAll();
   }

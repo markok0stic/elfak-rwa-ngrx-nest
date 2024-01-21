@@ -7,6 +7,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RolesEnum as Roles } from '@shared/enums/roles.enum';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
+import { UsersComponent } from './components/users/users.component';
 
 export const routes: Routes = [
   {
@@ -19,6 +20,12 @@ export const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard],
     data: { title: 'Dashboard', icon: 'dashboard', navInclude: true },
+  },
+  {
+    path: 'users',
+    component: UsersComponent,
+    canActivate: [AuthGuard],
+    data: {role: Roles.Admin ,title: 'Users', icon: 'account_circle', navInclude: true},
   },
   {
     path: 'register',

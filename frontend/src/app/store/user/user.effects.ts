@@ -48,7 +48,7 @@ export class UserEffects {
     this._action$.pipe(
       ofType(UserActions.editProfile),
       mergeMap(({ userData }) =>
-        this._usersService.editProfile(userData).pipe(
+        this._usersService.editUser(userData).pipe(
           map((user: UserModel) => {
             setUser(user);
             this._notificationsService.showSuccessSnackBar('Profile Updated');

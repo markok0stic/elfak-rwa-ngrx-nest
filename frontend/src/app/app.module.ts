@@ -49,6 +49,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgOptimizedImage } from '@angular/common';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
+import { UsersComponent } from './components/users/users.component';
+import { TableComponent } from './components/_table/table.component';
+import { MatTableModule } from '@angular/material/table';
+import { AddNewComponent } from './components/add-new/add-new.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -60,6 +67,9 @@ import { ViewProfileComponent } from './components/view-profile/view-profile.com
     NavigationComponent,
     EditProfileComponent,
     ViewProfileComponent,
+    UsersComponent,
+    TableComponent,
+    AddNewComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,6 +122,10 @@ import { ViewProfileComponent } from './components/view-profile/view-profile.com
     MatTooltipModule,
     MatLineModule,
     NgOptimizedImage,
+    MatTableModule,
+    MatPaginatorModule,
+    MatCheckboxModule,
+    MatSortModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],
