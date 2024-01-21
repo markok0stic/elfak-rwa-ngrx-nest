@@ -31,7 +31,7 @@ export class User {
   public city: string;
 
   @Column({ type: 'varchar', nullable: true })
-  public zip: number;
+  public zip: string;
 
   @Column({ type: 'varchar', nullable: false, default: RolesEnum.User })
   public role: string;

@@ -7,7 +7,7 @@ export const initialState: UserState = {
   user: null,
   accessToken: null,
   error: null,
-  registration: null,
+  registration: null
 };
 
 export const userReducers = createReducer(
@@ -23,6 +23,7 @@ export const userReducers = createReducer(
     isLoading: false,
     error: null,
     registration: null,
+    profileEdit: null
   })),
   on(UserActions.loginFailure, () => (initialState)),
   on(UserActions.setInitialUserState, (state, { user, token }) => ({
@@ -49,4 +50,8 @@ export const userReducers = createReducer(
     isLoading: false,
     registration: null,
   })),
+  on(UserActions.editProfileSuccess, (state, { user }) => ({
+    ...state,
+    user: user,
+  }))
 );

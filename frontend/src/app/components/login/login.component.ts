@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
     if (this.$loggedIn) {
       this.router.navigate(['/dashboard']);
     }
-    console.log(this.loginForm.controls['email'].invalid);
   }
 
   handleSubmit() {

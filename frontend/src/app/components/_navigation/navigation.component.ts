@@ -19,7 +19,7 @@ export class NavigationComponent {
   @ViewChild('drawer') drawer!: MatDrawer;
   drawerOpened: boolean;
   public navItems: Array<{ title: string, path: string, icon: string, role: RolesEnum }>;
-  currentRole: Observable<RolesEnum>;
+  currentRole: Observable<RolesEnum | null>;
   protected readonly hasAnyElement = hasAnyElement;
   protected readonly RolesEnum = RolesEnum;
 

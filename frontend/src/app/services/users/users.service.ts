@@ -25,7 +25,7 @@ export class UsersService {
     });
   }
 
-  editProfile(userData: FormData) {
+  editProfile(userData: UserModel) {
     return this.httpClient.put<UserModel>(
       `${environment.api}/users/edit-profile`,
       userData,

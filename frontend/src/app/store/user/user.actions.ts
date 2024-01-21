@@ -16,14 +16,6 @@ export const loginFailure = createAction('[UserModel] Login Failure',
 
 export const logoutUser = createAction('[UserModel] Logout UserModel');
 
-export const editProfile = createAction('[UserModel] Edit Profile',
-  props<{ userData: FormData }>(),
-);
-
-export const editProfileSuccess = createAction('[UserModel] Edit Profile Success',
-  props<{ user: UserModel }>(),
-);
-
 export const setInitialUserState = createAction(
   '[UserModel] Set Initial State',
   props<{ user: UserModel | null; token: string | null }>(),
@@ -39,6 +31,14 @@ export const registerSuccess = createAction('[Registration] Register Success',
 
 export const registerFailure = createAction('[Registration] Register Failure',
   props<{ error: string }>(),
+);
+
+export const editProfile = createAction('[ProfileEdit] Edit Profile',
+  props<{ userData: UserModel }>(),
+);
+
+export const editProfileSuccess = createAction('[ProfileEdit] Edit Profile Success',
+  props<{ user: UserModel }>(),
 );
 
 

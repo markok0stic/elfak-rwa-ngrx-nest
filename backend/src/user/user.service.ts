@@ -43,18 +43,19 @@ export class UserService {
   }
 
   public async editProfile(accessUser: User, dto: UserUpdateDto) {
-    const { firstName, lastName, address, phone } = dto;
+    const { firstName, lastName, address, phone, country, city, zip } = dto;
 
     const user: User = await this.userRepository.findOne({
       where: { id: accessUser.id },
       select: {
         id: true,
+        email: true,
+        role: true,
         firstName: true,
         lastName: true,
+        phone: true,
         country: true,
         address: true,
-        phone: true,
-        role: true,
         city: true,
         zip: true,
       },
@@ -64,8 +65,11 @@ export class UserService {
 
     user.firstName = firstName;
     user.lastName = lastName;
-    user.address = address;
     user.phone = phone;
+    user.country = country;
+    user.city = city;
+    user.zip = zip;
+    user.address = address;
 
     if (!(await this.userRepository.update(user.id, user)))
       return { success: false };
