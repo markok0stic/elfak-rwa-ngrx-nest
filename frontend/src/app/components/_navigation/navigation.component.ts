@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { logoutUser } from '../../store/user/user.actions';
+import { logoutUser } from '../../store/current-user/current.user.actions';
 import { Store } from '@ngrx/store';
 import { MatDrawer } from '@angular/material/sidenav';
 import { hasAnyElement } from '@shared/utils/common.utils';
 import { Observable } from 'rxjs';
-import { selectLoggedInUserRole } from '../../store/user/user.selectors';
+import { selectLoggedInUserRole } from '../../store/current-user/current.user.selectors';
 import { RolesEnum } from '@shared/enums/roles.enum';
 import { AppState } from '../../app.state';
 import { Router } from '@angular/router';

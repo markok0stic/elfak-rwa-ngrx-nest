@@ -21,5 +21,4 @@ export const customerReducers = createReducer(
     error: error,
     loading: false,
   })),
-  // Obrada dodatnih akcija...
 );

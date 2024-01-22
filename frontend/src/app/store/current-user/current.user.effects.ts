@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
-import * as UserActions from './user.actions';
+import * as UserActions from './current.user.actions';
 import { LoginUser, UserModel } from '../../models/user/user.model';
 import { UsersService } from '../../services/users/users.service';
 import { setToken, setUser } from '../../services/auth/user.context';
@@ -11,7 +11,7 @@ import { NotificationsService } from '../../services/notifications/notifications
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
-export class UserEffects {
+export class CurrentUserEffects {
   loginUser$ = createEffect(() =>
     this._action$.pipe(
       ofType(UserActions.loginUser),
@@ -57,29 +57,6 @@ export class UserEffects {
           catchError(error => {
             this._notificationsService.showErrorSnackBar(error.error);
             return of({ type: error });
-          }),
-        ),
-      ),
-    ),
-  );
-  registerUser$ = createEffect(() =>
-    this._action$.pipe(
-      ofType(UserActions.registerUser),
-      mergeMap(({ registerData }) =>
-        this._usersService.register(registerData).pipe(
-          map(() => {
-            this._notificationsService.showSuccessSnackBar('Registration successful');
-            return UserActions.registerSuccess({
-              successfulRegistrationData: {
-                successfulRegistration: true,
-                password: registerData.password,
-                email: registerData.email,
-              },
-            });
-          }),
-          catchError((error: HttpErrorResponse) => {
-            this._notificationsService.showErrorSnackBar(error.error);
-            return of(UserActions.registerFailure({ error: error.error.message }));
           }),
         ),
       ),

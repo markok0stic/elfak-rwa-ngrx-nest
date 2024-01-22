@@ -5,7 +5,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RolesEnum as Roles } from '@shared/enums/roles.enum';
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { UsersComponent } from './components/users/users.component';
 
@@ -31,7 +30,7 @@ export const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
     canActivate: [AuthGuard],
-    data: { role: Roles.Admin, icon: 'add-user', title: 'Register', navInclude: true },
+    data: { role: Roles.Admin, icon: 'add-current-user', title: 'Register', navInclude: true },
   },
   {
     path: 'profile',

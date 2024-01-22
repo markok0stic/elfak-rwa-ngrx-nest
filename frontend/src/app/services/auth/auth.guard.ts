@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    return this.store.select(state => state.user.user).pipe(
+    return this.store.select(state => state.currentUser.user).pipe(
       map(user => {
         const token = getToken();
         const isTokenExpired = !token || this.jwtHelper.isTokenExpired(token);

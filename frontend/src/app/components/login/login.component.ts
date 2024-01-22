@@ -3,9 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { loginUser } from 'src/app/store/user/user.actions';
+import { loginUser } from '../../store/current-user/current.user.actions';
 import { Observable } from 'rxjs';
-import { isUserLoadingSelector, isUserLoggedIn } from '../../store/user/user.selectors';
+import { isUserLoadingSelector, isUserLoggedIn } from '../../store/current-user/current.user.selectors';
 
 @Component({
   selector: 'app-login',

@@ -1,12 +1,10 @@
 import { UserModel } from '../../models/user/user.model';
+import { State } from '../../models/state';
 
-export interface UserState {
-  isLoading: boolean;
-  user: UserModel | null;
-  accessToken: string | null;
-  error: string | null;
+export type UsersState = State<UserModel> & {
   registration: RegistrationState | null;
 }
+
 
 export interface RegistrationState {
   successfulRegistration: boolean;

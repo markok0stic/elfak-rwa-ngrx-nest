@@ -15,17 +15,18 @@ table {
   width: 100%;
 }
 
-td, th {
-  width: 25%;
-}
-
 mat-paginator {
   margin-bottom: 50px;
 }
 
 .filter-actions {
   display: flex;
-  justify-content: center;
+  justify-content:start;
   align-items: center;
   column-gap: 2em;
+}
+
+
+.filter-actions mat-form-field {
+  max-width: 100%;
 }

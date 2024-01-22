@@ -8,9 +8,9 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppState } from './app.state';
-import { UserEffects } from './store/user/user.effects';
+import { CurrentUserEffects } from './store/current-user/current.user.effects';
 import { InterceptorService } from './app.interceptor';
-import { userReducers } from './store/user/user.reducers';
+import { currentUserReducers } from './store/current-user/current.user.reducers';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -47,15 +47,18 @@ import { NavigationComponent } from './components/_navigation/navigation.compone
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgOptimizedImage } from '@angular/common';
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { UsersComponent } from './components/users/users.component';
 import { TableComponent } from './components/_table/table.component';
 import { MatTableModule } from '@angular/material/table';
-import { AddNewComponent } from './components/add-new/add-new.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
+import { TableAddNewComponent } from './components/_table-add-new/table-add-new.component';
+import { TableActionsComponent } from './components/_table-actions/table-actions.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { usersReducer } from './store/users/users.reducers';
+import { UsersEffects } from './store/users/users.effects';
 
 @NgModule({
   declarations: [
@@ -65,11 +68,12 @@ import { MatSortModule } from '@angular/material/sort';
     DashboardComponent,
     LayoutComponent,
     NavigationComponent,
-    EditProfileComponent,
     ViewProfileComponent,
     UsersComponent,
     TableComponent,
-    AddNewComponent,
+    TableComponent,
+    TableAddNewComponent,
+    TableActionsComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,16 +84,18 @@ import { MatSortModule } from '@angular/material/sort';
     AppRoutingModule,
     FontAwesomeModule,
     StoreModule.forRoot<AppState>({
-      user: userReducers,
+      currentUser: currentUserReducers,
       product: productReducers,
       order: orderReducers,
       customer: customerReducers,
+      users: usersReducer
     }),
     EffectsModule.forRoot([
-      UserEffects,
+      CurrentUserEffects,
       ProductEffects,
       OrderEffects,
       CustomerEffects,
+      UsersEffects
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -126,6 +132,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatCheckboxModule,
     MatSortModule,
+    MatProgressSpinnerModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],

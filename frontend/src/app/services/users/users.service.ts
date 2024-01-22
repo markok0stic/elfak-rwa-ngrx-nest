@@ -2,25 +2,27 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { LoginUser, RegisterUser, UserModel } from '../../models/user/user.model';
+import { BehaviorSubject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
-  private baseUrl = `${environment.api}/users`;
+  private _baseUrl = `${environment.api}/users`;
 
   constructor(private httpClient: HttpClient) {
   }
 
   login(email: string, password: string) {
-    return this.httpClient.post<LoginUser>(`${this.baseUrl}/login`, {
+    return this.httpClient.post<LoginUser>(`${this._baseUrl}/login`, {
       email,
       password,
     });
   }
 
   register(data: RegisterUser) {
-    return this.httpClient.post<UserModel>(`${this.baseUrl}/register`, {
+    return this.httpClient.post<UserModel>(`${this._baseUrl}/register`, {
       ...data,
     });
   }

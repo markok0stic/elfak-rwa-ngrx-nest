@@ -1,6 +1,6 @@
 import { RolesEnum as Roles } from '@shared/enums/roles.enum';
 
-export interface UserModel {
+export type UserModel = {
   id: string;
   email: string;
   role: Roles;

@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { LoginUser, RegisterUser, UserModel } from '../../models/user/user.model';
-import { RegistrationState } from './user.state';
+import { LoginUser, UserModel } from '../../models/user/user.model';
 
 export const loginUser = createAction('[UserModel] Login UserModel',
   props<{ email: string; password: string }>(),
@@ -19,18 +18,6 @@ export const logoutUser = createAction('[UserModel] Logout UserModel');
 export const setInitialUserState = createAction(
   '[UserModel] Set Initial State',
   props<{ user: UserModel | null; token: string | null }>(),
-);
-
-export const registerUser = createAction('[Registration] Register UserModel',
-  props<{ registerData: RegisterUser }>(),
-);
-
-export const registerSuccess = createAction('[Registration] Register Success',
-  props<{ successfulRegistrationData: RegistrationState }>(),
-);
-
-export const registerFailure = createAction('[Registration] Register Failure',
-  props<{ error: string }>(),
 );
 
 export const editProfile = createAction('[ProfileEdit] Edit Profile',

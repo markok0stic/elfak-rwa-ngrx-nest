@@ -2,14 +2,15 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { isUserLoadingSelector, selectSuccessfulRegistrationData } from '../../store/user/user.selectors';
+import { isUserLoadingSelector } from '../../store/current-user/current.user.selectors';
 import { Observable } from 'rxjs';
 import { RolesEnum as Roles } from '@shared/enums/roles.enum';
 import { MatStepper } from '@angular/material/stepper';
-import { registerUser } from 'src/app/store/user/user.actions';
 import { RegisterUser } from '../../models/user/user.model';
 import { NotificationsService } from '../../services/notifications/notifications.service';
-import { RegistrationState } from '../../store/user/user.state';
+import { RegistrationState } from '../../store/users/users.state';
+import { selectSuccessfulRegistrationData } from '../../store/users/users.selectors';
+import { registerUser } from '../../store/users/users.actions';
 
 @Component({
   selector: 'app-register',

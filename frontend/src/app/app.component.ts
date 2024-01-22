@@ -5,9 +5,9 @@ import { filter, map, mergeMap } from 'rxjs/operators';
 import { getToken, getUser } from './services/auth/user.context';
 import { AppState } from './app.state';
 import { Store } from '@ngrx/store';
-import * as UserActions from './store/user/user.actions';
+import * as UserActions from './store/current-user/current.user.actions';
 import { Observable } from 'rxjs';
-import { isUserLoggedIn } from './store/user/user.selectors';
+import { isUserLoggedIn } from './store/current-user/current.user.selectors';
 
 @Component({
   selector: 'app-root',

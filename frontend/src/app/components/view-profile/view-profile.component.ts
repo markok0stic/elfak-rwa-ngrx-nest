@@ -3,9 +3,9 @@ import { Observable } from 'rxjs';
 import { UserModel } from '../../models/user/user.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { selectUser } from '../../store/user/user.selectors';
+import { selectUser } from '../../store/current-user/current.user.selectors';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { editProfile } from '../../store/user/user.actions';
+import { editProfile } from '../../store/current-user/current.user.actions';
 
 @Component({
   selector: 'app-view-profile',
