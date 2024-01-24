@@ -30,3 +30,13 @@ mat-paginator {
 .filter-actions mat-form-field {
   max-width: 100%;
 }
+
+.table-container {
+  display: flex;
+  width: 100%;
+}
+
+button {
+  width: 115px;
+}
+

@@ -6,6 +6,11 @@ import { MatSort } from '@angular/material/sort';
 import { Observable, of } from 'rxjs';
 import { State } from '../../models/state';
 
+export enum ViewMode {
+  TABLE,
+  ADD,
+  EDIT
+}
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -20,6 +25,7 @@ export class TableComponent<TData> implements AfterViewInit {
   dataSource: MatTableDataSource<TData>;
   selection: SelectionModel<TData>;
   loading: boolean;
+  currentViewMode: ViewMode;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -30,6 +36,7 @@ export class TableComponent<TData> implements AfterViewInit {
     this.selectEnabled = true;
     this.actionsEnabled = true;
     this.loading = false;
+    this.currentViewMode = ViewMode.TABLE;
     this.dataSource = new MatTableDataSource<TData>([])
     this.selection = new SelectionModel<TData>(true, []);
   }
@@ -89,4 +96,10 @@ export class TableComponent<TData> implements AfterViewInit {
     }
     return 'deselect all';
   }
+
+  toggleView(view: ViewMode) {
+    this.currentViewMode = view;
+  }
+
+  protected readonly ViewMode = ViewMode;
 }

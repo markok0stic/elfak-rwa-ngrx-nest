@@ -27,12 +27,6 @@ export const routes: Routes = [
     data: {role: Roles.Admin ,title: 'Users', icon: 'account_circle', navInclude: true},
   },
   {
-    path: 'register',
-    component: RegisterComponent,
-    canActivate: [AuthGuard],
-    data: { role: Roles.Admin, icon: 'add-current-user', title: 'Register', navInclude: true },
-  },
-  {
     path: 'profile',
     component: ViewProfileComponent,
     canActivate: [AuthGuard],

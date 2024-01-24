@@ -14,7 +14,8 @@ export class UsersEffects {
   loadUsers$ = createEffect(() => this._actions$.pipe(
     ofType(UserActions.loadUsers),
     mergeMap(() => this._usersService.getAll().pipe(
-      map(users => UserActions.loadUsersSuccess({ users })),
+      map((users) => {
+        return UserActions.loadUsersSuccess({ users })}),
       catchError(error => of(UserActions.loadUsersFailure({ error })))
     ))
   ));
@@ -34,6 +35,9 @@ export class UsersEffects {
               },
             });
           }),
+          tap(() => {
+            this._store.dispatch(UserActions.loadUsers());
+          }),
           catchError((error: HttpErrorResponse) => {
             this._notificationsService.showErrorSnackBar(error.error);
             return of(UserActions.registerFailure({ error: error.error.message }));
@@ -46,6 +50,7 @@ export class UsersEffects {
   constructor(
     private _actions$: Actions,
     private _usersService: UsersService,
+    private _store: Store<AppState>,
     private _notificationsService: NotificationsService
   ) {}
 }

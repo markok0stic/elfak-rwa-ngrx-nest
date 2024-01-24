@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-table-add-new',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./table-add-new.component.css']
 })
 export class TableAddNewComponent {
+  @Input() buttonText: string;
 
+  constructor() {
+    this.buttonText = '';
+  }
 }

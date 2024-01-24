@@ -25,18 +25,16 @@ export interface PeriodicElement {
 export class UsersComponent implements OnInit{
   users$: Observable<UsersState>
   columnsToDisplay: string[];
-  destroyed$ = new Subject<UserModel[]>();
   data: UserModel[] = [];
   loading: boolean;
 
-  constructor(private _store: Store<AppState>, private _usersService: UsersService) {
-    this.users$ = of();
+  constructor(private _store: Store<AppState>) {
+    this.users$ = this._store.select(selectAllUsers);
     this.columnsToDisplay = ['id','firstName','lastName','email','phone','country','role'];
     this.loading = false;
   }
 
   ngOnInit(): void {
     this._store.dispatch(UsersActions.loadUsers());
-    this.users$ = this._store.select(selectAllUsers);
   }
 }
