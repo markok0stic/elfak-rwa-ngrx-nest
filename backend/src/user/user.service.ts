@@ -43,10 +43,10 @@ export class UserService {
   }
 
   public async editProfile(accessUser: User, dto: UserUpdateDto) {
-    const { firstName, lastName, address, phone, country, city, zip } = dto;
+    const { firstName, lastName, address, phone, country, city, zip, id } = dto;
 
     const user: User = await this.userRepository.findOne({
-      where: { id: accessUser.id },
+      where: { id: Number(id) },
       select: {
         id: true,
         email: true,

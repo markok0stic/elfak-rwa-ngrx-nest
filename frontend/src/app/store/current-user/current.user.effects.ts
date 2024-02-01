@@ -9,6 +9,7 @@ import { UsersService } from '../../services/users/users.service';
 import { setToken, setUser } from '../../services/auth/user.context';
 import { NotificationsService } from '../../services/notifications/notifications.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { editSelfProfile } from './current.user.actions';
 
 @Injectable()
 export class CurrentUserEffects {
@@ -44,15 +45,15 @@ export class CurrentUserEffects {
       ),
     { dispatch: false },
   );
-  editProfile$ = createEffect(() =>
+  editSelfProfile$ = createEffect(() =>
     this._action$.pipe(
-      ofType(UserActions.editProfile),
+      ofType(UserActions.editSelfProfile),
       mergeMap(({ userData }) =>
         this._usersService.editUser(userData).pipe(
           map((user: UserModel) => {
             setUser(user);
             this._notificationsService.showSuccessSnackBar('Profile Updated');
-            return UserActions.editProfileSuccess({ user });
+            return UserActions.editSelfProfileSuccess({ user });
           }),
           catchError(error => {
             this._notificationsService.showErrorSnackBar(error.error);

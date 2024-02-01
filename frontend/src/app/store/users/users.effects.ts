@@ -8,6 +8,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NotificationsService } from '../../services/notifications/notifications.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
+import { UserModel } from '../../models/user/user.model';
+import { setUser } from '../../services/auth/user.context';
 
 @Injectable()
 export class UsersEffects {
@@ -41,6 +43,48 @@ export class UsersEffects {
           catchError((error: HttpErrorResponse) => {
             this._notificationsService.showErrorSnackBar(error.error);
             return of(UserActions.registerFailure({ error: error.error.message }));
+          }),
+        ),
+      ),
+    ),
+  );
+
+  editProfile$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(UserActions.editUserProfile),
+      mergeMap(({ userData }) =>
+        this._usersService.editUser(userData).pipe(
+          map((user: UserModel) => {
+            this._notificationsService.showSuccessSnackBar('Profile Updated');
+            return UserActions.editUserProfileSuccess({ user });
+          }),
+          tap(() => {
+            this._store.dispatch(UserActions.loadUsers());
+          }),
+          catchError(error => {
+            this._notificationsService.showErrorSnackBar(error.error);
+            return of({ type: error });
+          }),
+        ),
+      ),
+    ),
+  );
+
+  deleteUser$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(UserActions.deleteUser),
+      mergeMap(({ userId }) =>
+        this._usersService.deleteUser(userId).pipe(
+          map((_) => {
+            this._notificationsService.showSuccessSnackBar(`Profile with ID: ${userId} deleted`);
+            return UserActions.deleteUserSuccess({userId});
+          }),
+          tap(() => {
+            this._store.dispatch(UserActions.loadUsers());
+          }),
+          catchError(error => {
+            this._notificationsService.showErrorSnackBar(error.error);
+            return of({ type: error });
           }),
         ),
       ),

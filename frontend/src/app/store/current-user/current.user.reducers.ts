@@ -29,7 +29,7 @@ export const currentUserReducers = createReducer(
     user: user,
     accessToken: token,
   })),
-  on(UserActions.editProfileSuccess, (state, { user }) => ({
+  on(UserActions.editSelfProfileSuccess, (state, { user }) => ({
     ...state,
     user: user,
   }))

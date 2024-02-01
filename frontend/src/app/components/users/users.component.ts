@@ -1,34 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject, switchMap, takeUntil, timer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AppState } from '../../app.state';
 import { Store } from '@ngrx/store';
 import { UsersState } from '../../store/users/users.state';
 import { selectAllUsers } from '../../store/users/users.selectors';
 import * as UsersActions from '../../store/users/users.actions';
 import { UserModel } from '../../models/user/user.model';
-import { UsersService } from '../../services/users/users.service';
-import { RolesEnum } from '@shared/enums/roles.enum';
-import { tap } from 'rxjs/operators';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css']
 })
-export class UsersComponent implements OnInit{
+export class UsersComponent implements OnInit {
   users$: Observable<UsersState>
   columnsToDisplay: string[];
   data: UserModel[] = [];
   loading: boolean;
+  userToEdit: UserModel | null;
 
   constructor(private _store: Store<AppState>) {
+    this.userToEdit = null;
     this.users$ = this._store.select(selectAllUsers);
     this.columnsToDisplay = ['id','firstName','lastName','email','phone','country','role'];
     this.loading = false;
@@ -36,5 +28,14 @@ export class UsersComponent implements OnInit{
 
   ngOnInit(): void {
     this._store.dispatch(UsersActions.loadUsers());
+  }
+
+  handleEdit(user: UserModel) {
+    this.userToEdit = user;
+  }
+
+  handleDelete(user: UserModel) {
+    //  TODO: DISPLAY MAT DIALOGUE
+    this._store.dispatch(UsersActions.deleteUser({userId: Number(user.id)}));
   }
 }

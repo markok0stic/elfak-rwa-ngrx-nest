@@ -5,7 +5,6 @@ export type UsersState = State<UserModel> & {
   registration: RegistrationState | null;
 }
 
-
 export interface RegistrationState {
   successfulRegistration: boolean;
   email: string,

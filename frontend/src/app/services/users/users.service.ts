@@ -36,7 +36,7 @@ export class UsersService {
 
   deleteUser(id: number) {
     return this.httpClient.delete<UserModel>(
-      `${environment.api}/users/delete/1`,
+      `${environment.api}/users/delete/${id}`,
     );
   }
 

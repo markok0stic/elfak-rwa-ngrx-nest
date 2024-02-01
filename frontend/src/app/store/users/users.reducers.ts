@@ -33,4 +33,6 @@ export const usersReducer = createReducer(
     isLoading: false,
     registration: null,
   })),
+  on(UserActions.deleteUser, state => ({ ...state, loading: true})),
+  on(UserActions.deleteUserSuccess, state => ({ ...state})),
 );

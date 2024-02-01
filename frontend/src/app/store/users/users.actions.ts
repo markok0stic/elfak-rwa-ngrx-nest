@@ -23,3 +23,19 @@ export const registerSuccess = createAction('[Registration] Register Success',
 export const registerFailure = createAction('[Registration] Register Failure',
   props<{ error: string }>(),
 );
+
+export const editUserProfile = createAction('[ProfileEdit] Edit User Profile',
+  props<{ userData: UserModel }>(),
+);
+
+export const editUserProfileSuccess = createAction('[ProfileEdit] Edit User Profile Success',
+  props<{ user: UserModel }>(),
+);
+
+export const deleteUser = createAction('[Users Delete] Delete User',
+  props<{ userId: number }>(),
+);
+
+export const deleteUserSuccess = createAction('[Users Delete] Delete User Success',
+  props<{userId: number}>(),
+);

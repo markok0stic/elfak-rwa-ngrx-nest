@@ -1,4 +1,5 @@
 export interface UserUpdateDto {
+  id: string;
   firstName: string;
   lastName: string;
   phone: string;

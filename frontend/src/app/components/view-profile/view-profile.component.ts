@@ -1,33 +1,51 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { UserModel } from '../../models/user/user.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
 import { selectUser } from '../../store/current-user/current.user.selectors';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { editProfile } from '../../store/current-user/current.user.actions';
+import { editSelfProfile } from '../../store/current-user/current.user.actions';
+import { editUserProfile } from '../../store/users/users.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-profile',
   templateUrl: './view-profile.component.html',
   styleUrls: ['./view-profile.component.css']
 })
-export class ViewProfileComponent {
+export class ViewProfileComponent implements OnInit {
+  private userSubject = new BehaviorSubject<UserModel | null>(null);
   user$: Observable<UserModel | null>;
   profileForm: FormGroup | null;
   sectionTitle: string;
   userEmail: string | null;
   userRole: string | null;
+  isNotSelfEdit: boolean;
 
-  constructor(private store: Store<AppState>, private _formBuilder: FormBuilder) {
-    this.user$ = this.store.select(selectUser);
+  @Input()
+  set user(value: UserModel | null) {
+    this.userSubject.next(value);
+    this.isNotSelfEdit = true;
+  }
+
+  constructor(private store: Store<AppState>, private _formBuilder: FormBuilder, private _router: Router) {
+    this.user$ = of(null);
     this.userEmail = null;
     this.userRole = null;
     this.profileForm = null;
     this.sectionTitle = 'Profile';
+    this.isNotSelfEdit = false;
   }
 
   ngOnInit(): void {
+    if(this.isNotSelfEdit) {
+      this.user$ = this.userSubject.asObservable();
+    }
+    else {
+      this.user$ = this.store.select(selectUser);
+    }
+
     this.user$.subscribe((user) => {
       if (user) {
         this.userEmail = user.email;
@@ -40,6 +58,7 @@ export class ViewProfileComponent {
 
   profileFormGroup(user: UserModel | null) {
       return this._formBuilder.group({
+        id: [user?.id, Validators.required],
         firstName: [user?.firstName, Validators.required],
         lastName: [user?.lastName, Validators.required],
         phone: [user?.phone, Validators.required],
@@ -71,6 +90,11 @@ export class ViewProfileComponent {
       ...this.profileForm.value
     }
 
-    this.store.dispatch(editProfile({userData: editUserData}));
+    if(this.isNotSelfEdit) {
+      this.store.dispatch(editUserProfile({userData: editUserData}));
+      this.profileForm.disable();
+    } else {
+      this.store.dispatch(editSelfProfile({userData: editUserData}));
+    }
   }
 }

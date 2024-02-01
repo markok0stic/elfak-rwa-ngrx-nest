@@ -1,4 +1,13 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -29,6 +38,9 @@ export class TableComponent<TData> implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+
+  @Output() edit = new EventEmitter<TData>();
+  @Output() delete = new EventEmitter<TData>();
 
   constructor(private cdr: ChangeDetectorRef) {
     this.data$ = of();
@@ -99,6 +111,15 @@ export class TableComponent<TData> implements AfterViewInit {
 
   toggleView(view: ViewMode) {
     this.currentViewMode = view;
+  }
+
+  handleEdit(el: TData) {
+    this.edit.emit(el);
+    this.toggleView(ViewMode.EDIT);
+  }
+
+  handleDelete(el: TData) {
+    this.delete.emit(el)
   }
 
   protected readonly ViewMode = ViewMode;

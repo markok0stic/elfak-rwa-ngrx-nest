@@ -20,11 +20,11 @@ export const setInitialUserState = createAction(
   props<{ user: UserModel | null; token: string | null }>(),
 );
 
-export const editProfile = createAction('[ProfileEdit] Edit Profile',
+export const editSelfProfile = createAction('[ProfileEdit] Edit Self Profile',
   props<{ userData: UserModel }>(),
 );
 
-export const editProfileSuccess = createAction('[ProfileEdit] Edit Profile Success',
+export const editSelfProfileSuccess = createAction('[ProfileEdit] Edit Self Profile Success',
   props<{ user: UserModel }>(),
 );
 

@@ -60,7 +60,9 @@ export class UserController {
     return this.userService.getAll();
   }
 
-  @Delete(':id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Delete('delete/:id')
+  @Roles(RolesEnum.Admin)
   public deleteUser(@Param('id', ParseIntPipe) id: number) {
     return this.userService.delete(id);
   }
