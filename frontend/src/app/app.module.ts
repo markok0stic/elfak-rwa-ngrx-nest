@@ -54,10 +54,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
-import { TableAddNewComponent } from './components/_table-add-new/table-add-new.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { usersReducer } from './store/users/users.reducers';
 import { UsersEffects } from './store/users/users.effects';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +71,7 @@ import { UsersEffects } from './store/users/users.effects';
     UsersComponent,
     TableComponent,
     TableComponent,
-    TableAddNewComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

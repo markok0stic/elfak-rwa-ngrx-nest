@@ -76,7 +76,7 @@ export class UsersEffects {
       mergeMap(({ userId }) =>
         this._usersService.deleteUser(userId).pipe(
           map((_) => {
-            this._notificationsService.showSuccessSnackBar(`Profile with ID: ${userId} deleted`);
+            this._notificationsService.showSuccessSnackBar(`Profile with Id: ${userId} deleted`);
             return UserActions.deleteUserSuccess({userId});
           }),
           tap(() => {
