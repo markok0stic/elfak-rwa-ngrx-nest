@@ -55,9 +55,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { usersReducer } from './store/users/users.reducers';
+import { usersReducers } from './store/users/users.reducers';
 import { UsersEffects } from './store/users/users.effects';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { categoriesReducers } from './store/category/categories.reducers';
+import { CategoriesEffects } from './store/category/categories.effects';
 
 @NgModule({
   declarations: [
@@ -86,14 +88,16 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
       product: productReducers,
       order: orderReducers,
       customer: customerReducers,
-      users: usersReducer
+      users: usersReducers,
+      categories: categoriesReducers
     }),
     EffectsModule.forRoot([
       CurrentUserEffects,
       ProductEffects,
       OrderEffects,
       CustomerEffects,
-      UsersEffects
+      UsersEffects,
+      CategoriesEffects
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

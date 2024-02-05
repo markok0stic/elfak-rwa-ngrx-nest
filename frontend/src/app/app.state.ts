@@ -5,11 +5,13 @@ import { CustomerState } from './store/customer/customer.state';
 import { UsersState } from './store/users/users.state';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { CategoriesState } from './store/category/categories.state';
 
 export interface AppState {
   currentUser: CurrentUserState,
   product: ProductState,
   order: OrderState,
   customer: CustomerState,
-  users: UsersState
+  users: UsersState,
+  categories: CategoriesState
 }

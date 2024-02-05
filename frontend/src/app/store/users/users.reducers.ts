@@ -9,7 +9,7 @@ const initialState: UsersState = {
   registration: null
 };
 
-export const usersReducer = createReducer(
+export const usersReducers = createReducer(
   initialState,
   on(UserActions.loadUsers, state => ({ ...state, loading: true })),
   on(UserActions.loadUsersSuccess, (state, { users }) => ({ ...state, loading: false, data: users })),
