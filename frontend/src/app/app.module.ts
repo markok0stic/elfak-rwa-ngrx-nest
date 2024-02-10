@@ -89,7 +89,7 @@ import { CategoriesEffects } from './store/category/categories.effects';
       order: orderReducers,
       customer: customerReducers,
       users: usersReducers,
-      categories: categoriesReducers
+      categories: categoriesReducers,
     }),
     EffectsModule.forRoot([
       CurrentUserEffects,
@@ -97,7 +97,7 @@ import { CategoriesEffects } from './store/category/categories.effects';
       OrderEffects,
       CustomerEffects,
       UsersEffects,
-      CategoriesEffects
+      CategoriesEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

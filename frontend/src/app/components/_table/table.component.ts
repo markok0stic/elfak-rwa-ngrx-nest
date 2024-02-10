@@ -1,13 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -20,6 +11,7 @@ export enum ViewMode {
   ADD,
   EDIT
 }
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -41,6 +33,7 @@ export class TableComponent<TData> implements AfterViewInit {
 
   @Output() edit = new EventEmitter<TData>();
   @Output() delete = new EventEmitter<TData>();
+  protected readonly ViewMode = ViewMode;
 
   constructor(private cdr: ChangeDetectorRef) {
     this.data$ = of();
@@ -49,7 +42,7 @@ export class TableComponent<TData> implements AfterViewInit {
     this.actionsEnabled = true;
     this.loading = false;
     this.currentViewMode = ViewMode.TABLE;
-    this.dataSource = new MatTableDataSource<TData>([])
+    this.dataSource = new MatTableDataSource<TData>([]);
     this.selection = new SelectionModel<TData>(true, []);
   }
 
@@ -100,7 +93,7 @@ export class TableComponent<TData> implements AfterViewInit {
   }
 
   checkboxLabel(row?: TData): string {
-    if(this.dataSource) {
+    if (this.dataSource) {
       if (!row) {
         return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
       }
@@ -119,8 +112,6 @@ export class TableComponent<TData> implements AfterViewInit {
   }
 
   handleDelete(el: TData) {
-    this.delete.emit(el)
+    this.delete.emit(el);
   }
-
-  protected readonly ViewMode = ViewMode;
 }

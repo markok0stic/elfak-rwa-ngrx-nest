@@ -3,8 +3,6 @@ import { ProductState } from './store/product/product.state';
 import { OrderState } from './store/order/order.state';
 import { CustomerState } from './store/customer/customer.state';
 import { UsersState } from './store/users/users.state';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { CategoriesState } from './store/category/categories.state';
 
 export interface AppState {

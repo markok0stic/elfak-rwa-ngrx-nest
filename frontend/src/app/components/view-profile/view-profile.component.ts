@@ -12,22 +12,16 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-view-profile',
   templateUrl: './view-profile.component.html',
-  styleUrls: ['./view-profile.component.css']
+  styleUrls: ['./view-profile.component.css'],
 })
 export class ViewProfileComponent implements OnInit {
-  private userSubject = new BehaviorSubject<UserModel | null>(null);
   user$: Observable<UserModel | null>;
   profileForm: FormGroup | null;
   sectionTitle: string;
   userEmail: string | null;
   userRole: string | null;
   isNotSelfEdit: boolean;
-
-  @Input()
-  set user(value: UserModel | null) {
-    this.userSubject.next(value);
-    this.isNotSelfEdit = true;
-  }
+  private userSubject = new BehaviorSubject<UserModel | null>(null);
 
   constructor(private store: Store<AppState>, private _formBuilder: FormBuilder, private _router: Router) {
     this.user$ = of(null);
@@ -38,11 +32,16 @@ export class ViewProfileComponent implements OnInit {
     this.isNotSelfEdit = false;
   }
 
+  @Input()
+  set user(value: UserModel | null) {
+    this.userSubject.next(value);
+    this.isNotSelfEdit = true;
+  }
+
   ngOnInit(): void {
-    if(this.isNotSelfEdit) {
+    if (this.isNotSelfEdit) {
       this.user$ = this.userSubject.asObservable();
-    }
-    else {
+    } else {
       this.user$ = this.store.select(selectUser);
     }
 
@@ -57,20 +56,20 @@ export class ViewProfileComponent implements OnInit {
   }
 
   profileFormGroup(user: UserModel | null) {
-      return this._formBuilder.group({
-        id: [user?.id, Validators.required],
-        firstName: [user?.firstName, Validators.required],
-        lastName: [user?.lastName, Validators.required],
-        phone: [user?.phone, Validators.required],
-        country: [user?.country, Validators.required],
-        address: [user?.address],
-        city: [user?.city],
-        zip: [user?.zip],
-      });
+    return this._formBuilder.group({
+      id: [user?.id, Validators.required],
+      firstName: [user?.firstName, Validators.required],
+      lastName: [user?.lastName, Validators.required],
+      phone: [user?.phone, Validators.required],
+      country: [user?.country, Validators.required],
+      address: [user?.address],
+      city: [user?.city],
+      zip: [user?.zip],
+    });
   }
 
   toggleEdit() {
-    if(this.profileForm) {
+    if (this.profileForm) {
       if (this.profileForm.disabled) {
         this.sectionTitle = 'Edit profile';
         this.profileForm.enable();
@@ -82,19 +81,19 @@ export class ViewProfileComponent implements OnInit {
   }
 
   handleEdit() {
-    if(!this.profileForm || this.profileForm?.invalid) {
+    if (!this.profileForm || this.profileForm?.invalid) {
       return;
     }
 
     const editUserData: UserModel = {
-      ...this.profileForm.value
-    }
+      ...this.profileForm.value,
+    };
 
-    if(this.isNotSelfEdit) {
-      this.store.dispatch(editUserProfile({userData: editUserData}));
+    if (this.isNotSelfEdit) {
+      this.store.dispatch(editUserProfile({ userData: editUserData }));
       this.profileForm.disable();
     } else {
-      this.store.dispatch(editSelfProfile({userData: editUserData}));
+      this.store.dispatch(editSelfProfile({ userData: editUserData }));
     }
   }
 }

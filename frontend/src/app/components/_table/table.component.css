@@ -21,7 +21,7 @@ mat-paginator {
 
 .filter-actions {
   display: flex;
-  justify-content:flex-start;
+  justify-content: flex-start;
   align-items: center;
   column-gap: 2em;
 }

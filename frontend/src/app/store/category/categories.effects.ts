@@ -15,13 +15,15 @@ export class CategoriesEffects {
       map(categories => CategoryActions.loadCategoriesSuccess({ categories })),
       catchError(error => {
         this._notificationsService.showErrorSnackBar(error.error);
-        return of(UserActions.registerFailure({ error: error.error.message }));})
-    ))
+        return of(UserActions.registerFailure({ error: error.error.message }));
+      }),
+    )),
   ));
 
   constructor(
     private _actions$: Actions,
     private _categoryService: CategoriesService,
-    private _notificationsService: NotificationsService
-  ) {}
+    private _notificationsService: NotificationsService,
+  ) {
+  }
 }

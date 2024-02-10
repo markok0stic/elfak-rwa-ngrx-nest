@@ -9,7 +9,6 @@ import { NotificationsService } from '../../services/notifications/notifications
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
 import { UserModel } from '../../models/user/user.model';
-import { setUser } from '../../services/auth/user.context';
 
 @Injectable()
 export class UsersEffects {
@@ -17,9 +16,10 @@ export class UsersEffects {
     ofType(UserActions.loadUsers),
     mergeMap(() => this._usersService.getAll().pipe(
       map((users) => {
-        return UserActions.loadUsersSuccess({ users })}),
-      catchError(error => of(UserActions.loadUsersFailure({ error })))
-    ))
+        return UserActions.loadUsersSuccess({ users });
+      }),
+      catchError(error => of(UserActions.loadUsersFailure({ error }))),
+    )),
   ));
 
   registerUser$ = createEffect(() =>
@@ -77,7 +77,7 @@ export class UsersEffects {
         this._usersService.deleteUser(userId).pipe(
           map((_) => {
             this._notificationsService.showSuccessSnackBar(`Profile with Id: ${userId} deleted`);
-            return UserActions.deleteUserSuccess({userId});
+            return UserActions.deleteUserSuccess({ userId });
           }),
           tap(() => {
             this._store.dispatch(UserActions.loadUsers());
@@ -95,6 +95,7 @@ export class UsersEffects {
     private _actions$: Actions,
     private _usersService: UsersService,
     private _store: Store<AppState>,
-    private _notificationsService: NotificationsService
-  ) {}
+    private _notificationsService: NotificationsService,
+  ) {
+  }
 }

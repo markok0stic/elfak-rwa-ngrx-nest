@@ -17,7 +17,7 @@ import { registerUser } from '../../store/users/users.actions';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent implements OnInit {
   @ViewChild('stepper') stepper!: MatStepper;
   hide: boolean;
   $loading: Observable<boolean>;

@@ -41,6 +41,6 @@ export class UsersService {
   getAll() {
     return this.httpClient.get<UserModel[]>(
       `${environment.api}/users`,
-    )
+    );
   }
 }

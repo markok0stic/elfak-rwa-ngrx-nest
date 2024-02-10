@@ -5,5 +5,5 @@ export const selectCategories = (state: AppState) => state.categories;
 
 export const selectAllCategories = createSelector(
   selectCategories,
-  (state) => state.data
+  (state) => state.data,
 );

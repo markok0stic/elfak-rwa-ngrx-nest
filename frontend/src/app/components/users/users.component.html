@@ -1,11 +1,11 @@
 <app-table
+  (delete)="handleDelete($event)"
+  (edit)="handleEdit($event)"
   [data$]="users$"
   [displayedColumns]="columnsToDisplay"
-  (edit)="handleEdit($event)"
-  (delete)="handleDelete($event)"
 >
   <app-register register></app-register>
-  <app-view-profile edit [user]="userToEdit"></app-view-profile>
+  <app-view-profile [user]="userToEdit" edit></app-view-profile>
 </app-table>
 
 

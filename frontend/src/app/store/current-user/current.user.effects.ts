@@ -8,8 +8,6 @@ import { LoginUser, UserModel } from '../../models/user/user.model';
 import { UsersService } from '../../services/users/users.service';
 import { setToken, setUser } from '../../services/auth/user.context';
 import { NotificationsService } from '../../services/notifications/notifications.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { editSelfProfile } from './current.user.actions';
 
 @Injectable()
 export class CurrentUserEffects {

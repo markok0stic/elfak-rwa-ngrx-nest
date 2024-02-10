@@ -3,10 +3,10 @@
     <mat-icon>menu</mat-icon>
   </button>
   <a routerLink="dashboard">
-    <img alt="Application Logo" class="app-logo" ngSrc="assets/inventory-management.png" height="512" width="512">
+    <img alt="Application Logo" class="app-logo" height="512" ngSrc="assets/inventory-management.png" width="512">
   </a>
   <span class="spacer"></span>
-  <a mat-button [matMenuTriggerFor]="userMenu">
+  <a [matMenuTriggerFor]="userMenu" mat-button>
     <mat-icon>account_circle</mat-icon>
     Profile
   </a>
@@ -15,7 +15,7 @@
       <mat-icon>edit</mat-icon>
       <span>Edit Profile</span>
     </button>
-    <button mat-menu-item (click)="onLogout()">
+    <button (click)="onLogout()" mat-menu-item>
       <mat-icon>logout</mat-icon>
       <span>Logout</span>
     </button>
@@ -28,12 +28,12 @@
       <mat-nav-list role="navigation">
         <div *ngFor="let navItem of navItems">
           <a *ngIf="(currentRole | async) === RolesEnum.Admin || (currentRole | async) === navItem.role"
+             [activated]="isActive(navItem.path)"
              [disableRipple]="true"
              [routerLinkActiveOptions]="{exact: true}"
              [routerLink]="[navItem.path]"
              mat-list-item
              routerLinkActive="activated"
-             [activated]="isActive(navItem.path)"
           >
             <span class="icon-center">
               <mat-icon>{{ navItem.icon }}</mat-icon>
@@ -44,11 +44,11 @@
       </mat-nav-list>
       <div class="spacer"></div>
       <div class="logout-section">
-      <button color="primary" (click)="onLogout()" mat-stroked-button class="logout-btn">
-        <mat-icon>logout</mat-icon>
-        Logout
-      </button>
-    </div>
+        <button (click)="onLogout()" class="logout-btn" color="primary" mat-stroked-button>
+          <mat-icon>logout</mat-icon>
+          Logout
+        </button>
+      </div>
     </div>
   </mat-drawer>
   <mat-drawer-content>

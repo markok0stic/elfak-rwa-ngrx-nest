@@ -1,6 +1,6 @@
 import { CategoriesState } from './categories.state';
 import { createReducer, on } from '@ngrx/store';
-import * as CategoryActions from "./categories.actions";
+import * as CategoryActions from './categories.actions';
 
 export const initialState: CategoriesState = {
   data: [],
@@ -11,6 +11,10 @@ export const initialState: CategoriesState = {
 export const categoriesReducers = createReducer(
   initialState,
   on(CategoryActions.loadCategories, state => ({ ...state, loading: true })),
-  on(CategoryActions.loadCategoriesSuccess, (state, { categories }) => ({ ...state, list: categories, loading: false })),
+  on(CategoryActions.loadCategoriesSuccess, (state, { categories }) => ({
+    ...state,
+    list: categories,
+    loading: false,
+  })),
   on(CategoryActions.loadCategoriesFailure, (state, { error }) => ({ ...state, error, loading: false })),
 );

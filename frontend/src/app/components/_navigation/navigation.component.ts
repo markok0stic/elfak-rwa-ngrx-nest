@@ -32,8 +32,8 @@ export class NavigationComponent {
           title: route.data!['title'],
           path: `${route.path}` ?? '/',
           icon: route.data!['icon'],
-          role: !!route.data!['role'] ? route.data!['role'] as RolesEnum : RolesEnum.User
-        })
+          role: !!route.data!['role'] ? route.data!['role'] as RolesEnum : RolesEnum.User,
+        }),
       );
   }
 

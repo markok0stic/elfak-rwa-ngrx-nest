@@ -3,4 +3,4 @@ export function hasAnyElement<T>(list?: T[] | undefined): boolean {
 }
 
 export const keys = <T extends Record<PropertyKey, unknown>>(obj: T): Array<keyof T> =>
-  Object.keys(obj)
+  Object.keys(obj);

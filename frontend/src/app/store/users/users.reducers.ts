@@ -6,7 +6,7 @@ const initialState: UsersState = {
   data: [],
   loading: false,
   error: null,
-  registration: null
+  registration: null,
 };
 
 export const usersReducers = createReducer(
@@ -33,6 +33,6 @@ export const usersReducers = createReducer(
     isLoading: false,
     registration: null,
   })),
-  on(UserActions.deleteUser, state => ({ ...state, loading: true})),
-  on(UserActions.deleteUserSuccess, state => ({ ...state})),
+  on(UserActions.deleteUser, state => ({ ...state, loading: true })),
+  on(UserActions.deleteUserSuccess, state => ({ ...state })),
 );

@@ -12,10 +12,10 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  styleUrls: ['./users.component.css'],
 })
 export class UsersComponent implements OnInit {
-  users$: Observable<UsersState>
+  users$: Observable<UsersState>;
   columnsToDisplay: string[];
   data: UserModel[] = [];
   loading: boolean;
@@ -24,7 +24,7 @@ export class UsersComponent implements OnInit {
   constructor(private _store: Store<AppState>, private _dialog: MatDialog) {
     this.userToEdit = null;
     this.users$ = this._store.select(selectAllUsers);
-    this.columnsToDisplay = ['id','firstName','lastName','email','phone','country','role'];
+    this.columnsToDisplay = ['id', 'firstName', 'lastName', 'email', 'phone', 'country', 'role'];
     this.loading = false;
   }
 

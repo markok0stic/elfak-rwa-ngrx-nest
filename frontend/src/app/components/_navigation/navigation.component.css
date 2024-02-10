@@ -23,6 +23,7 @@ mat-toolbar button {
 .toolbar-height {
   height: 64px;
 }
+
 /* Add this to your existing styles */
 
 .app-logo-link {

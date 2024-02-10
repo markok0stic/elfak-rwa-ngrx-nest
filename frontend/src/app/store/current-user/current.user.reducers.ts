@@ -6,7 +6,7 @@ export const initialState: CurrentUserState = {
   isLoading: false,
   user: null,
   accessToken: null,
-  error: null
+  error: null,
 };
 
 export const currentUserReducers = createReducer(
@@ -21,7 +21,7 @@ export const currentUserReducers = createReducer(
     accessToken: data.accessToken,
     isLoading: false,
     error: null,
-    profileEdit: null
+    profileEdit: null,
   })),
   on(UserActions.loginFailure, () => (initialState)),
   on(UserActions.setInitialUserState, (state, { user, token }) => ({
@@ -32,5 +32,5 @@ export const currentUserReducers = createReducer(
   on(UserActions.editSelfProfileSuccess, (state, { user }) => ({
     ...state,
     user: user,
-  }))
+  })),
 );
