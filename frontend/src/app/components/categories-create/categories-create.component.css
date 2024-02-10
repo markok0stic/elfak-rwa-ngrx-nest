@@ -1,0 +1,28 @@
+.category-create-container{
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-card-title {
+  align-self: center;
+}
+
+.mat-form-field {
+  width: 100%;
+  display: block;
+}
+
+.mat-raised-button {
+  margin: 0 10px;
+}
+
+.mat-raised-button {
+  min-width: 150px;
+}
+
+.full-width {
+  flex: 0 0 100%;
+}

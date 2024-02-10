@@ -1,0 +1,23 @@
+<div class="category-create-container">
+  <mat-card-title>Create Category</mat-card-title>
+  <mat-card>
+      <form [formGroup]="categoryForm" (ngSubmit)="handleSubmit()">
+        <mat-card-content>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" placeholder="Enter category name">
+          <mat-error *ngIf="categoryForm.controls['name'].invalid">
+            Category name is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" placeholder="Enter description (optional)"></textarea>
+        </mat-form-field>
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit" [disabled]="categoryForm.invalid">Create</button>
+        </div>
+        </mat-card-content>
+      </form>
+  </mat-card>
+</div>

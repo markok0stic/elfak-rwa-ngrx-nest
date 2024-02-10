@@ -9,11 +9,10 @@
   <button (click)="toggleView(ViewMode.ADD)" *ngIf="currentViewMode !== ViewMode.ADD" color="accent" mat-raised-button>
     Add new
   </button>
-  <button *ngIf="selectEnabled && selection.hasValue()" color="warn" mat-raised-button>Delete</button>
 </div>
 
 <div *ngIf="currentViewMode === ViewMode.ADD">
-  <ng-content select="[register]"></ng-content>
+  <ng-content select="[create]"></ng-content>
 </div>
 <div *ngIf="currentViewMode === ViewMode.EDIT">
   <ng-content select="[edit]"></ng-content>
@@ -21,27 +20,6 @@
 <div *ngIf="currentViewMode === ViewMode.TABLE" class="mat-elevation-z8">
   <mat-spinner *ngIf="loading"></mat-spinner>
   <table *ngIf="!loading" [dataSource]="dataSource" mat-table matSort>
-
-    <ng-container *ngIf="selectEnabled" matColumnDef="select">
-      <th *matHeaderCellDef mat-header-cell>
-        <mat-checkbox (change)="$event ? toggleAllRows() : null"
-                      [aria-label]="checkboxLabel()"
-                      [checked]="selection.hasValue() && isAllSelected()"
-                      [indeterminate]="selection.hasValue() && !isAllSelected()"
-                      matTooltip="Select all"
-        >
-        </mat-checkbox>
-      </th>
-      <td *matCellDef="let row" mat-cell>
-        <mat-checkbox (change)="$event ? selection.toggle(row) : null"
-                      (click)="$event.stopPropagation()"
-                      [aria-label]="checkboxLabel(row)"
-                      [checked]="selection.isSelected(row)"
-                      matTooltip="Select">
-        </mat-checkbox>
-      </td>
-    </ng-container>
-
     <ng-container *ngIf="actionsEnabled" matColumnDef="action">
       <th *matHeaderCellDef mat-header-cell>Action</th>
       <td *matCellDef="let element" mat-cell>
@@ -67,5 +45,5 @@
     </tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
 </div>

@@ -58,8 +58,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { usersReducers } from './store/users/users.reducers';
 import { UsersEffects } from './store/users/users.effects';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import { categoriesReducers } from './store/category/categories.reducers';
-import { CategoriesEffects } from './store/category/categories.effects';
+import { categoriesReducers } from './store/categories/categories.reducers';
+import { CategoriesEffects } from './store/categories/categories.effects';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { CategoriesCreateComponent } from './components/categories-create/categories-create.component';
+import { CategoriesEditComponent } from './components/categories-edit/categories-edit.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +77,9 @@ import { CategoriesEffects } from './store/category/categories.effects';
     TableComponent,
     TableComponent,
     ConfirmDialogComponent,
+    CategoriesComponent,
+    CategoriesCreateComponent,
+    CategoriesEditComponent,
   ],
   imports: [
     BrowserModule,

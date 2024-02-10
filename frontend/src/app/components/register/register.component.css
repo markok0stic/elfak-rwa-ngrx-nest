@@ -76,10 +76,3 @@ mat-icon {
   margin-right: 8px;
 }
 
-@media (max-width: 768px) {
-  .mat-raised-button {
-    font-size: 0.8rem;
-    min-width: 120px;
-    padding: 0 8px;
-  }
-}

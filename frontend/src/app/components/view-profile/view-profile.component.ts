@@ -23,7 +23,7 @@ export class ViewProfileComponent implements OnInit {
   isNotSelfEdit: boolean;
   private userSubject = new BehaviorSubject<UserModel | null>(null);
 
-  constructor(private store: Store<AppState>, private _formBuilder: FormBuilder, private _router: Router) {
+  constructor(private store: Store<AppState>, private _formBuilder: FormBuilder) {
     this.user$ = of(null);
     this.userEmail = null;
     this.userRole = null;

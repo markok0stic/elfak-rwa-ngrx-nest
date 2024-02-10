@@ -1,0 +1,11 @@
+<app-table
+  (delete)="handleDelete($event)"
+  (edit)="handleEdit($event)"
+  [data$]="categories$"
+  [displayedColumns]="columnsToDisplay"
+>
+  <app-categories-create create></app-categories-create>
+  <app-categories-edit edit [category]="categoryToEdit"></app-categories-edit>
+</app-table>
+
+

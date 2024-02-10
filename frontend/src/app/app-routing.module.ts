@@ -6,6 +6,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RolesEnum as Roles } from '@shared/enums/roles.enum';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { UsersComponent } from './components/users/users.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,12 @@ export const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard],
     data: { title: 'Dashboard', icon: 'dashboard', navInclude: true },
+  },
+  {
+    path: 'categories',
+    component: CategoriesComponent,
+    canActivate: [AuthGuard],
+    data: { title: 'Categories', icon: 'category', navInclude: true },
   },
   {
     path: 'users',

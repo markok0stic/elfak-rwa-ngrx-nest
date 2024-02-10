@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { SALT_ROUNDS } from '../../helper-config';
-import { UserUpdateDto } from './dto/user-update.dto';
+import { UserUpdateDto } from './dto/user.update.dto';
 import * as bcrypt from 'bcrypt';
 import { HttpResponseErrorsEnum } from '@shared/enums/http.response.errors.enum';
 
@@ -61,7 +61,8 @@ export class UserService {
       },
     });
 
-    if (!user) throw new BadRequestException('InvalidUser');
+    if (!user)
+      throw new BadRequestException(HttpResponseErrorsEnum.NotFoundEntry);
 
     user.firstName = firstName;
     user.lastName = lastName;

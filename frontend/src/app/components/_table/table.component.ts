@@ -20,11 +20,9 @@ export enum ViewMode {
 export class TableComponent<TData> implements AfterViewInit {
   @Input() data$: Observable<State<TData>>;
   @Input() displayedColumns: string[];
-  @Input() selectEnabled: boolean;
   @Input() actionsEnabled: boolean;
 
   dataSource: MatTableDataSource<TData>;
-  selection: SelectionModel<TData>;
   loading: boolean;
   currentViewMode: ViewMode;
 
@@ -38,17 +36,16 @@ export class TableComponent<TData> implements AfterViewInit {
   constructor(private cdr: ChangeDetectorRef) {
     this.data$ = of();
     this.displayedColumns = [];
-    this.selectEnabled = true;
     this.actionsEnabled = true;
     this.loading = false;
     this.currentViewMode = ViewMode.TABLE;
     this.dataSource = new MatTableDataSource<TData>([]);
-    this.selection = new SelectionModel<TData>(true, []);
   }
 
   ngAfterViewInit() {
     this.data$.subscribe(data => {
       this.loading = data.loading;
+      this.dataSource = new MatTableDataSource<TData>();
       this.dataSource = new MatTableDataSource(data.data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -58,9 +55,6 @@ export class TableComponent<TData> implements AfterViewInit {
 
   getTableColumns(): string[] {
     let columns = this.displayedColumns;
-    if (this.selectEnabled) {
-      columns = ['select', ...columns];
-    }
     if (this.actionsEnabled) {
       columns = [...columns, 'action'];
     }
@@ -75,31 +69,6 @@ export class TableComponent<TData> implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  toggleAllRows() {
-    if (this.isAllSelected()) {
-      this.selection.clear();
-      return;
-    }
-
-    this.selection.select(...this.dataSource.data);
-  }
-
-  checkboxLabel(row?: TData): string {
-    if (this.dataSource) {
-      if (!row) {
-        return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-      }
-      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row}`;
-    }
-    return 'deselect all';
   }
 
   toggleView(view: ViewMode) {

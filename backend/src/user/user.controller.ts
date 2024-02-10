@@ -16,7 +16,7 @@ import { UserDto } from './dto/user.dto';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../auth/roles.guard';
-import { UserUpdateDto } from './dto/user-update.dto';
+import { UserUpdateDto } from './dto/user.update.dto';
 import { Roles } from '../auth/roles.decorator';
 import { RolesEnum } from '@shared/enums/roles.enum';
 
