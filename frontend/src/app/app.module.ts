@@ -68,6 +68,7 @@ import { SuppliersEffects } from './store/suppliers/suppliers.effects';
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
 import { SuppliersCreateComponent } from './components/suppliers-create/suppliers-create.component';
 import { SuppliersEditComponent } from './components/suppliers-edit/suppliers-edit.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -104,7 +105,7 @@ import { SuppliersEditComponent } from './components/suppliers-edit/suppliers-ed
       customer: customerReducers,
       users: usersReducers,
       categories: categoriesReducers,
-      suppliers: suppliersReducers
+      suppliers: suppliersReducers,
     }),
     EffectsModule.forRoot([
       CurrentUserEffects,
@@ -113,7 +114,7 @@ import { SuppliersEditComponent } from './components/suppliers-edit/suppliers-ed
       CustomerEffects,
       UsersEffects,
       CategoriesEffects,
-      SuppliersEffects
+      SuppliersEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -151,6 +152,7 @@ import { SuppliersEditComponent } from './components/suppliers-edit/suppliers-ed
     MatCheckboxModule,
     MatSortModule,
     MatProgressSpinnerModule,
+    MatSlideToggleModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],

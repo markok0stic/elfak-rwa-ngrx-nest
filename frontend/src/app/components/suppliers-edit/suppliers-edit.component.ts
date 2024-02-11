@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { editSupplier } from '../../store/suppliers/suppliers.actions';
+import { StatusEnum } from '@shared/enums/status.enum';
 
 @Component({
   selector: 'app-suppliers-edit',
@@ -40,11 +41,13 @@ export class SuppliersEditComponent implements OnInit {
   }
 
   createFormGroup(supplier: SupplierModel | null) {
+    console.log(supplier?.status)
     return this._formBuilder.group({
       id: new FormControl(supplier?.id, Validators.required),
       name: new FormControl(supplier?.name, Validators.required),
       mobile: new FormControl(supplier?.mobile, Validators.required),
-      address: new FormControl(supplier?.address, Validators.required)
+      address: new FormControl(supplier?.address, Validators.required),
+      status: new FormControl(supplier?.status === StatusEnum.Active, Validators.required)
     });
   }
 
@@ -64,6 +67,11 @@ export class SuppliersEditComponent implements OnInit {
     if (!this.supplierForm || this.supplierForm.invalid)
       return;
 
-    this.store.dispatch(editSupplier({supplier: this.supplierForm.value}));
+    const formValue = { ...this.supplierForm.value };
+    formValue.status = formValue.status ? StatusEnum.Active : StatusEnum.Inactive;
+
+    this.store.dispatch(editSupplier({supplier: formValue}));
   }
+
+  protected readonly StatusEnum = StatusEnum;
 }
