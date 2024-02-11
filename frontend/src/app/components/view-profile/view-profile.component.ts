@@ -7,7 +7,6 @@ import { selectUser } from '../../store/current-user/current.user.selectors';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { editSelfProfile } from '../../store/current-user/current.user.actions';
 import { editUserProfile } from '../../store/users/users.actions';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-profile',
@@ -84,6 +83,7 @@ export class ViewProfileComponent implements OnInit {
     if (!this.profileForm || this.profileForm?.invalid) {
       return;
     }
+
 
     const editUserData: UserModel = {
       ...this.profileForm.value,

@@ -42,7 +42,7 @@ export class CategoriesComponent implements OnInit {
     const dialogRef = this._dialog.open(ConfirmDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this._store.dispatch(CategoryActions.loadCategories());
+        this._store.dispatch(CategoryActions.deleteCategory({categoryId: category.id}));
       }
     });
   }

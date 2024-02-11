@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
 import { BehaviorSubject, Observable, of } from 'rxjs';
+import { editCategory } from '../../store/categories/categories.actions'
 
 @Component({
   selector: 'app-categories-edit',
@@ -38,6 +39,7 @@ export class CategoriesEditComponent implements OnInit {
   }
   createFormGroup(category: CategoryModel | null) {
     return this._formBuilder.group({
+      id: new FormControl(category?.id, Validators.required),
       name: new FormControl(category?.name, Validators.required),
       description: new FormControl(category?.description)
     });
@@ -55,5 +57,10 @@ export class CategoriesEditComponent implements OnInit {
     }
   }
 
-  handleEdit() {}
+  handleEdit() {
+    if (!this.categoryForm || this.categoryForm?.invalid)
+      return;
+
+    this.store.dispatch(editCategory({category:this.categoryForm.value}))
+  }
 }

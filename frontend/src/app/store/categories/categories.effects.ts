@@ -8,6 +8,7 @@ import { NotificationsService } from '../../services/notifications/notifications
 import { HttpErrorResponse } from '@angular/common/http';
 import { AppState } from '../../app.state';
 import { Store } from '@ngrx/store';
+import { CategoryModel } from '../../models/category/category.model';
 
 @Injectable()
 export class CategoriesEffects {
@@ -39,6 +40,48 @@ export class CategoriesEffects {
           catchError((error: HttpErrorResponse) => {
             this._notificationsService.showErrorSnackBar(error.error);
             return of(CategoryActions.createCategoryFailure({ error: error.error.message }));
+          }),
+        ),
+      ),
+    ),
+  );
+
+  editCategory$  = createEffect(() =>
+    this._actions$.pipe(
+      ofType(CategoryActions.editCategory),
+      mergeMap(({ category }) =>
+        this._categoryService.updateCategory(category).pipe(
+          map((category: CategoryModel) => {
+            this._notificationsService.showSuccessSnackBar('Category Updated');
+            return CategoryActions.editCategorySuccess({ category });
+          }),
+          tap(() => {
+            this._store.dispatch(CategoryActions.loadCategories());
+          }),
+          catchError(error => {
+            this._notificationsService.showErrorSnackBar(error.error);
+            return of(CategoryActions.editCategoryFailure(error));
+          }),
+        ),
+      ),
+    ),
+  );
+
+  deleteCategory$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(CategoryActions.deleteCategory),
+      mergeMap(({ categoryId }) =>
+        this._categoryService.deleteCategory(categoryId).pipe(
+          map((_) => {
+            this._notificationsService.showSuccessSnackBar(`Category with id: ${categoryId} deleted`);
+            return CategoryActions.deleteCategorySuccess({ categoryId });
+          }),
+          tap(() => {
+            this._store.dispatch(CategoryActions.loadCategories());
+          }),
+          catchError(error => {
+            this._notificationsService.showErrorSnackBar(error.error);
+            return of({ type: error });
           }),
         ),
       ),

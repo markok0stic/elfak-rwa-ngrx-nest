@@ -1,7 +1,7 @@
 <div class="category-create-container">
   <mat-card-title>{{sectionTitle}}</mat-card-title>
   <mat-card>
-      <form *ngIf="categoryForm" [formGroup]="categoryForm" (ngSubmit)="handleEdit()">
+      <form *ngIf="categoryForm" [formGroup]="categoryForm">
         <mat-card-content>
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Name</mat-label>
