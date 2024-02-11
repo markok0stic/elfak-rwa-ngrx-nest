@@ -7,6 +7,7 @@ import { RolesEnum as Roles } from '@shared/enums/roles.enum';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { UsersComponent } from './components/users/users.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { SuppliersComponent } from './components/suppliers/suppliers.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,12 @@ export const routes: Routes = [
     component: CategoriesComponent,
     canActivate: [AuthGuard],
     data: { title: 'Categories', icon: 'category', navInclude: true },
+  },
+  {
+    path: 'suppliers',
+    component: SuppliersComponent,
+    canActivate: [AuthGuard],
+    data: { title: 'Suppliers', icon: 'people_alt', navInclude: true },
   },
   {
     path: 'users',

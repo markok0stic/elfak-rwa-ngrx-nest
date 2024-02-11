@@ -63,6 +63,11 @@ import { CategoriesEffects } from './store/categories/categories.effects';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { CategoriesCreateComponent } from './components/categories-create/categories-create.component';
 import { CategoriesEditComponent } from './components/categories-edit/categories-edit.component';
+import { suppliersReducers } from './store/suppliers/suppliers.reducers';
+import { SuppliersEffects } from './store/suppliers/suppliers.effects';
+import { SuppliersComponent } from './components/suppliers/suppliers.component';
+import { SuppliersCreateComponent } from './components/suppliers-create/suppliers-create.component';
+import { SuppliersEditComponent } from './components/suppliers-edit/suppliers-edit.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +85,9 @@ import { CategoriesEditComponent } from './components/categories-edit/categories
     CategoriesComponent,
     CategoriesCreateComponent,
     CategoriesEditComponent,
+    SuppliersComponent,
+    SuppliersCreateComponent,
+    SuppliersEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,6 +104,7 @@ import { CategoriesEditComponent } from './components/categories-edit/categories
       customer: customerReducers,
       users: usersReducers,
       categories: categoriesReducers,
+      suppliers: suppliersReducers
     }),
     EffectsModule.forRoot([
       CurrentUserEffects,
@@ -104,6 +113,7 @@ import { CategoriesEditComponent } from './components/categories-edit/categories
       CustomerEffects,
       UsersEffects,
       CategoriesEffects,
+      SuppliersEffects
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

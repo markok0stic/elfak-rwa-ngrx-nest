@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
     return this._formBuilder.group({
       firstName: new FormControl(null, Validators.required),
       lastName: new FormControl(null, Validators.required),
-      phone: new FormControl(null, Validators.required),
+      phone: new FormControl(null, [Validators.required,Validators.pattern(/^[0-9]+$/)]),
       country: new FormControl(null, Validators.required),
       address: new FormControl(null),
       city: new FormControl(null),

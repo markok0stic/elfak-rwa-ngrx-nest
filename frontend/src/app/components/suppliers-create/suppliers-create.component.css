@@ -1,0 +1,24 @@
+.supplier-create-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-card-title {
+  align-self: center;
+}
+
+.mat-form-field {
+  width: 100%;
+  display: block;
+}
+
+.mat-raised-button {
+  margin: 10px 0;
+}
+
+.full-width {
+  width: 100%;
+}

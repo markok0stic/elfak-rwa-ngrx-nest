@@ -55,12 +55,6 @@ export class CategoryService {
       throw new BadRequestException(HttpResponseErrorsEnum.NotFoundEntry);
     }
 
-    if (await this.findOne(name)) {
-      throw new BadRequestException(
-        HttpResponseErrorsEnum.AlreadyExistingCategory,
-      );
-    }
-
     category.name = name || category.name;
     category.description = description || category.description;
 

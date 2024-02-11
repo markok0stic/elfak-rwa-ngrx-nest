@@ -4,6 +4,7 @@ import { OrderState } from './store/order/order.state';
 import { CustomerState } from './store/customer/customer.state';
 import { UsersState } from './store/users/users.state';
 import { CategoriesState } from './store/categories/categories.state';
+import { SuppliersState } from './store/suppliers/suppliers.state';
 
 export interface AppState {
   currentUser: CurrentUserState,
@@ -11,5 +12,6 @@ export interface AppState {
   order: OrderState,
   customer: CustomerState,
   users: UsersState,
-  categories: CategoriesState
+  categories: CategoriesState,
+  suppliers: SuppliersState,
 }
