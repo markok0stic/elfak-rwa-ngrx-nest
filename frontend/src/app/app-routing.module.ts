@@ -8,6 +8,7 @@ import { ViewProfileComponent } from './components/view-profile/view-profile.com
 import { UsersComponent } from './components/users/users.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
+import { BrandsComponent } from './components/brands/brands.component';
 
 export const routes: Routes = [
   {
@@ -26,6 +27,12 @@ export const routes: Routes = [
     component: CategoriesComponent,
     canActivate: [AuthGuard],
     data: { title: 'Categories', icon: 'category', navInclude: true },
+  },
+  {
+    path: 'brands',
+    component: BrandsComponent,
+    canActivate: [AuthGuard],
+    data: { title: 'Brands', icon: 'currency_bitcoin', navInclude: true },
   },
   {
     path: 'suppliers',

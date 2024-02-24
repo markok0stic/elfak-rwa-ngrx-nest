@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { Category } from './entities/category.entity';
 import { HttpResponseErrorsEnum } from '@shared/enums/http.response.errors.enum';
+import { CategoryUpdateDto } from './dto/category.update';
 
 @Injectable()
 export class CategoryService {
@@ -31,7 +32,7 @@ export class CategoryService {
     return this.categoryRepository.save(category);
   }
 
-  public async findOne(name: string): Promise<Category | undefined> {
+  async findOne(name: string): Promise<Category | undefined> {
     return this.categoryRepository.findOneBy({ name: name });
   }
 
@@ -47,7 +48,7 @@ export class CategoryService {
     return category;
   }
 
-  async update(id: number, categoryDto): Promise<Category> {
+  async update(id: number, categoryDto: CategoryUpdateDto): Promise<Category> {
     const { name, description } = categoryDto;
     const category = await this.categoryRepository.findOneBy({ id });
 

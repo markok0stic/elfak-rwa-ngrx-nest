@@ -7,12 +7,14 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
 import { SupplierModule } from './supplier/supplier.module';
+import { BrandModule } from './brand/brand.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
     UserModule,
     CategoryModule,
+    BrandModule,
     SupplierModule,
     AuthModule,
   ],

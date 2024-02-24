@@ -69,6 +69,11 @@ import { SuppliersComponent } from './components/suppliers/suppliers.component';
 import { SuppliersCreateComponent } from './components/suppliers-create/suppliers-create.component';
 import { SuppliersEditComponent } from './components/suppliers-edit/suppliers-edit.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { brandsReducers } from './store/brands/brands.reducers';
+import { BrandsEffects } from './store/brands/brands.effects';
+import { BrandsComponent } from './components/brands/brands.component';
+import { BrandsCreateComponent } from './components/brands-create/brands-create.component';
+import { BrandsEditComponent } from './components/brands-edit/brands-edit.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +94,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     SuppliersComponent,
     SuppliersCreateComponent,
     SuppliersEditComponent,
+    BrandsComponent,
+    BrandsCreateComponent,
+    BrandsEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,6 +114,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
       users: usersReducers,
       categories: categoriesReducers,
       suppliers: suppliersReducers,
+      brands: brandsReducers
     }),
     EffectsModule.forRoot([
       CurrentUserEffects,
@@ -115,6 +124,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
       UsersEffects,
       CategoriesEffects,
       SuppliersEffects,
+      BrandsEffects
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
