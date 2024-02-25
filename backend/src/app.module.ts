@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
 import { SupplierModule } from './supplier/supplier.module';
 import { BrandModule } from './brand/brand.module';
+import { ModelModule } from './model/model.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { BrandModule } from './brand/brand.module';
     UserModule,
     CategoryModule,
     BrandModule,
+    ModelModule,
     SupplierModule,
     AuthModule,
   ],

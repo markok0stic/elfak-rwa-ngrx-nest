@@ -74,6 +74,11 @@ import { BrandsEffects } from './store/brands/brands.effects';
 import { BrandsComponent } from './components/brands/brands.component';
 import { BrandsCreateComponent } from './components/brands-create/brands-create.component';
 import { BrandsEditComponent } from './components/brands-edit/brands-edit.component';
+import { modelsReducers } from './store/models/models.reducers';
+import { ModelsComponent } from './components/models/models.component';
+import { ModelsCreateComponent } from './components/models-create/models-create.component';
+import { ModelsEditComponent } from './components/models-edit/models-edit.component';
+import { ModelsEffects } from './store/models/models.effects';
 
 @NgModule({
   declarations: [
@@ -97,6 +102,9 @@ import { BrandsEditComponent } from './components/brands-edit/brands-edit.compon
     BrandsComponent,
     BrandsCreateComponent,
     BrandsEditComponent,
+    ModelsComponent,
+    ModelsCreateComponent,
+    ModelsEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -114,7 +122,8 @@ import { BrandsEditComponent } from './components/brands-edit/brands-edit.compon
       users: usersReducers,
       categories: categoriesReducers,
       suppliers: suppliersReducers,
-      brands: brandsReducers
+      brands: brandsReducers,
+      models: modelsReducers
     }),
     EffectsModule.forRoot([
       CurrentUserEffects,
@@ -124,7 +133,8 @@ import { BrandsEditComponent } from './components/brands-edit/brands-edit.compon
       UsersEffects,
       CategoriesEffects,
       SuppliersEffects,
-      BrandsEffects
+      BrandsEffects,
+      ModelsEffects
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

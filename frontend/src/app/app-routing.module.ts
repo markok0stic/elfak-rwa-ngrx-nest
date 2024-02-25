@@ -9,6 +9,7 @@ import { UsersComponent } from './components/users/users.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
 import { BrandsComponent } from './components/brands/brands.component';
+import { ModelsComponent } from './components/models/models.component';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,12 @@ export const routes: Routes = [
     component: BrandsComponent,
     canActivate: [AuthGuard],
     data: { title: 'Brands', icon: 'currency_bitcoin', navInclude: true },
+  },
+  {
+    path: 'models',
+    component: ModelsComponent,
+    canActivate: [AuthGuard],
+    data: { title: 'Models', icon: 'work', navInclude: true },
   },
   {
     path: 'suppliers',

@@ -6,6 +6,7 @@ import { UsersState } from './store/users/users.state';
 import { CategoriesState } from './store/categories/categories.state';
 import { SuppliersState } from './store/suppliers/suppliers.state';
 import { BrandsState } from './store/brands/brands.state';
+import { ModelsState } from './store/models/models.state';
 
 export interface AppState {
   currentUser: CurrentUserState,
@@ -15,5 +16,6 @@ export interface AppState {
   users: UsersState,
   categories: CategoriesState,
   suppliers: SuppliersState,
-  brands: BrandsState
+  brands: BrandsState,
+  models: ModelsState
 }
