@@ -79,6 +79,9 @@ import { ModelsComponent } from './components/models/models.component';
 import { ModelsCreateComponent } from './components/models-create/models-create.component';
 import { ModelsEditComponent } from './components/models-edit/models-edit.component';
 import { ModelsEffects } from './store/models/models.effects';
+import { ProductsComponent } from './components/products/products.component';
+import { ProductsCreateComponent } from './components/products-create/products-create.component';
+import { ProductsEditComponent } from './components/products-edit/products-edit.component';
 
 @NgModule({
   declarations: [
@@ -105,6 +108,9 @@ import { ModelsEffects } from './store/models/models.effects';
     ModelsComponent,
     ModelsCreateComponent,
     ModelsEditComponent,
+    ProductsComponent,
+    ProductsCreateComponent,
+    ProductsEditComponent,
   ],
   imports: [
     BrowserModule,

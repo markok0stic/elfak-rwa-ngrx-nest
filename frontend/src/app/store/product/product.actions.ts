@@ -1,26 +1,18 @@
 import { createAction, props } from '@ngrx/store';
 import { ProductModel } from '../../models/product/product.model';
 
-export const requestLoadProducts = createAction('[ProductModel] Request Load Products',
-);
+export const loadProducts = createAction('[Products] Load Products');
+export const loadProductsSuccess = createAction('[Products] Load Products Success', props<{ products: ProductModel[] }>());
+export const loadProductsFailure = createAction('[Products] Load Products Failure', props<{ error: any }>());
 
-export const loadProductsSuccess = createAction('[ProductModel] Load Products Success',
-  props<{ products: ProductModel[] }>(),
-);
+export const createProducts = createAction('[Products] Create Products', props<{ product: ProductModel }>());
+export const createProductsSuccess = createAction('[Products] Create Products Success', props<{ success: boolean }>());
+export const createProductsFailure = createAction('[Products] Create Products Failure', props<{ error: any }>());
 
-export const loadProductsFailure = createAction('[ProductModel] Load Products Failure',
-  props<{ error: any }>(),
-);
+export const editProducts = createAction('[Products] Edit Products', props<{ product: ProductModel }>());
+export const editProductsSuccess = createAction('[Products] Edit Products Success', props<{ product: ProductModel }>());
+export const editProductsFailure = createAction('[Products] Edit Products Failure', props<{ error: any }>());
 
-export const requestAddProduct = createAction('[ProductModel] Request Add ProductModel',
-  props<{ product: ProductModel }>(),
-);
-
-export const addProductSuccess = createAction('[ProductModel] Add ProductModel Success',
-  props<{ product: ProductModel }>(),
-);
-
-export const addProductFailure = createAction('[ProductModel] Add ProductModel Failure',
-  props<{ error: any }>(),
-);
-
+export const deleteProducts = createAction('[Products] Delete Products', props<{ productId: number }>());
+export const deleteProductsSuccess = createAction('[Products] Delete Products Success', props<{ productId: number }>());
+export const deleteProductsFailure = createAction('[Products] Delete Products Failure', props<{ error: any }>());

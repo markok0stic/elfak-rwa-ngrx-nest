@@ -9,6 +9,7 @@ import { CategoryModule } from './category/category.module';
 import { SupplierModule } from './supplier/supplier.module';
 import { BrandModule } from './brand/brand.module';
 import { ModelModule } from './model/model.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ModelModule } from './model/model.module';
     ModelModule,
     SupplierModule,
     AuthModule,
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -10,12 +10,12 @@ import { ModelsState } from './store/models/models.state';
 
 export interface AppState {
   currentUser: CurrentUserState,
-  product: ProductState,
   order: OrderState,
   customer: CustomerState,
   users: UsersState,
   categories: CategoriesState,
   suppliers: SuppliersState,
   brands: BrandsState,
-  models: ModelsState
+  models: ModelsState,
+  products: ProductState,
 }

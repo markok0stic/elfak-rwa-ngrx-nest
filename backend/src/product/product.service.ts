@@ -7,16 +7,15 @@ import { User } from '../user/entities/user.entity';
 import { Category } from '../category/entities/category.entity';
 import { Brand } from '../brand/entities/brand.entity';
 import { Model } from '../model/entities/model.entity';
+import { ProductUpdateDto } from './dto/product.update';
 
 @Injectable()
 export class ProductService {
   constructor(
     @InjectRepository(Product)
     private productRepository: Repository<Product>,
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
     @InjectRepository(Brand)
-    private reportRepository: Repository<Brand>,
+    private brandRepository: Repository<Brand>,
     @InjectRepository(Model)
     private modelRepository: Repository<Model>,
     @InjectRepository(Category)
@@ -28,226 +27,94 @@ export class ProductService {
       id: productDto.categoryId,
     });
 
-    if (!category) throw new BadRequestException('InvalidCategory');
+    if (!category) throw new BadRequestException('Invalid Category');
 
-    product.gallery = paths;
-    product.createdBy = user;
+    const brand: Brand | null = await this.brandRepository.findOneBy({
+      id: productDto.brandId,
+    });
+
+    if (!brand) throw new BadRequestException('Invalid Brand');
+
+    const model: Model | null = await this.modelRepository.findOneBy({
+      id: productDto.modelId,
+    });
+
+    if (!model) throw new BadRequestException('Invalid Model');
+
+    const product = this.productRepository.create(productDto);
     product.category = category;
+    product.brand = brand;
+    product.model = model;
 
     return this.productRepository.save(product);
   }
 
-  public async update(
-    dto: ProductDto,
-    images: Array<Express.Multer.File>,
-    user: User,
-  ): Promise<Product> {
-    if (!user) throw new BadRequestException('InvalidUser');
-
-    const ad: Product = await this.productRepository.findOne({
+  public async update(dto: ProductUpdateDto): Promise<Product> {
+    const product: Product = await this.productRepository.findOne({
       where: { id: dto.id },
-      relations: { category: true },
+      relations: { category: true, brand: true, model: true },
     });
 
-    if (!ad) throw new BadRequestException('ProductNotFound');
+    if (!product) throw new BadRequestException('Product Not Found');
 
-    const category: Category = await this.categoryRepository.findOne({
-      where: { id: dto.categoryId },
+    const category: Category | null = await this.categoryRepository.findOneBy({
+      id: dto.categoryId,
     });
 
-    if (!category) throw new BadRequestException('CategoryNotFound');
+    if (!category) throw new BadRequestException('Invalid Category');
 
-    ad.title = dto.title;
-    ad.price = dto.price;
-    ad.brand = dto.brand;
-    ad.caliber = dto.caliber;
-    ad.description = dto.description;
-    ad.category = category;
-
-    let imgs: string[] = [];
-    if (images.length !== 0) {
-      images.forEach((img) => imgs.push(img.filename));
-
-      const fs = require('fs');
-      ad.gallery.forEach((img) => {
-        fs.unlinkSync(`${UPLOAD_DESTINATION}/${img}`);
-      });
-    } else {
-      imgs = dto.gallery;
-    }
-
-    ad.gallery = imgs;
-
-    if (!(await this.productRepository.update(dto.id, ad))) return null;
-
-    return ad;
-  }
-
-  public async getBySearch(dto: ProductDto): Promise<Product[]> {
-    const { searchInput, categoryId } = dto;
-
-    let ads: Product[] = await this.productRepository.find({
-      where: { deleted: false },
-      relations: { createdBy: true, category: true },
+    const brand: Brand | null = await this.brandRepository.findOneBy({
+      id: dto.brandId,
     });
 
-    if (categoryId) {
-      ads = ads.filter((ad: Product) => ad.category.id == categoryId);
-    }
+    if (!brand) throw new BadRequestException('Invalid Brand');
 
-    if (searchInput.length > 0) {
-      ads = ads.filter(
-        (ad) =>
-          ad.title.includes(searchInput) ||
-          ad.brand.includes(searchInput) ||
-          ad.caliber.includes(searchInput),
-      );
-    }
+    const model: Model | null = await this.modelRepository.findOneBy({
+      id: dto.modelId,
+    });
 
-    return ads;
+    if (!model) throw new BadRequestException('Invalid Model');
+
+    product.name = dto.name;
+    product.description = dto.description;
+    product.quantity = dto.quantity;
+    product.category = category;
+    product.brand = brand;
+    product.model = model;
+
+    if (!(await this.productRepository.update(dto.id, product))) return null;
+
+    return product;
   }
 
   public async getAll(): Promise<Product[]> {
-    const ads: Product[] = await this.productRepository.find({
-      where: { deleted: false },
-      relations: { createdBy: true, category: true },
+    return await this.productRepository.find({
+      relations: { category: true, model: true, brand: true },
     });
-
-    return ads;
   }
 
-  public async getOne(id: number, accessUser: User) {
-    if (!accessUser) return new BadRequestException('InvalidUser');
-
-    const user: User = await this.userRepository.findOne({
-      where: { id: accessUser.id },
-      relations: { favourites: true },
-    });
-
-    const ad: Product = await this.productRepository.findOne({
+  public async getOne(id: number) {
+    const product: Product = await this.productRepository.findOne({
       where: {
         id: id,
       },
-      relations: { createdBy: true, category: true },
+      relations: { category: true, model: true, brand: true },
     });
 
-    if (!ad) return new BadRequestException('AdNotFound');
+    if (!product) return new BadRequestException('Product Not Found');
 
-    const isSaved = !!user.favourites.find((fav) => {
-      return fav.id === ad.id;
-    });
-
-    const data = {
-      ...ad,
-      isSaved: isSaved,
-    };
-
-    return data;
+    return product;
   }
 
-  public async getByUser(id: number) {
-    const user: User | null = await this.userRepository.findOne({
-      where: { id: id },
-      relations: { myAds: true },
+  public async delete(id: number) {
+    const product: Product = await this.productRepository.findOne({
+      where: {
+        id: id,
+      },
+      relations: { category: true, model: true, brand: true },
     });
 
-    if (!user) throw new BadRequestException('InvalidUser');
-
-    const data = user.myAds.map((ad: Product) => {
-      if (!ad.deleted)
-        return {
-          ...ad,
-          createdBy: {
-            id: user.id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            phone: user.phone,
-            role: user.role,
-            imagePath: user.imagePath,
-            address: user.address,
-          },
-        };
-    });
-
-    return data;
-  }
-
-  public async getByUserSaved(accessUser: User) {
-    if (!accessUser) return new BadRequestException('InvalidUser');
-
-    const user: User = await this.userRepository.findOne({
-      where: { id: accessUser.id },
-      relations: { favourites: true },
-    });
-
-    const data = user.favourites.map((ad: Product) => {
-      if (!ad.deleted)
-        return {
-          ...ad,
-          createdBy: {
-            id: user.id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            phone: user.phone,
-            role: user.role,
-            imagePath: user.imagePath,
-            address: user.address,
-          },
-        };
-    });
-
-    return data;
-  }
-
-  public async softDelete(dto: ProductDto, userId: number) {
-    const { id } = dto;
-    const user: User = await this.userRepository.findOne({
-      where: { id: userId },
-    });
-
-    if (!user || user.role !== Role.Admin)
-      throw new BadRequestException('Forbidden');
-
-    const ad: Product = await this.productRepository.findOne({
-      where: { id: id },
-      relations: { reports: true },
-    });
-
-    if (!ad) throw new BadRequestException('AdNotFound');
-
-    ad.reports.forEach(async (report: Report) => {
-      await this.reportRepository.update(report.id, {
-        status: ReportStatus.Resolved,
-      });
-    });
-
-    ad.deleted = true;
-
-    if (!(await this.productRepository.save(ad))) return { success: false };
-
-    return { success: true };
-  }
-
-  public async delete(id: number, userId: number) {
-    const ad: Product = await this.productRepository.findOne({
-      where: { id: id },
-      relations: { createdBy: true, reports: true },
-    });
-
-    if (ad.createdBy.id !== userId) {
-      throw new BadRequestException('InvalidUser');
-    }
-
-    if (ad.gallery.length > 0) {
-      const { gallery } = ad;
-
-      const fs = require('fs');
-
-      gallery.forEach((img) => {
-        const path = `${UPLOAD_DESTINATION}/${img}`;
-        fs.unlinkSync(path);
-      });
-    }
+    if (!product) return new BadRequestException('Product Not Found');
 
     if (!(await this.productRepository.delete(id))) return { success: false };
 

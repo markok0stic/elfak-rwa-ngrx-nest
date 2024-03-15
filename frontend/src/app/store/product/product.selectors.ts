@@ -1,12 +1,19 @@
 import { createSelector } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { ProductState } from './product.state';
 
-export const selectProducts = (state: AppState) => state.product;
+export const selectFeature = (state: AppState) => state;
 
 export const selectAllProducts = createSelector(
-  selectProducts,
-  (state: ProductState) => state.products,
+  selectFeature,
+  (state: AppState) => state.products
 );
 
-// Dodajte selektore za učitavanje, greške, i druge aspekte state-a...
+export const selectProductsLoading = createSelector(
+  selectFeature,
+  (state: AppState) => state.products.loading
+);
+
+export const selectSuccessfulProductCreation = createSelector(
+  selectFeature,
+  (state: AppState) => state.products.successfulCreation
+);

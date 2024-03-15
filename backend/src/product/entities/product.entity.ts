@@ -12,7 +12,7 @@ export class Product {
   public sku: string;
 
   @Column({ type: 'int', nullable: false })
-  public quantity: string;
+  public quantity: number;
 
   @Column({ type: 'varchar', nullable: false })
   public name: string;

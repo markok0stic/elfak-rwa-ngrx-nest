@@ -1,7 +1,6 @@
-import { ProductModel } from '../../models/product/product.model';
+import { State } from '../../models/state';
+import { ModelModel } from '../../models/model/model.model';
 
-export interface ProductState {
-  products: ProductModel[];
-  loading: boolean;
-  error: any;
+export type ProductState = State<ModelModel> & {
+  successfulCreation: boolean | null;
 }

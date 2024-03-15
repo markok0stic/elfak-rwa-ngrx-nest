@@ -5,7 +5,6 @@ import {
   Get,
   Param,
   ParseIntPipe,
-  Patch,
   Post,
   Put,
   UseGuards,
@@ -45,13 +44,6 @@ export class ProductController {
   @Get()
   public get() {
     return this.productService.getAll();
-  }
-
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Patch('softDelete')
-  @Roles(RolesEnum.Admin)
-  public softDelete(@Body() dto: ProductDto) {
-    return this.productService.softDelete(dto);
   }
 
   @UseGuards(JwtAuthGuard, RolesGuard)
