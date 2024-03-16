@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProductDto } from './dto/product.dto';
 import { Repository } from 'typeorm';
 import { Product } from './entities/product.entity';
-import { User } from '../user/entities/user.entity';
 import { Category } from '../category/entities/category.entity';
 import { Brand } from '../brand/entities/brand.entity';
 import { Model } from '../model/entities/model.entity';
@@ -78,6 +77,8 @@ export class ProductService {
     product.name = dto.name;
     product.description = dto.description;
     product.quantity = dto.quantity;
+    product.purchasePrice = dto.purchasePrice;
+    product.salesPrice = dto.salesPrice;
     product.category = category;
     product.brand = brand;
     product.model = model;

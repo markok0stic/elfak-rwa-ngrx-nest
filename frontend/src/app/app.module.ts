@@ -122,7 +122,7 @@ import { ProductsEditComponent } from './components/products-edit/products-edit.
     FontAwesomeModule,
     StoreModule.forRoot<AppState>({
       currentUser: currentUserReducers,
-      product: productReducers,
+      products: productReducers,
       order: orderReducers,
       customer: customerReducers,
       users: usersReducers,

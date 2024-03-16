@@ -10,6 +10,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { SuppliersComponent } from './components/suppliers/suppliers.component';
 import { BrandsComponent } from './components/brands/brands.component';
 import { ModelsComponent } from './components/models/models.component';
+import { ProductsComponent } from './components/products/products.component';
 
 export const routes: Routes = [
   {
@@ -22,6 +23,12 @@ export const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard],
     data: { title: 'Dashboard', icon: 'dashboard', navInclude: true },
+  },
+  {
+    path: 'users',
+    component: UsersComponent,
+    canActivate: [AuthGuard],
+    data: { role: Roles.Admin, title: 'Users', icon: 'account_circle', navInclude: true },
   },
   {
     path: 'categories',
@@ -42,17 +49,29 @@ export const routes: Routes = [
     data: { title: 'Models', icon: 'work', navInclude: true },
   },
   {
+    path: 'products',
+    component: ProductsComponent,
+    canActivate: [AuthGuard],
+    data: { title: 'Products', icon: 'storefront', navInclude: true },
+  },
+  {
+    path: 'sales',
+    component: ProductsComponent,
+    canActivate: [AuthGuard],
+    data: { title: 'Sales', icon: 'shopping_cart', navInclude: true },
+  },
+  {
+    path: 'sales-reports',
+    component: ProductsComponent,
+    canActivate: [AuthGuard],
+    data: { title: 'Sales Reports', icon: 'receipt_long', navInclude: true },
+  },
+  /*{
     path: 'suppliers',
     component: SuppliersComponent,
     canActivate: [AuthGuard],
     data: { title: 'Suppliers', icon: 'people_alt', navInclude: true },
-  },
-  {
-    path: 'users',
-    component: UsersComponent,
-    canActivate: [AuthGuard],
-    data: { role: Roles.Admin, title: 'Users', icon: 'account_circle', navInclude: true },
-  },
+  },*/
   {
     path: 'profile',
     component: ViewProfileComponent,

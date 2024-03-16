@@ -14,6 +14,12 @@ export class Product {
   @Column({ type: 'int', nullable: false })
   public quantity: number;
 
+  @Column({ type: 'float', nullable: false })
+  public purchasePrice: number;
+
+  @Column({ type: 'float', nullable: false })
+  public salesPrice: number;
+
   @Column({ type: 'varchar', nullable: false })
   public name: string;
 

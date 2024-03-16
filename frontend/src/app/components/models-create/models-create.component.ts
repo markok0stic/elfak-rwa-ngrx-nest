@@ -3,10 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { selectSuppliersLoading } from '../../store/suppliers/suppliers.selectors';
 import { StatusEnum } from '@shared/enums/status.enum';
 import * as ModelsActions from '../../store/models/models.actions';
-import { selectSuccessfulModelCreation } from '../../store/models/models.selectors';
+import { selectModelsLoading, selectSuccessfulModelCreation } from '../../store/models/models.selectors';
 
 @Component({
   selector: 'app-models-create',
@@ -21,7 +20,7 @@ export class ModelsCreateComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private store: Store<AppState>) {
     this.modelForm = this.createFormGroup();
-    this.$loading = this.store.select(selectSuppliersLoading);
+    this.$loading = this.store.select(selectModelsLoading);
     this.creationSuccess = false;
     this.created$ = this.store.select(selectSuccessfulModelCreation);
   }

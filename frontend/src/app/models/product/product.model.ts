@@ -3,13 +3,38 @@ import { BrandModel } from '../brand/brand.model';
 import { ModelModel } from '../model/model.model';
 
 export interface ProductModel {
-  id: string;
+  id: number;
   name: string;
   description: string;
-  price: number;
   quantity: number;
   sku: string;
+  purchasePrice: number;
+  salesPrice: number;
   category: CategoryModel;
   brand: BrandModel;
   model: ModelModel;
+}
+
+export interface CreateProductModel {
+  sku: string;
+  quantity: number;
+  name: string;
+  description: string;
+  purchasePrice: number;
+  salesPrice: number;
+  categoryId: number;
+  brandId: number;
+  modelId: number;
+}
+
+export interface UpdateProductModel {
+  id: number;
+  name: string;
+  description: string;
+  quantity: number;
+  purchasePrice: number;
+  salesPrice: number;
+  categoryId: number;
+  brandId: number;
+  modelId: number;
 }

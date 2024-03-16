@@ -1,1 +1,9 @@
-<p>products works!</p>
+<app-table
+  (delete)="handleDelete($event)"
+  (edit)="handleEdit($event)"
+  [data$]="products$"
+  [displayedColumns]="columnsToDisplay"
+>
+  <app-products-create create></app-products-create>
+  <app-products-edit></app-products-edit>
+</app-table>
