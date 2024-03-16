@@ -1,6 +1,6 @@
 <div class="product-create-container">
+  <mat-card-title>Create Product</mat-card-title>
   <mat-card>
-    <mat-card-title>Create Product</mat-card-title>
     <form [formGroup]="productForm" (ngSubmit)="handleSubmit()">
       <mat-card-content>
         <mat-form-field appearance="fill" class="full-width">
@@ -10,38 +10,38 @@
             Product name is required
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Description</mat-label>
-          <textarea matInput formControlName="description" placeholder="Enter product description"></textarea>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="full-width">
+        <div class="form-row">
+        <mat-form-field appearance="fill" class="half-width">
           <mat-label>SKU</mat-label>
           <input matInput formControlName="sku" placeholder="Enter SKU">
           <mat-error *ngIf="productForm.controls['sku'].invalid">
             SKU is required
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill" class="full-width">
+        <mat-form-field appearance="fill" class="half-width">
           <mat-label>Quantity</mat-label>
           <input type="number" matInput formControlName="quantity" placeholder="Enter quantity">
           <mat-error *ngIf="productForm.controls['quantity'].invalid">
             Quantity is required
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill" class="full-width">
+        </div>
+        <div class="form-row">
+        <mat-form-field appearance="fill" class="half-width">
           <mat-label>Purchase Price</mat-label>
           <input type="text" matInput formControlName="purchasePrice" placeholder="Enter purchase price">
           <mat-error *ngIf="productForm.controls['purchasePrice'].invalid">
             Purchase price is required
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill" class="full-width">
+        <mat-form-field appearance="fill" class="half-width">
           <mat-label>Sales Price</mat-label>
           <input type="text" matInput formControlName="salesPrice" placeholder="Enter sales price">
           <mat-error *ngIf="productForm.controls['salesPrice'].invalid">
             Sales price is required
           </mat-error>
         </mat-form-field>
+        </div>
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>Category</mat-label>
           <mat-select formControlName="categoryId">
@@ -83,6 +83,10 @@
           <mat-error *ngIf="productForm.controls['modelId'].invalid">
             Model is required
           </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" placeholder="Enter product description"></textarea>
         </mat-form-field>
       </mat-card-content>
       <mat-card-actions>

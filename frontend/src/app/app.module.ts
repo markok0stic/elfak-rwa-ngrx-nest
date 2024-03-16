@@ -82,9 +82,11 @@ import { ModelsEffects } from './store/models/models.effects';
 import { ProductsComponent } from './components/products/products.component';
 import { ProductsCreateComponent } from './components/products-create/products-create.component';
 import { ProductsEditComponent } from './components/products-edit/products-edit.component';
+import { CamelCaseToTitlePipe } from './services/custom-pipes/CamelCaseToTitlePipe';
 
 @NgModule({
   declarations: [
+    CamelCaseToTitlePipe,
     AppComponent,
     LoginComponent,
     RegisterComponent,

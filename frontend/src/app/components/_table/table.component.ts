@@ -21,6 +21,7 @@ export class TableComponent<TData> implements AfterViewInit {
   @Input() data$: Observable<State<TData>>;
   @Input() displayedColumns: string[];
   @Input() actionsEnabled: boolean;
+  @Input() increaseEnabled: boolean;
 
   dataSource: MatTableDataSource<TData>;
   loading: boolean;
@@ -31,12 +32,14 @@ export class TableComponent<TData> implements AfterViewInit {
 
   @Output() edit = new EventEmitter<TData>();
   @Output() delete = new EventEmitter<TData>();
+  @Output() increase = new EventEmitter<TData>();
   protected readonly ViewMode = ViewMode;
 
   constructor(private cdr: ChangeDetectorRef) {
     this.data$ = of();
     this.displayedColumns = [];
     this.actionsEnabled = true;
+    this.increaseEnabled = false;
     this.loading = false;
     this.currentViewMode = ViewMode.TABLE;
     this.dataSource = new MatTableDataSource<TData>([]);
@@ -82,5 +85,9 @@ export class TableComponent<TData> implements AfterViewInit {
 
   handleDelete(el: TData) {
     this.delete.emit(el);
+  }
+
+  handleIncrease(el: TData) {
+    this.increase.emit(el)
   }
 }

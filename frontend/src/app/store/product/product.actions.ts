@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { CreateProductModel, ProductModel, UpdateProductModel } from '../../models/product/product.model';
 
 export const loadProducts = createAction('[Products] Load Products');
-export const loadProductsSuccess = createAction('[Products] Load Products Success', props<{ products: ProductModel[] }>());
+export const loadProductsSuccess = createAction('[Products] Load Products Success', props<{ data: ProductModel[] }>());
 export const loadProductsFailure = createAction('[Products] Load Products Failure', props<{ error: any }>());
 
 export const createProducts = createAction('[Products] Create Products', props<{ product: CreateProductModel }>());

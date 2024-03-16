@@ -9,8 +9,9 @@ import * as BrandActions from '../../store/brands/brands.actions';
 import * as ModelActions from '../../store/models/models.actions';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { ProductState } from '../../store/product/product.state';
-import { ProductModel } from '../../models/product/product.model';
+import { ProductModel, UpdateProductModel } from '../../models/product/product.model';
 import { selectAllProducts } from '../../store/product/product.selectors';
+import { editProducts } from '../../store/product/product.actions';
 
 @Component({
   selector: 'app-products',
@@ -28,9 +29,9 @@ export class ProductsComponent implements OnInit {
     this._store.dispatch(CategoryActions.loadCategories())
     this._store.dispatch(BrandActions.loadBrands())
     this._store.dispatch(ModelActions.loadModels())
-    this.productToEdit = null;
     this.products$ = this._store.select(selectAllProducts);
-    this.columnsToDisplay = ['id', 'name', 'description', 'price'];
+    this.productToEdit = null;
+    this.columnsToDisplay = ['sku', 'name', 'quantity', 'categoryName', 'brandName', 'modelName', 'salesPrice', 'purchasePrice'];
     this.loading = false;
   }
 
@@ -49,5 +50,21 @@ export class ProductsComponent implements OnInit {
         this._store.dispatch(ProductsActions.deleteProducts({productId: product.id}));
       }
     });
+  }
+
+  handleIncreaseQuantity(product: ProductModel) {
+    const updatedProduct: UpdateProductModel = {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      quantity: product.quantity + 1,
+      purchasePrice: product.purchasePrice,
+      salesPrice: product.salesPrice,
+      categoryId: product.category.id,
+      brandId: product.brand.id,
+      modelId: product.model.id,
+    };
+
+    this._store.dispatch(editProducts({product: updatedProduct}));
   }
 }

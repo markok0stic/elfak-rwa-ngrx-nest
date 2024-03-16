@@ -22,6 +22,15 @@ export class ProductService {
   ) {}
 
   public async create(productDto: ProductDto): Promise<Product> {
+    const productBySku: Product = await this.productRepository.findOneBy({
+      sku: productDto.sku,
+    });
+
+    if (productBySku)
+      throw new BadRequestException(
+        `Product with SKU: ${productDto.sku} already exists`,
+      );
+
     const category: Category | null = await this.categoryRepository.findOneBy({
       id: productDto.categoryId,
     });
@@ -44,6 +53,7 @@ export class ProductService {
     product.category = category;
     product.brand = brand;
     product.model = model;
+    product.createdOn = new Date();
 
     return this.productRepository.save(product);
   }
@@ -83,14 +93,22 @@ export class ProductService {
     product.brand = brand;
     product.model = model;
 
-    if (!(await this.productRepository.update(dto.id, product))) return null;
-
-    return product;
+    return this.productRepository.save(product);
   }
 
   public async getAll(): Promise<Product[]> {
     return await this.productRepository.find({
       relations: { category: true, model: true, brand: true },
+    });
+  }
+
+  public async getRecentlyAdded(): Promise<Product[]> {
+    return await this.productRepository.find({
+      relations: { category: true },
+      order: {
+        createdOn: 'DESC',
+      },
+      take: 10,
     });
   }
 

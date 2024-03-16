@@ -19,8 +19,18 @@ export class ProductEffects {
       ofType(ProductActions.loadProducts),
       mergeMap(() =>
         this.productService.getAllProducts().pipe(
-          map(products => ProductActions.loadProductsSuccess({ products })),
-          catchError(error => of(ProductActions.loadProductsFailure({ error }))),
+          map(products => {
+            products.forEach(el=>{
+              el.categoryName = el.category.name
+              el.brandName = el.brand.name
+              el.modelName = el.model.name
+            })
+            return ProductActions.loadProductsSuccess({ data:products })
+          }),
+          catchError(error => {
+            console.log(error)
+            return of(ProductActions.loadProductsFailure({ error }))
+          }),
         ),
       ),
     ),

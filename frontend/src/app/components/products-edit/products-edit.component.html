@@ -1,1 +1,100 @@
-<p>products-edit works!</p>
+<div class="product-edit-container">
+  <mat-card-title>{{sectionTitle}}</mat-card-title>
+  <mat-card>
+    <form *ngIf="productForm" [formGroup]="productForm">
+      <mat-card-content>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>SKU</mat-label>
+          <input [disabled]="true" [value]="sku" matInput placeholder="Enter SKU">
+        </mat-form-field>
+        <div class="form-row">
+          <mat-form-field appearance="fill" class="half-width">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter product name">
+            <mat-error *ngIf="productForm.controls['name'].invalid">
+              Product name is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="half-width">
+            <mat-label>Quantity</mat-label>
+            <input type="number" matInput formControlName="quantity" placeholder="Enter quantity">
+            <mat-error *ngIf="productForm.controls['quantity'].invalid">
+              Quantity is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form-row">
+          <mat-form-field appearance="fill" class="half-width">
+            <mat-label>Purchase Price</mat-label>
+            <input type="text" matInput formControlName="purchasePrice" placeholder="Enter purchase price">
+            <mat-error *ngIf="productForm.controls['purchasePrice'].invalid">
+              Purchase price is required
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="half-width">
+            <mat-label>Sales Price</mat-label>
+            <input type="text" matInput formControlName="salesPrice" placeholder="Enter sales price">
+            <mat-error *ngIf="productForm.controls['salesPrice'].invalid">
+              Sales price is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Category</mat-label>
+          <mat-select formControlName="categoryId">
+            <mat-option
+              *ngFor="let category of categories"
+              [value]="category.id"
+            >
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="productForm.controls['categoryId'].invalid">
+            Category is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Brand</mat-label>
+          <mat-select formControlName="brandId">
+            <mat-option
+              *ngFor="let brand of brands"
+              [value]="brand.id"
+            >
+              {{ brand.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="productForm.controls['brandId'].invalid">
+            Brand is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Model</mat-label>
+          <mat-select formControlName="modelId">
+            <mat-option
+              *ngFor="let model of models"
+              [value]="model.id"
+            >
+              {{ model.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="productForm.controls['modelId'].invalid">
+            Model is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description" placeholder="Enter product description"></textarea>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button (click)="toggleEdit()" mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+        <span class="spacer"></span>
+        <button (click)="handleEdit()" [disabled]="!productForm.dirty || !productForm.valid" color="primary" mat-raised-button
+                type="submit">Save Changes
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

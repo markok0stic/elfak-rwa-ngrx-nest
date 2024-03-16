@@ -11,6 +11,9 @@ export class Product {
   @Column({ type: 'varchar', nullable: false, unique: true })
   public sku: string;
 
+  @Column({ type: 'timestamp', nullable: false })
+  public createdOn: Date;
+
   @Column({ type: 'int', nullable: false })
   public quantity: number;
 

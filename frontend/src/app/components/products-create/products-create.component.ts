@@ -43,7 +43,6 @@ export class ProductsCreateComponent implements OnInit {
   ngOnInit(): void {
     this.created$.subscribe((success)=>{
       this.creationSuccess = !!success;
-      console.log(!!success)
       if(success) {
         this.handleReset()
       }

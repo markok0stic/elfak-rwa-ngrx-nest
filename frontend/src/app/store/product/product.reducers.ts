@@ -12,9 +12,9 @@ export const initialProductState: ProductState = {
 export const productReducers = createReducer(
   initialProductState,
   on(ProductActions.loadProducts, state => ({ ...state, loading: true })),
-  on(ProductActions.loadProductsSuccess, (state, { products }) => ({
+  on(ProductActions.loadProductsSuccess, (state, { data }) => ({
     ...state,
-    products: products,
+    data: data,
     loading: false,
   })),
   on(ProductActions.loadProductsFailure, (state, { error }) => ({

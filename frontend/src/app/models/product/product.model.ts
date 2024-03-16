@@ -10,9 +10,13 @@ export interface ProductModel {
   sku: string;
   purchasePrice: number;
   salesPrice: number;
+  categoryName: string,
+  brandName: string,
+  modelName: string,
   category: CategoryModel;
   brand: BrandModel;
   model: ModelModel;
+  createdOn: number;
 }
 
 export interface CreateProductModel {
