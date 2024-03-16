@@ -41,7 +41,6 @@ export class SuppliersEditComponent implements OnInit {
   }
 
   createFormGroup(supplier: SupplierModel | null) {
-    console.log(supplier?.status)
     return this._formBuilder.group({
       id: new FormControl(supplier?.id, Validators.required),
       name: new FormControl(supplier?.name, Validators.required),

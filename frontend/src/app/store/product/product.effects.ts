@@ -28,7 +28,6 @@ export class ProductEffects {
             return ProductActions.loadProductsSuccess({ data:products })
           }),
           catchError(error => {
-            console.log(error)
             return of(ProductActions.loadProductsFailure({ error }))
           }),
         ),
