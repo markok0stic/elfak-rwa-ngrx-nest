@@ -6,6 +6,12 @@
     <img alt="Application Logo" class="app-logo" height="512" ngSrc="assets/inventory-management.png" width="512">
   </a>
   <span class="spacer"></span>
+  <div class="clock">
+    <mat-icon>access_time</mat-icon>
+    {{currentTime   | date: "dd-MM-yyyy"}}
+    {{currentTime   | date: "HH:mm:ss"}}
+  </div>
+  <span class="spacer"></span>
   <a [matMenuTriggerFor]="userMenu" mat-button>
     <mat-icon>account_circle</mat-icon>
     Profile
