@@ -1,7 +1,5 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Category } from '../../category/entities/category.entity';
-import { Brand } from '../../brand/entities/brand.entity';
-import { Model } from '../../model/entities/model.entity';
 
 @Entity()
 export class Product {
@@ -33,14 +31,4 @@ export class Product {
     onDelete: 'CASCADE',
   })
   public category: Category;
-
-  @ManyToOne(() => Brand, (brand: Brand) => brand.products, {
-    onDelete: 'CASCADE',
-  })
-  public brand: Brand;
-
-  @ManyToOne(() => Model, (model: Model) => model.products, {
-    onDelete: 'CASCADE',
-  })
-  public model: Model;
 }

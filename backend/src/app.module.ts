@@ -6,21 +6,17 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
-import { SupplierModule } from './supplier/supplier.module';
-import { BrandModule } from './brand/brand.module';
-import { ModelModule } from './model/model.module';
 import { ProductModule } from './product/product.module';
+import { SaleModule } from './sale/sale.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
     UserModule,
     CategoryModule,
-    BrandModule,
-    ModelModule,
-    SupplierModule,
     AuthModule,
     ProductModule,
+    SaleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

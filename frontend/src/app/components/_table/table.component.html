@@ -26,7 +26,7 @@
         <button *ngIf="increaseEnabled" (click)="handleIncrease(element)" color="primary" mat-icon-button matTooltip="Increase">
           <mat-icon>add</mat-icon>
         </button>
-        <button (click)="handleEdit(element)" mat-icon-button matTooltip="Edit">
+        <button *ngIf="editEnabled" (click)="handleEdit(element)" mat-icon-button matTooltip="Edit">
           <mat-icon>edit</mat-icon>
         </button>
         <button (click)="handleDelete(element)" color="warn" mat-icon-button matTooltip="Delete">

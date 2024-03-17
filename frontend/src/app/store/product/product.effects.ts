@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as ProductActions from './product.actions';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { ProductsService } from '../../services/products/products.services';
+import { ProductsService } from '../../services/products/products.service';
 import * as ProductsActions from './product.actions';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NotificationsService } from '../../services/notifications/notifications.service';
@@ -22,8 +22,6 @@ export class ProductEffects {
           map(products => {
             products.forEach(el=>{
               el.categoryName = el.category.name
-              el.brandName = el.brand.name
-              el.modelName = el.model.name
             })
             return ProductActions.loadProductsSuccess({ data:products })
           }),

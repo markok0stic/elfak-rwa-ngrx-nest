@@ -1,6 +1,4 @@
 import { CategoryModel } from '../category/category.model';
-import { BrandModel } from '../brand/brand.model';
-import { ModelModel } from '../model/model.model';
 
 export interface ProductModel {
   id: number;
@@ -11,11 +9,7 @@ export interface ProductModel {
   purchasePrice: number;
   salesPrice: number;
   categoryName: string,
-  brandName: string,
-  modelName: string,
   category: CategoryModel;
-  brand: BrandModel;
-  model: ModelModel;
   createdOn: number;
 }
 
@@ -27,8 +21,6 @@ export interface CreateProductModel {
   purchasePrice: number;
   salesPrice: number;
   categoryId: number;
-  brandId: number;
-  modelId: number;
 }
 
 export interface UpdateProductModel {
@@ -39,6 +31,4 @@ export interface UpdateProductModel {
   purchasePrice: number;
   salesPrice: number;
   categoryId: number;
-  brandId: number;
-  modelId: number;
 }

@@ -1,0 +1,9 @@
+<app-table
+  (delete)="handleDelete($event)"
+  (edit)="handleEdit($event)"
+  [data$]="sales$"
+  [displayedColumns]="columnsToDisplay"
+  [editEnabled]="false"
+>
+  <app-sales-create create></app-sales-create>
+</app-table>

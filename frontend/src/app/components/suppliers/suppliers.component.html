@@ -1,9 +1,0 @@
-<app-table
-  (delete)="handleDelete($event)"
-  (edit)="handleEdit($event)"
-  [data$]="suppliers$"
-  [displayedColumns]="columnsToDisplay"
->
-  <app-suppliers-create create></app-suppliers-create>
-  <app-suppliers-edit edit [supplier]="this.supplierToEdit"></app-suppliers-edit>
-</app-table>

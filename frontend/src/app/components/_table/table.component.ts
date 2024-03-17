@@ -22,6 +22,7 @@ export class TableComponent<TData> implements AfterViewInit {
   @Input() displayedColumns: string[];
   @Input() actionsEnabled: boolean;
   @Input() increaseEnabled: boolean;
+  @Input() editEnabled: boolean;
 
   dataSource: MatTableDataSource<TData>;
   loading: boolean;
@@ -36,6 +37,7 @@ export class TableComponent<TData> implements AfterViewInit {
   protected readonly ViewMode = ViewMode;
 
   constructor(private cdr: ChangeDetectorRef) {
+    this.editEnabled = true;
     this.data$ = of();
     this.displayedColumns = [];
     this.actionsEnabled = true;

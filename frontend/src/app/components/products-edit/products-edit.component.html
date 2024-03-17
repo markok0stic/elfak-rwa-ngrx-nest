@@ -54,34 +54,6 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Brand</mat-label>
-          <mat-select formControlName="brandId">
-            <mat-option
-              *ngFor="let brand of brands"
-              [value]="brand.id"
-            >
-              {{ brand.name }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="productForm.controls['brandId'].invalid">
-            Brand is required
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Model</mat-label>
-          <mat-select formControlName="modelId">
-            <mat-option
-              *ngFor="let model of models"
-              [value]="model.id"
-            >
-              {{ model.name }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="productForm.controls['modelId'].invalid">
-            Model is required
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="full-width">
           <mat-label>Description</mat-label>
           <textarea matInput formControlName="description" placeholder="Enter product description"></textarea>
         </mat-form-field>

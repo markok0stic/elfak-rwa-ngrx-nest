@@ -3,15 +3,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { StatusEnum } from '@shared/enums/status.enum';
 import * as ProductsActions from '../../store/product/product.actions';
 import { selectProductsLoading, selectSuccessfulProductCreation } from '../../store/product/product.selectors';
 import { CategoryModel } from '../../models/category/category.model';
-import { BrandModel } from '../../models/brand/brand.model';
-import { ModelModel } from '../../models/model/model.model';
 import { selectAllCategories } from '../../store/categories/categories.selectors';
-import { selectAllBrands } from '../../store/brands/brands.selectors';
-import { selectAllModels } from '../../store/models/models.selectors';
 
 @Component({
   selector: 'app-products-create',
@@ -24,8 +19,6 @@ export class ProductsCreateComponent implements OnInit {
   creationSuccess: boolean;
   created$: Observable<boolean | null>;
   categories: CategoryModel[];
-  brands: BrandModel[];
-  models: ModelModel[];
 
   constructor(private fb: FormBuilder, private store: Store<AppState>) {
     this.productForm = this.createFormGroup();
@@ -33,11 +26,7 @@ export class ProductsCreateComponent implements OnInit {
     this.creationSuccess = false;
     this.created$ = this.store.select(selectSuccessfulProductCreation);
     this.categories = [];
-    this.brands = [];
-    this.models = [];
     this.store.select(selectAllCategories).subscribe((categories) => this.categories = categories.data);
-    this.store.select(selectAllBrands).subscribe((brands) => this.brands = brands.data);
-    this.store.select(selectAllModels).subscribe((models) => this.models = models.data);
   }
 
   ngOnInit(): void {
@@ -58,8 +47,6 @@ export class ProductsCreateComponent implements OnInit {
       purchasePrice: new FormControl('', Validators.required),
       salesPrice: new FormControl('', Validators.required),
       categoryId: new FormControl(null, Validators.required),
-      brandId: new FormControl(null, Validators.required),
-      modelId: new FormControl(null, Validators.required),
     });
   }
 

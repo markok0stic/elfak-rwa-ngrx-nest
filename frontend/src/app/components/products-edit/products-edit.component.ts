@@ -6,11 +6,7 @@ import { AppState } from '../../app.state';
 import { ProductModel } from '../../models/product/product.model';
 import { editProducts } from '../../store/product/product.actions';
 import { selectAllCategories } from '../../store/categories/categories.selectors';
-import { selectAllBrands } from '../../store/brands/brands.selectors';
-import { selectAllModels } from '../../store/models/models.selectors';
 import { CategoryModel } from '../../models/category/category.model';
-import { BrandModel } from '../../models/brand/brand.model';
-import { ModelModel } from '../../models/model/model.model';
 
 @Component({
   selector: 'app-products-edit',
@@ -22,8 +18,6 @@ export class ProductsEditComponent implements OnInit {
   productForm: FormGroup | null;
   sectionTitle: string;
   categories: CategoryModel[];
-  brands: BrandModel[];
-  models: ModelModel[];
   sku: string | null;
   private supplierSubject = new BehaviorSubject<ProductModel | null>(null);
 
@@ -37,11 +31,7 @@ export class ProductsEditComponent implements OnInit {
     this.product$ = of(null);
     this.sectionTitle = 'Product';
     this.categories = [];
-    this.brands = [];
-    this.models = [];
     this.store.select(selectAllCategories).subscribe((categories) => this.categories = categories.data);
-    this.store.select(selectAllBrands).subscribe((brands) => this.brands = brands.data);
-    this.store.select(selectAllModels).subscribe((models) => this.models = models.data);
     this.sku = null;
   }
 
@@ -67,8 +57,6 @@ export class ProductsEditComponent implements OnInit {
       purchasePrice: new FormControl(product?.purchasePrice, Validators.required),
       salesPrice: new FormControl(product?.salesPrice, Validators.required),
       categoryId: new FormControl(product?.category.id, Validators.required),
-      brandId: new FormControl(product?.brand.id, Validators.required),
-      modelId: new FormControl(product?.model.id, Validators.required),
     });
   }
 

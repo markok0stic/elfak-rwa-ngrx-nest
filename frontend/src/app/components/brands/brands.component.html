@@ -1,9 +1,0 @@
-<app-table
-  (delete)="handleDelete($event)"
-  (edit)="handleEdit($event)"
-  [data$]="brands$"
-  [displayedColumns]="columnsToDisplay"
->
-  <app-brands-create create></app-brands-create>
-  <app-brands-edit edit [brand]="brandToEdit"></app-brands-edit>
-</app-table>

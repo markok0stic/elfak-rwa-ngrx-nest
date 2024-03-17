@@ -1,9 +1,0 @@
-<app-table
-  (delete)="handleDelete($event)"
-  (edit)="handleEdit($event)"
-  [data$]="models$"
-  [displayedColumns]="columnsToDisplay"
->
-  <app-models-create create></app-models-create>
-  <app-models-edit edit [model]="modelToEdit"></app-models-edit>
-</app-table>

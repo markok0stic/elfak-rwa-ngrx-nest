@@ -7,10 +7,8 @@ import { RolesEnum as Roles } from '@shared/enums/roles.enum';
 import { ViewProfileComponent } from './components/view-profile/view-profile.component';
 import { UsersComponent } from './components/users/users.component';
 import { CategoriesComponent } from './components/categories/categories.component';
-import { SuppliersComponent } from './components/suppliers/suppliers.component';
-import { BrandsComponent } from './components/brands/brands.component';
-import { ModelsComponent } from './components/models/models.component';
 import { ProductsComponent } from './components/products/products.component';
+import { SalesComponent } from './components/sales/sales.component';
 
 export const routes: Routes = [
   {
@@ -37,18 +35,6 @@ export const routes: Routes = [
     data: { title: 'Categories', icon: 'category', navInclude: true },
   },
   {
-    path: 'brands',
-    component: BrandsComponent,
-    canActivate: [AuthGuard],
-    data: { title: 'Brands', icon: 'currency_bitcoin', navInclude: true },
-  },
-  {
-    path: 'models',
-    component: ModelsComponent,
-    canActivate: [AuthGuard],
-    data: { title: 'Models', icon: 'work', navInclude: true },
-  },
-  {
     path: 'products',
     component: ProductsComponent,
     canActivate: [AuthGuard],
@@ -56,7 +42,7 @@ export const routes: Routes = [
   },
   {
     path: 'sales',
-    component: ProductsComponent,
+    component: SalesComponent,
     canActivate: [AuthGuard],
     data: { title: 'Sales', icon: 'shopping_cart', navInclude: true },
   },
@@ -66,12 +52,6 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     data: { title: 'Sales Reports', icon: 'receipt_long', navInclude: true },
   },
-  /*{
-    path: 'suppliers',
-    component: SuppliersComponent,
-    canActivate: [AuthGuard],
-    data: { title: 'Suppliers', icon: 'people_alt', navInclude: true },
-  },*/
   {
     path: 'profile',
     component: ViewProfileComponent,

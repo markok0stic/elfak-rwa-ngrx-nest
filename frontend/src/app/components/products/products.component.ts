@@ -5,8 +5,6 @@ import { AppState } from '../../app.state';
 import { MatDialog } from '@angular/material/dialog';
 import * as ProductsActions from '../../store/product/product.actions';
 import * as CategoryActions from '../../store/categories/categories.actions';
-import * as BrandActions from '../../store/brands/brands.actions';
-import * as ModelActions from '../../store/models/models.actions';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { ProductState } from '../../store/product/product.state';
 import { ProductModel, UpdateProductModel } from '../../models/product/product.model';
@@ -27,11 +25,9 @@ export class ProductsComponent implements OnInit {
 
   constructor(private _store: Store<AppState>, private _dialog: MatDialog) {
     this._store.dispatch(CategoryActions.loadCategories())
-    this._store.dispatch(BrandActions.loadBrands())
-    this._store.dispatch(ModelActions.loadModels())
     this.products$ = this._store.select(selectAllProducts);
     this.productToEdit = null;
-    this.columnsToDisplay = ['sku', 'name', 'quantity', 'categoryName', 'brandName', 'modelName', 'salesPrice', 'purchasePrice'];
+    this.columnsToDisplay = ['sku', 'name', 'quantity', 'categoryName', 'salesPrice', 'purchasePrice'];
     this.loading = false;
   }
 
@@ -61,8 +57,6 @@ export class ProductsComponent implements OnInit {
       purchasePrice: product.purchasePrice,
       salesPrice: product.salesPrice,
       categoryId: product.category.id,
-      brandId: product.brand.id,
-      modelId: product.model.id,
     };
 
     this._store.dispatch(editProducts({product: updatedProduct}));

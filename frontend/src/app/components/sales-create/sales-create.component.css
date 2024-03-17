@@ -1,0 +1,67 @@
+.sale-create-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sale-detail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+mat-form-field {
+  flex-grow: 1;
+}
+
+mat-card-title {
+  align-self: center;
+}
+
+
+.mat-form-field {
+  width: 100%;
+  display: block;
+}
+
+.mat-raised-button {
+  margin: 10px 0;
+}
+
+.full-width, form {
+  width: 100%;
+}
+
+.half-width {
+  flex: 0 0 calc(50% - 10px);
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.remove-product-container {
+  display: flex;
+  justify-content: end;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.one-three-width {
+  flex: 0 0 calc(15% - 10px);
+  margin-bottom: 16px;
+}
+
+.two-three-width {
+  flex: 0 0 calc(85% - 10px);
+}
