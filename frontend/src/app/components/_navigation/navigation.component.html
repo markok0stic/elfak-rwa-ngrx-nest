@@ -8,8 +8,7 @@
   <span class="spacer"></span>
   <div class="clock">
     <mat-icon>access_time</mat-icon>
-    {{currentTime   | date: "dd-MM-yyyy"}}
-    {{currentTime   | date: "HH:mm:ss"}}
+    {{ currentTime | date: 'MMMM d, y, HH:mm' }}
   </div>
   <span class="spacer"></span>
   <a [matMenuTriggerFor]="userMenu" mat-button>

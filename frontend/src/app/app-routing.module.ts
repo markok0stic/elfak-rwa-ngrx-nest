@@ -9,6 +9,7 @@ import { UsersComponent } from './components/users/users.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { ProductsComponent } from './components/products/products.component';
 import { SalesComponent } from './components/sales/sales.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 export const routes: Routes = [
   {
@@ -47,10 +48,10 @@ export const routes: Routes = [
     data: { title: 'Sales', icon: 'shopping_cart', navInclude: true },
   },
   {
-    path: 'sales-reports',
-    component: ProductsComponent,
+    path: 'reports',
+    component: ReportsComponent,
     canActivate: [AuthGuard],
-    data: { title: 'Sales Reports', icon: 'receipt_long', navInclude: true },
+    data: { title: 'Sale Reports', icon: 'receipt_long', navInclude: true },
   },
   {
     path: 'profile',

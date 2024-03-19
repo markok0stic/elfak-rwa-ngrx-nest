@@ -46,7 +46,7 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.timeSubscription = interval(1000)
+    this.timeSubscription = interval(60000)
       .pipe(map(() => new Date()))
       .subscribe(time => {
         this.currentTime = time;

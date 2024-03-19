@@ -11,6 +11,7 @@ export interface ProductModel {
   categoryName: string,
   category: CategoryModel;
   createdOn: number;
+  createdDate: string;
 }
 
 export interface CreateProductModel {

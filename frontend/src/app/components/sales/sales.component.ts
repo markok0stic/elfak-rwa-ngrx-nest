@@ -9,6 +9,8 @@ import { SaleModel } from '../../models/sale/sale.model';
 import * as ProductActions from '../../store/product/product.actions';
 import * as SalesActions from '../../store/sales/sale.actions';
 import { selectAllSales } from '../../store/sales/sale.selectors';
+import { TableAdditionalActions } from '../_table/table.component';
+import { ReportsService } from '../../services/sales/reports.service';
 
 @Component({
   selector: 'app-sales',
@@ -21,13 +23,19 @@ export class SalesComponent implements OnInit {
   data: SaleModel[] = [];
   saleToEdit: SaleModel | null;
   loading: boolean;
+  generateSaleReportAction: TableAdditionalActions;
 
-  constructor(private _store: Store<AppState>, private _dialog: MatDialog) {
+  constructor(private _store: Store<AppState>,
+              private _dialog: MatDialog) {
     this._store.dispatch(ProductActions.loadProducts())
     this.sales$ = this._store.select(selectAllSales);
     this.saleToEdit = null;
-    this.columnsToDisplay = ['id', 'products', 'total', 'createdOn'];
+    this.columnsToDisplay = ['id', 'products', 'saleDate', 'total'];
     this.loading = false;
+    this.generateSaleReportAction = {
+      icon: "print",
+      matToolTip: "Generate Sale Report"
+    }
   }
 
   ngOnInit(): void {
@@ -47,4 +55,7 @@ export class SalesComponent implements OnInit {
     });
   }
 
+  handleGenerateSaleReport(sale: SaleModel) {
+    this._store.dispatch(SalesActions.generateSaleReportById({id: sale.id}))
+  }
 }

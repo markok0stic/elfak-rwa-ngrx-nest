@@ -46,11 +46,6 @@ export class ProductController {
     return this.productService.getAll();
   }
 
-  @Get('/recently-added')
-  public getRecentlyAdded() {
-    return this.productService.getRecentlyAdded();
-  }
-
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Delete(':id')
   @Roles(RolesEnum.User, RolesEnum.Admin)

@@ -1,1 +1,33 @@
-<p>dashboard works!</p>
+<mat-spinner *ngIf="loading | async"></mat-spinner>
+<div *ngIf="dashboardData$ | async as dashboardData">
+  <div class="dashboard-container">
+    <div class="dashboard-cards">
+      <app-dashboard-card color="#b68098" icon="person" [count]="dashboardData.userCount"
+                          title="Users" (click)="navigate('/users')"></app-dashboard-card>
+      <app-dashboard-card color="#ff845a" icon="category" [count]="dashboardData.categoriesCount"
+                          title="Categories" (click)="navigate('/categories')"></app-dashboard-card>
+      <app-dashboard-card color="#7689ed" icon="storefront" [count]="dashboardData.productsCount"
+                          title="Products" (click)="navigate('/products')"></app-dashboard-card>
+      <app-dashboard-card color="#a0bd6d" icon="attach_money" [count]="dashboardData.totalProfit"
+                          title="Profit" (click)="navigate('/sales')"></app-dashboard-card>
+    </div>
+  </div>
+
+  <div class="dashboard-tables">
+    <app-dashboard-table [columnsToDisplay]="bestSellingProductsColumns"
+                         [dataSource]="dashboardData.bestSellingProducts"
+                         [title]="'Best Selling Products'">
+
+    </app-dashboard-table>
+    <app-dashboard-table [columnsToDisplay]="latestSalesColumns"
+                         [dataSource]="dashboardData.latestSales"
+                         [title]="'Latest Sales'">
+
+    </app-dashboard-table>
+    <app-dashboard-table [columnsToDisplay]="recentlyCreatedProductsColumns"
+                         [dataSource]="dashboardData.recentlyCreatedProducts"
+                         [title]="'Recently Added Products'">
+
+    </app-dashboard-table>
+  </div>
+</div>

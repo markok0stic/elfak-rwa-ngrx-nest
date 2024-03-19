@@ -10,6 +10,7 @@ import { ProductState } from '../../store/product/product.state';
 import { ProductModel, UpdateProductModel } from '../../models/product/product.model';
 import { selectAllProducts } from '../../store/product/product.selectors';
 import { editProducts } from '../../store/product/product.actions';
+import { TableAdditionalActions } from '../_table/table.component';
 
 @Component({
   selector: 'app-products',
@@ -22,6 +23,7 @@ export class ProductsComponent implements OnInit {
   data: ProductModel[] = [];
   productToEdit: ProductModel | null;
   loading: boolean;
+  increaseQuantity: TableAdditionalActions;
 
   constructor(private _store: Store<AppState>, private _dialog: MatDialog) {
     this._store.dispatch(CategoryActions.loadCategories())
@@ -29,6 +31,10 @@ export class ProductsComponent implements OnInit {
     this.productToEdit = null;
     this.columnsToDisplay = ['sku', 'name', 'quantity', 'categoryName', 'salesPrice', 'purchasePrice'];
     this.loading = false;
+    this.increaseQuantity = {
+      icon: "add",
+      matToolTip: "Increase Quantity"
+    }
   }
 
   ngOnInit(): void {

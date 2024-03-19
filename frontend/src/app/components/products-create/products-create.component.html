@@ -29,14 +29,14 @@
         <div class="form-row">
         <mat-form-field appearance="fill" class="half-width">
           <mat-label>Purchase Price</mat-label>
-          <input type="text" matInput formControlName="purchasePrice" placeholder="Enter purchase price">
+          <input type="number" matInput formControlName="purchasePrice" placeholder="Enter purchase price" step="0.01">
           <mat-error *ngIf="productForm.controls['purchasePrice'].invalid">
             Purchase price is required
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill" class="half-width">
           <mat-label>Sales Price</mat-label>
-          <input type="text" matInput formControlName="salesPrice" placeholder="Enter sales price">
+          <input type="number" matInput formControlName="salesPrice" placeholder="Enter sales price" step="0.01">
           <mat-error *ngIf="productForm.controls['salesPrice'].invalid">
             Sales price is required
           </mat-error>

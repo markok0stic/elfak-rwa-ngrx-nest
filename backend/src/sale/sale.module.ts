@@ -6,10 +6,12 @@ import { SaleController } from './sale.controller';
 import { SaleService } from './sale.service';
 import { SaleDetail } from './entities/sale.details.entity';
 import { UserModule } from '../user/user.module';
+import { ReportService } from './report.service';
+import { ReportsController } from './report.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Sale, SaleDetail, Product]), UserModule],
-  controllers: [SaleController],
-  providers: [SaleService],
+  controllers: [SaleController, ReportsController],
+  providers: [SaleService, ReportService],
 })
 export class SaleModule {}

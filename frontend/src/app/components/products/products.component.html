@@ -1,10 +1,10 @@
 <app-table
   (delete)="handleDelete($event)"
   (edit)="handleEdit($event)"
-  (increase)="handleIncreaseQuantity($event)"
+  (additional)="handleIncreaseQuantity($event)"
   [data$]="products$"
   [displayedColumns]="columnsToDisplay"
-  [increaseEnabled]="true"
+  [additionalActions]="increaseQuantity"
 >
   <app-products-create create></app-products-create>
   <app-products-edit edit [product]="productToEdit"></app-products-edit>

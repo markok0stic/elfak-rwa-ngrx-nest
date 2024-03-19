@@ -9,6 +9,7 @@ import { NotificationsService } from '../../services/notifications/notifications
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
 import { SalesService } from '../../services/sales/sales.service';
+import { ReportsService } from '../../services/sales/reports.service';
 
 @Injectable()
 export class SaleEffects {
@@ -23,6 +24,12 @@ export class SaleEffects {
               sale.products = sale.saleDetails.map(detail =>
                 `${detail.product.name} x${detail.quantity}`
               ).join("\n");
+              const date = new Date(sale.createdOn);
+              sale.saleDate = date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+              });
             })
             return SaleActions.loadSalesSuccess({ data:sales })
           }),
@@ -32,6 +39,46 @@ export class SaleEffects {
         ),
       ),
     ),
+  );
+
+  generateSaleReportById$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SalesActions.generateSaleReportById),
+      mergeMap(({id}) =>
+        this.reportsService.getSaleReportById(id).pipe(
+          map((blob) => {
+            const url = window.URL.createObjectURL(blob);
+            const anchor = document.createElement('a');
+            anchor.download = `sales-report-${id}.pdf`;
+            anchor.href = url;
+            anchor.click();
+            window.URL.revokeObjectURL(url);
+            return SalesActions.generateSaleReportSuccessful();
+          }),
+          catchError((error) => of(SalesActions.generateSaleReportFailure({ error })))
+        )
+      )
+    )
+  );
+
+  generateSaleReportByDate$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SalesActions.generateSaleReportByDate),
+      mergeMap(({dateFrom, dateTo}) =>
+        this.reportsService.getSalesReportByDate(dateFrom, dateTo).pipe(
+          map((blob) => {
+            const url = window.URL.createObjectURL(blob);
+            const anchor = document.createElement('a');
+            anchor.download = `sales-report-${dateFrom.toDateString()}-${dateTo?.toDateString()}.pdf`;
+            anchor.href = url;
+            anchor.click();
+            window.URL.revokeObjectURL(url);
+            return SalesActions.generateSaleReportSuccessful();
+          }),
+          catchError((error) => of(SalesActions.generateSaleReportFailure({ error })))
+        )
+      )
+    )
   );
 
   createSales$ = createEffect(() => this.actions$.pipe(
@@ -76,6 +123,7 @@ export class SaleEffects {
   constructor(
     private actions$: Actions,
     private salesService: SalesService,
+    private reportsService: ReportsService,
     private notificationsService: NotificationsService,
     private store: Store<AppState>
   ) {

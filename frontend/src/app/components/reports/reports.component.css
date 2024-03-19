@@ -1,0 +1,35 @@
+.reports-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-form-field {
+  width: 100%;
+  display: block;
+}
+
+.mat-raised-button {
+  margin: 10px 0;
+}
+
+.full-width, form {
+  width: 100%;
+}
+
+mat-card-title {
+  align-self: center;
+}
+
+.half-width {
+  flex: 0 0 calc(50% - 10px);
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}

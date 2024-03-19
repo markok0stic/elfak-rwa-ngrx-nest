@@ -1,0 +1,28 @@
+.dashboard-cards {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+
+app-dashboard-card {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.dashboard-tables{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: flex-start;
+  column-gap: 2em;
+  margin-top: 3em;
+}
+
+app-dashboard-table{
+  width: 33%;
+}

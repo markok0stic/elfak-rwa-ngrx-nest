@@ -23,7 +23,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
-import { MatLineModule, MatRippleModule } from '@angular/material/core';
+import { MatLineModule, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -36,8 +36,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { productReducers } from './store/product/product.reducers';
 import { ProductEffects } from './store/product/product.effects';
-import { customerReducers } from './store/customer/customer.reducers';
-import { CustomerEffects } from './store/customer/customer.effects';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LayoutComponent } from './components/_layout/layout.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -70,6 +68,12 @@ import { saleReducers } from './store/sales/sale.reducers';
 import { SaleEffects } from './store/sales/sale.effects';
 import { SalesComponent } from './components/sales/sales.component';
 import { SalesCreateComponent } from './components/sales-create/sales-create.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { dashboardReducers } from './store/dashboard/dashboard.reducers';
+import { DashboardEffects } from './store/dashboard/dashboard.effects';
+import { DashboardCardComponent } from './components/dashboard-card/dashboard-card.component';
+import { DashboardTableComponent } from './components/dashboard-table/dashboard-table.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +97,9 @@ import { SalesCreateComponent } from './components/sales-create/sales-create.com
     ProductsEditComponent,
     SalesComponent,
     SalesCreateComponent,
+    ReportsComponent,
+    DashboardCardComponent,
+    DashboardTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,18 +112,18 @@ import { SalesCreateComponent } from './components/sales-create/sales-create.com
     StoreModule.forRoot<AppState>({
       currentUser: currentUserReducers,
       products: productReducers,
-      customer: customerReducers,
       users: usersReducers,
       categories: categoriesReducers,
-      sales: saleReducers
+      sales: saleReducers,
+      dashboard: dashboardReducers
     }),
     EffectsModule.forRoot([
       CurrentUserEffects,
       ProductEffects,
-      CustomerEffects,
       UsersEffects,
       CategoriesEffects,
-      SaleEffects
+      SaleEffects,
+      DashboardEffects
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -155,6 +162,8 @@ import { SalesCreateComponent } from './components/sales-create/sales-create.com
     MatSortModule,
     MatProgressSpinnerModule,
     MatSlideToggleModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }],
   bootstrap: [AppComponent],

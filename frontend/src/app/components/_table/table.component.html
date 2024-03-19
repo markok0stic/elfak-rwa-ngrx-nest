@@ -1,4 +1,4 @@
-<div class="filter-actions">
+<div *ngIf="headerEnabled" class="filter-actions">
   <mat-form-field>
     <mat-label>Filter</mat-label>
     <input #input (keyup)="applyFilter($event)" matInput placeholder="Ex. value">
@@ -23,8 +23,8 @@
     <ng-container *ngIf="actionsEnabled" matColumnDef="action">
       <th *matHeaderCellDef mat-header-cell>Action</th>
       <td *matCellDef="let element" mat-cell>
-        <button *ngIf="increaseEnabled" (click)="handleIncrease(element)" color="primary" mat-icon-button matTooltip="Increase">
-          <mat-icon>add</mat-icon>
+        <button *ngIf="additionalActions" (click)="handleAdditional(element)" color="primary" mat-icon-button [matTooltip]="additionalActions.matToolTip">
+          <mat-icon>{{additionalActions.icon}}</mat-icon>
         </button>
         <button *ngIf="editEnabled" (click)="handleEdit(element)" mat-icon-button matTooltip="Edit">
           <mat-icon>edit</mat-icon>
@@ -44,7 +44,7 @@
     <tr *matRowDef="let row; columns: getTableColumns();" mat-row></tr>
 
     <tr *matNoDataRow class="mat-row">
-      <td class="mat-cell" colspan="4">No data matching the filter "{{ input.value }}"</td>
+      <td class="mat-cell" colspan="4">No data to display</td>
     </tr>
   </table>
 

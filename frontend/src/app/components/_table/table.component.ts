@@ -12,6 +12,11 @@ export enum ViewMode {
   EDIT
 }
 
+export type TableAdditionalActions = {
+  icon: string,
+  matToolTip: string
+}
+
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -20,9 +25,10 @@ export enum ViewMode {
 export class TableComponent<TData> implements AfterViewInit {
   @Input() data$: Observable<State<TData>>;
   @Input() displayedColumns: string[];
-  @Input() actionsEnabled: boolean;
-  @Input() increaseEnabled: boolean;
   @Input() editEnabled: boolean;
+  @Input() actionsEnabled: boolean;
+  @Input() additionalActions?: TableAdditionalActions;
+  @Input() headerEnabled: boolean;
 
   dataSource: MatTableDataSource<TData>;
   loading: boolean;
@@ -33,15 +39,16 @@ export class TableComponent<TData> implements AfterViewInit {
 
   @Output() edit = new EventEmitter<TData>();
   @Output() delete = new EventEmitter<TData>();
-  @Output() increase = new EventEmitter<TData>();
+  @Output() additional = new EventEmitter<TData>();
   protected readonly ViewMode = ViewMode;
 
   constructor(private cdr: ChangeDetectorRef) {
     this.editEnabled = true;
+    this.headerEnabled = true;
+    this.actionsEnabled = true;
     this.data$ = of();
     this.displayedColumns = [];
     this.actionsEnabled = true;
-    this.increaseEnabled = false;
     this.loading = false;
     this.currentViewMode = ViewMode.TABLE;
     this.dataSource = new MatTableDataSource<TData>([]);
@@ -89,7 +96,7 @@ export class TableComponent<TData> implements AfterViewInit {
     this.delete.emit(el);
   }
 
-  handleIncrease(el: TData) {
-    this.increase.emit(el)
+  handleAdditional(el: TData) {
+    this.additional.emit(el)
   }
 }

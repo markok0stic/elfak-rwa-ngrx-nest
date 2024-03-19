@@ -1,9 +1,11 @@
 <app-table
   (delete)="handleDelete($event)"
   (edit)="handleEdit($event)"
+  (additional)="handleGenerateSaleReport($event)"
   [data$]="sales$"
   [displayedColumns]="columnsToDisplay"
   [editEnabled]="false"
+  [additionalActions]="generateSaleReportAction"
 >
   <app-sales-create create></app-sales-create>
 </app-table>

@@ -68,16 +68,6 @@ export class ProductService {
     });
   }
 
-  public async getRecentlyAdded(): Promise<Product[]> {
-    return await this.productRepository.find({
-      relations: { category: true },
-      order: {
-        createdOn: 'DESC',
-      },
-      take: 10,
-    });
-  }
-
   public async getOne(id: number) {
     const product: Product = await this.productRepository.findOne({
       where: {
