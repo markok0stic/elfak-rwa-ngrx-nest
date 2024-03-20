@@ -26,16 +26,23 @@ export class SaleService {
     sale.createdOn = new Date();
 
     const savedSale = await this.saleRepository.save(sale);
-
     for (const detail of dto.saleDetails) {
       const product = await this.productRepository.findOneBy({
         id: detail.productId,
       });
       if (!product) {
+        await this.saleRepository.delete(savedSale.id);
         throw new BadRequestException(
           `Product with ID ${detail.productId} not found`,
         );
       }
+      if (product.quantity < detail.quantity) {
+        await this.saleRepository.delete(savedSale.id);
+        throw new BadRequestException(
+          `Not enough quantity for product: ${product.name}, available: ${product.quantity}`,
+        );
+      }
+
       const saleDetail = new SaleDetail();
       saleDetail.sale = savedSale;
       saleDetail.product = product;

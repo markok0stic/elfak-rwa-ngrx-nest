@@ -14,16 +14,12 @@
 
 mat-form-field {
   flex-grow: 1;
+  width: 100%;
+  display: block;
 }
 
 mat-card-title {
   align-self: center;
-}
-
-
-.mat-form-field {
-  width: 100%;
-  display: block;
 }
 
 .mat-raised-button {
@@ -57,11 +53,18 @@ mat-card-title {
   align-items: center;
 }
 
-.one-three-width {
-  flex: 0 0 calc(15% - 10px);
-  margin-bottom: 16px;
+.row-with-price{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 2em;
+  width: 100%;
 }
 
-.two-three-width {
-  flex: 0 0 calc(85% - 10px);
+.qty-field {
+  max-width: 164px;
+}
+
+.remove-button{
+  margin-bottom: 16px;
 }

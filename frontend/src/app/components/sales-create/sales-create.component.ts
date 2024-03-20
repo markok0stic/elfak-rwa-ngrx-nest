@@ -50,7 +50,8 @@ export class SalesCreateComponent implements OnInit {
     const saleDetailForm = this.fb.group({
       productId: ['', Validators.required],
       quantity: [1, [Validators.required, Validators.min(1)]],
-      salesPrice: ['', Validators.required]
+      salesPrice: ['', Validators.required],
+      availableQuantity: ['']
     });
 
     this.saleDetails.push(saleDetailForm);
@@ -64,6 +65,7 @@ export class SalesCreateComponent implements OnInit {
     const selectedProduct = this.products.find(p => p.id === productId);
     if (selectedProduct) {
       this.saleDetails.at(index).get('salesPrice')!.setValue(selectedProduct.salesPrice);
+      this.saleDetails.at(index).get('availableQuantity')!.setValue(selectedProduct.quantity);
     }
   }
 

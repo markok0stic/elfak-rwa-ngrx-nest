@@ -24,7 +24,7 @@ export class Product {
   @Column({ type: 'varchar', nullable: false })
   public name: string;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: 'longtext', nullable: true })
   public description: string;
 
   @ManyToOne(() => Category, (category: Category) => category.products, {

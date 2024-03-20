@@ -9,7 +9,7 @@ export class Category {
   @Column({ type: 'varchar', nullable: false })
   public name: string;
 
-  @Column({ type: 'varchar', nullable: true })
+  @Column({ type: 'longtext', nullable: true })
   public description: string;
 
   @OneToMany(() => Product, (product: Product) => product.category)
